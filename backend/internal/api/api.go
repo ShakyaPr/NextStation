@@ -10,11 +10,13 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 	"time"
 
 	"stationfinder/internal/config"
 	"stationfinder/internal/data"
 	"stationfinder/internal/geo"
+	"stationfinder/internal/google"
 	"stationfinder/internal/locations"
 	"stationfinder/internal/search"
 )
@@ -25,15 +27,16 @@ type Server struct {
 	byID     map[string]*data.Station
 	store    *locations.Store
 	search   *search.Service
+	google   *google.Client
 	bgCtx    context.Context
 }
 
-func New(bgCtx context.Context, cfg *config.Config, stations []*data.Station, store *locations.Store, svc *search.Service) *Server {
+func New(bgCtx context.Context, cfg *config.Config, stations []*data.Station, store *locations.Store, svc *search.Service, gc *google.Client) *Server {
 	byID := make(map[string]*data.Station, len(stations))
 	for _, s := range stations {
 		byID[s.ID] = s
 	}
-	return &Server{cfg: cfg, stations: stations, byID: byID, store: store, search: svc, bgCtx: bgCtx}
+	return &Server{cfg: cfg, stations: stations, byID: byID, store: store, search: svc, google: gc, bgCtx: bgCtx}
 }
 
 func (s *Server) Handler() http.Handler {
@@ -45,6 +48,8 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/geocode", s.runGeocode)
 	mux.HandleFunc("GET /api/geocode/status", s.geocodeStatus)
 	mux.HandleFunc("POST /api/search", s.doSearch)
+	mux.HandleFunc("GET /api/places/autocomplete", s.autocomplete)
+	mux.HandleFunc("GET /api/places/details", s.placeDetails)
 
 	if dir := s.cfg.Server.StaticDir; dir != "" {
 		if _, err := os.Stat(filepath.Join(dir, "index.html")); err == nil {
@@ -225,4 +230,77 @@ func (s *Server) doSearch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, resp)
+}
+
+type stationSuggestion struct {
+	ID       string     `json:"id"`
+	Name     string     `json:"name"`
+	District string     `json:"district"`
+	Category string     `json:"category"`
+	Location geo.LatLng `json:"location"`
+}
+
+// autocomplete returns Google place predictions plus matching stations from the vacancy list.
+func (s *Server) autocomplete(w http.ResponseWriter, r *http.Request) {
+	q := strings.TrimSpace(r.URL.Query().Get("q"))
+	resp := struct {
+		Places   []google.Suggestion `json:"places"`
+		Stations []stationSuggestion `json:"stations"`
+		Error    string              `json:"error,omitempty"`
+	}{Places: []google.Suggestion{}, Stations: []stationSuggestion{}}
+	if len([]rune(q)) < 2 {
+		writeJSON(w, http.StatusOK, resp)
+		return
+	}
+
+	upper := strings.ToUpper(q)
+	for _, st := range s.stations {
+		if len(resp.Stations) >= 5 {
+			break
+		}
+		if !strings.Contains(st.Name, upper) {
+			continue
+		}
+		if e := s.store.Get(st.ID); e != nil && e.Location != nil {
+			resp.Stations = append(resp.Stations, stationSuggestion{st.ID, st.Name, st.District, st.Category, *e.Location})
+		}
+	}
+
+	if s.google.Enabled() {
+		places, err := s.google.Autocomplete(r.Context(), q, r.URL.Query().Get("session"))
+		if err != nil {
+			// Still return station matches; surface the Google error for the UI.
+			log.Printf("autocomplete: %v", err)
+			resp.Error = err.Error()
+		} else {
+			resp.Places = places
+		}
+	}
+	writeJSON(w, http.StatusOK, resp)
+}
+
+func (s *Server) placeDetails(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("placeId")
+	if id == "" {
+		writeErr(w, http.StatusBadRequest, errors.New("placeId is required"))
+		return
+	}
+	if !s.google.Enabled() {
+		writeErr(w, http.StatusServiceUnavailable, errors.New("google api key is not configured"))
+		return
+	}
+	p, err := s.google.PlaceDetails(r.Context(), id, r.URL.Query().Get("session"))
+	if errors.Is(err, google.ErrNotFound) {
+		writeErr(w, http.StatusNotFound, err)
+		return
+	}
+	if err != nil {
+		writeErr(w, http.StatusBadGateway, err)
+		return
+	}
+	if !geo.InSriLanka(p.Location) {
+		writeErr(w, http.StatusBadRequest, errors.New("place is outside Sri Lanka"))
+		return
+	}
+	writeJSON(w, http.StatusOK, p)
 }

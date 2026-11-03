@@ -24,15 +24,19 @@ var ErrNotFound = errors.New("no results")
 
 // Endpoints can be overridden (used by tests).
 type Endpoints struct {
-	PlacesSearchText string
-	Geocode          string
-	RouteMatrix      string
+	PlacesSearchText   string
+	PlacesAutocomplete string
+	PlaceDetails       string // base URL; the place ID is appended
+	Geocode            string
+	RouteMatrix        string
 }
 
 var DefaultEndpoints = Endpoints{
-	PlacesSearchText: "https://places.googleapis.com/v1/places:searchText",
-	Geocode:          "https://maps.googleapis.com/maps/api/geocode/json",
-	RouteMatrix:      "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix",
+	PlacesSearchText:   "https://places.googleapis.com/v1/places:searchText",
+	PlacesAutocomplete: "https://places.googleapis.com/v1/places:autocomplete",
+	PlaceDetails:       "https://places.googleapis.com/v1/places/",
+	Geocode:            "https://maps.googleapis.com/maps/api/geocode/json",
+	RouteMatrix:        "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix",
 }
 
 type Client struct {
@@ -72,13 +76,21 @@ func (c *Client) postJSON(ctx context.Context, endpoint, fieldMask string, body,
 	if err != nil {
 		return err
 	}
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, bytes.NewReader(buf))
+	return c.doJSON(ctx, http.MethodPost, endpoint, fieldMask, bytes.NewReader(buf), out)
+}
+
+func (c *Client) doJSON(ctx context.Context, method, endpoint, fieldMask string, body io.Reader, out any) error {
+	req, err := http.NewRequestWithContext(ctx, method, endpoint, body)
 	if err != nil {
 		return err
 	}
-	req.Header.Set("Content-Type", "application/json")
+	if body != nil {
+		req.Header.Set("Content-Type", "application/json")
+	}
 	req.Header.Set("X-Goog-Api-Key", c.key)
-	req.Header.Set("X-Goog-FieldMask", fieldMask)
+	if fieldMask != "" {
+		req.Header.Set("X-Goog-FieldMask", fieldMask)
+	}
 	resp, err := c.http.Do(req)
 	if err != nil {
 		return err
@@ -151,6 +163,93 @@ func (c *Client) PlacesTextSearch(ctx context.Context, query string) ([]Place, e
 	return out, nil
 }
 
+// Suggestion is one Places Autocomplete prediction.
+type Suggestion struct {
+	PlaceID       string `json:"placeId"`
+	MainText      string `json:"mainText"`
+	SecondaryText string `json:"secondaryText,omitempty"`
+}
+
+// Autocomplete returns place predictions in Sri Lanka for partially typed input.
+// sessionToken groups the keystrokes and the final PlaceDetails call into one billed session.
+func (c *Client) Autocomplete(ctx context.Context, input, sessionToken string) ([]Suggestion, error) {
+	body := map[string]any{
+		"input":               input,
+		"includedRegionCodes": []string{"lk"},
+		"languageCode":        "en",
+	}
+	if sessionToken != "" {
+		body["sessionToken"] = sessionToken
+	}
+	var resp struct {
+		Suggestions []struct {
+			PlacePrediction *struct {
+				PlaceID string `json:"placeId"`
+				Text    struct {
+					Text string `json:"text"`
+				} `json:"text"`
+				StructuredFormat struct {
+					MainText struct {
+						Text string `json:"text"`
+					} `json:"mainText"`
+					SecondaryText struct {
+						Text string `json:"text"`
+					} `json:"secondaryText"`
+				} `json:"structuredFormat"`
+			} `json:"placePrediction"`
+		} `json:"suggestions"`
+	}
+	if err := c.postJSON(ctx, c.ep.PlacesAutocomplete, "", body, &resp); err != nil {
+		return nil, err
+	}
+	out := make([]Suggestion, 0, len(resp.Suggestions))
+	for _, s := range resp.Suggestions {
+		p := s.PlacePrediction
+		if p == nil || p.PlaceID == "" {
+			continue
+		}
+		main := p.StructuredFormat.MainText.Text
+		if main == "" {
+			main = p.Text.Text
+		}
+		out = append(out, Suggestion{PlaceID: p.PlaceID, MainText: main, SecondaryText: p.StructuredFormat.SecondaryText.Text})
+	}
+	return out, nil
+}
+
+// PlaceDetails returns the location of a place ID (e.g. from Autocomplete).
+func (c *Client) PlaceDetails(ctx context.Context, placeID, sessionToken string) (*Place, error) {
+	q := url.Values{}
+	q.Set("languageCode", "en")
+	if sessionToken != "" {
+		q.Set("sessionToken", sessionToken)
+	}
+	var resp struct {
+		ID          string `json:"id"`
+		DisplayName struct {
+			Text string `json:"text"`
+		} `json:"displayName"`
+		FormattedAddress string `json:"formattedAddress"`
+		Location         *struct {
+			Latitude  float64 `json:"latitude"`
+			Longitude float64 `json:"longitude"`
+		} `json:"location"`
+	}
+	endpoint := c.ep.PlaceDetails + url.PathEscape(placeID) + "?" + q.Encode()
+	if err := c.doJSON(ctx, http.MethodGet, endpoint, "id,displayName,formattedAddress,location", nil, &resp); err != nil {
+		return nil, err
+	}
+	if resp.Location == nil {
+		return nil, ErrNotFound
+	}
+	return &Place{
+		Location: geo.LatLng{Lat: resp.Location.Latitude, Lng: resp.Location.Longitude},
+		Name:     resp.DisplayName.Text,
+		Address:  resp.FormattedAddress,
+		PlaceID:  resp.ID,
+	}, nil
+}
+
 // Geocode resolves an address restricted to Sri Lanka.
 func (c *Client) Geocode(ctx context.Context, address string) (*Place, error) {
 	q := url.Values{}
@@ -165,6 +264,11 @@ func (c *Client) Geocode(ctx context.Context, address string) (*Place, error) {
 	}
 	resp, err := c.http.Do(req)
 	if err != nil {
+		// Don't leak the key: url.Error includes the full request URL.
+		var ue *url.Error
+		if errors.As(err, &ue) {
+			return nil, fmt.Errorf("geocoding request failed: %w", ue.Err)
+		}
 		return nil, err
 	}
 	defer resp.Body.Close()

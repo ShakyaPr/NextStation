@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { api, formatDuration, locationQuality, titleCase } from "./api";
 import type { LatLng, Meta, SearchRequest, SearchResponse } from "./api";
 import StationMap, { type MapMarker } from "./StationMap";
+import PlaceSearch, { type SelectedPlace } from "./PlaceSearch";
 
 interface Props {
   meta: Meta;
@@ -46,8 +47,8 @@ function MultiSelect({
 const fmtCoord = (p: LatLng) => `${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`;
 
 export default function SearchView({ meta }: Props) {
-  const [originText, setOriginText] = useState("Kegalle");
-  const [originPoint, setOriginPoint] = useState<LatLng | null>(null);
+  const [originText, setOriginText] = useState("");
+  const [originPoint, setOriginPoint] = useState<SelectedPlace | null>(null);
   const [pickMode, setPickMode] = useState(false);
   const [maxDuration, setMaxDuration] = useState("");
   const [maxDistance, setMaxDistance] = useState("");
@@ -73,11 +74,17 @@ export default function SearchView({ meta }: Props) {
     [meta, provinces],
   );
 
-  async function runSearch(e?: React.FormEvent) {
+  async function runSearch(e?: React.FormEvent, originOverride?: SelectedPlace) {
     e?.preventDefault();
     setError(null);
+    const o = originOverride ?? originPoint;
+    if (!o && !originText.trim()) {
+      setError("Search for a starting point, pick one on the map, or use your location.");
+      return;
+    }
+    if (!meta.apiKeyConfigured) return;
     const req: SearchRequest = {
-      origin: originPoint ? { lat: originPoint.lat, lng: originPoint.lng } : { query: originText },
+      origin: o ? { lat: o.lat, lng: o.lng, label: o.label } : { query: originText },
       limit: Number(limit) || 10,
       sortBy,
       provinces,
@@ -130,17 +137,31 @@ export default function SearchView({ meta }: Props) {
           <h2>Starting point</h2>
           {originPoint ? (
             <div className="picked">
-              <span>📍 {fmtCoord(originPoint)}</span>
-              <button type="button" className="link" onClick={() => setOriginPoint(null)}>
-                Use a place name instead
+              <div>
+                <div className="picked-label">📍 {originPoint.label}</div>
+                <div className="muted small">{fmtCoord(originPoint)}</div>
+              </div>
+              <button
+                type="button"
+                className="link"
+                onClick={() => {
+                  setOriginPoint(null);
+                  setOriginText("");
+                }}
+              >
+                Change
               </button>
             </div>
           ) : (
-            <input
-              className="input"
-              value={originText}
-              onChange={(e) => setOriginText(e.target.value)}
-              placeholder="City, town or address (e.g. Kegalle)"
+            <PlaceSearch
+              text={originText}
+              onTextChange={setOriginText}
+              onSelect={(p) => {
+                setOriginPoint(p);
+                setPickMode(false);
+                runSearch(undefined, p);
+              }}
+              placeholder="Search a town, address, hospital…"
             />
           )}
           <div className="row gap">
@@ -156,7 +177,7 @@ export default function SearchView({ meta }: Props) {
               className="btn small"
               onClick={() =>
                 navigator.geolocation?.getCurrentPosition(
-                  (p) => setOriginPoint({ lat: p.coords.latitude, lng: p.coords.longitude }),
+                  (p) => setOriginPoint({ lat: p.coords.latitude, lng: p.coords.longitude, label: "My location" }),
                   (err) => setError(`Location unavailable: ${err.message}`),
                 )
               }
@@ -217,11 +238,11 @@ export default function SearchView({ meta }: Props) {
           markers={markers}
           selectedId={selected}
           onMarkerClick={setSelected}
-          fitKey={String(searchCount)}
+          fitKey={`${searchCount}|${originPoint ? fmtCoord(originPoint) : ""}`}
           crosshair={pickMode}
           onMapClick={(p) => {
             if (!pickMode) return;
-            setOriginPoint(p);
+            setOriginPoint({ ...p, label: "Point on map" });
             setPickMode(false);
           }}
         />
