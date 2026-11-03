@@ -68,7 +68,32 @@ body { margin: 0; background: var(--bg); }
 .btn.wide { width: 100%; margin-top: 8px; padding: 10px; }
 .link { background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; font: inherit; font-size: 13px; }
 
-.picked { display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; background: var(--accent-soft); border-radius: 8px; font-size: 14px; align-items: flex-start; }
+.picked { display: flex; justify-content: space-between; gap: 8px; padding: 8px 10px; background: var(--accent-soft); border-radius: 8px; font-size: 14px; align-items: flex-start; }
+.picked-label { font-weight: 600; }
+
+.place-search { position: relative; }
+.place-input { position: relative; }
+.place-input .input { padding-left: 32px; padding-right: 32px; }
+.place-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: .6; pointer-events: none; }
+.spinner {
+  position: absolute; right: 10px; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+  border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.suggestions {
+  position: absolute; z-index: 2000; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px 0; list-style: none;
+  background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(20,30,40,.14);
+  max-height: 360px; overflow-y: auto;
+}
+.suggestions button {
+  display: flex; gap: 8px; align-items: flex-start; width: 100%; text-align: left; border: 0; background: none;
+  padding: 8px 12px; font: inherit; font-size: 14px; color: var(--text); cursor: pointer;
+}
+.suggestions button.active { background: var(--accent-soft); }
+.suggest-icon { font-size: 13px; line-height: 20px; }
+.suggest-main { font-weight: 600; }
+.suggest-group { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 8px 12px 4px; border-top: 1px solid var(--border); margin-top: 4px; }
+.suggest-footer { padding: 6px 12px 2px; text-align: right; }
 
 .multi { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 14px; }
 .multi summary { cursor: pointer; }

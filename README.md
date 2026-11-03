@@ -85,8 +85,15 @@ serves the UI at http://localhost:8080 (`server.staticDir`).
 
 ## Using it
 
-- **Find stations.** Enter a starting point (e.g. `Kegalle`), click *Pick on map*, or
-  use *My location*. Optionally set:
+- **Find stations.** Set a starting point in one of three ways:
+  - **Search**: start typing a town, address or landmark (e.g. `kegal`). Suggestions
+    come from Google Places, restricted to Sri Lanka. Matching stations from the
+    vacancy list are listed too, so you can start from one of them. Use ↑/↓ and
+    Enter, or click a suggestion. Selecting one runs the search straight away.
+  - Click *Pick on map*.
+  - Use *My location*.
+
+  Optionally set:
   - **Max travel time** and/or **Max road distance**
   - **Number of stations** (default 10)
   - **Rank by**: travel time or distance
@@ -107,6 +114,8 @@ serves the UI at http://localhost:8080 (`server.staticDir`).
 | `PUT` | `/api/stations/{id}/location` | `{"lat":7.25,"lng":80.34}` manual fix |
 | `DELETE` | `/api/stations/{id}/location` | remove manual fix |
 | `POST` | `/api/geocode[?retryFailed=true]` | locate missing / retry failed stations |
+| `GET` | `/api/places/autocomplete?q=kegal&session=<token>` | Google place suggestions + matching stations |
+| `GET` | `/api/places/details?placeId=<id>&session=<token>` | coordinates of a suggested place |
 
 ```bash
 curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
@@ -120,13 +129,16 @@ curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
   "designation": "MO"
 }'
 ```
-`origin` can also be `{"lat": 7.25, "lng": 80.35}`. All fields except `origin` are optional;
+`origin` can also be `{"lat": 7.25, "lng": 80.35, "label": "Kegalle Hospital"}`. All fields except `origin` are optional;
 `sortBy` is `duration` or `distance`.
 
 ## Cost notes
 
 - Geocoding the stations is a one-time cost: about 438 Places Text Search requests,
   plus Geocoding requests for any fallbacks. Results are cached on disk.
+- Place search uses Places Autocomplete with session tokens: the keystrokes and the
+  final details lookup are billed as one session. Picking a station suggestion makes
+  no Google call.
 - Each search makes 1 Geocoding call for the origin, plus at most `maxRouteCandidates`
   (default 60) Route Matrix elements. Repeating a search from the same origin uses the
   in-memory cache.

@@ -54,7 +54,7 @@ func main() {
 	svc := search.NewService(cfg, stations, store, client)
 	srv := &http.Server{
 		Addr:              fmt.Sprintf(":%d", cfg.Server.Port),
-		Handler:           api.New(ctx, cfg, stations, store, svc).Handler(),
+		Handler:           api.New(ctx, cfg, stations, store, svc, client).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	go func() {

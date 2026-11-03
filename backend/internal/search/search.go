@@ -21,6 +21,8 @@ type Origin struct {
 	Query string   `json:"query,omitempty"`
 	Lat   *float64 `json:"lat,omitempty"`
 	Lng   *float64 `json:"lng,omitempty"`
+	// Label is a display name for a lat/lng origin (e.g. the place picked from search).
+	Label string `json:"label,omitempty"`
 }
 
 type Request struct {
@@ -93,7 +95,7 @@ func (s *Service) ResolveOrigin(ctx context.Context, o Origin) (*ResolvedOrigin,
 		if !geo.InSriLanka(p) {
 			return nil, badRequest("origin %.5f,%.5f is outside Sri Lanka", p.Lat, p.Lng)
 		}
-		return &ResolvedOrigin{LatLng: p}, nil
+		return &ResolvedOrigin{LatLng: p, Address: o.Label}, nil
 	}
 	q := strings.TrimSpace(o.Query)
 	if q == "" {

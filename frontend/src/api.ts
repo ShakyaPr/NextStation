@@ -63,8 +63,35 @@ export interface Meta {
   geocoding: GeocodeProgress;
 }
 
+export interface PlaceSuggestion {
+  placeId: string;
+  mainText: string;
+  secondaryText?: string;
+}
+
+export interface StationSuggestion {
+  id: string;
+  name: string;
+  district: string;
+  category: string;
+  location: LatLng;
+}
+
+export interface AutocompleteResponse {
+  places: PlaceSuggestion[];
+  stations: StationSuggestion[];
+  error?: string;
+}
+
+export interface PlaceDetails {
+  location: LatLng;
+  name?: string;
+  address?: string;
+  placeId?: string;
+}
+
 export interface SearchRequest {
-  origin: { query?: string; lat?: number; lng?: number };
+  origin: { query?: string; lat?: number; lng?: number; label?: string };
   maxDistanceKm?: number;
   maxDurationMin?: number;
   limit?: number;
@@ -119,6 +146,19 @@ export const api = {
   geocodeStatus: () => request<GeocodeProgress>("GET", "/api/geocode/status"),
   setLocation: (id: string, p: LatLng) =>
     request<LocationEntry>("PUT", `/api/stations/${encodeURIComponent(id)}/location`, p),
+  autocomplete: (q: string, session: string, signal?: AbortSignal) =>
+    fetch(`/api/places/autocomplete?q=${encodeURIComponent(q)}&session=${encodeURIComponent(session)}`, { signal }).then(
+      async (r) => {
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? `HTTP ${r.status}`);
+        return data as AutocompleteResponse;
+      },
+    ),
+  placeDetails: (placeId: string, session: string) =>
+    request<PlaceDetails>(
+      "GET",
+      `/api/places/details?placeId=${encodeURIComponent(placeId)}&session=${encodeURIComponent(session)}`,
+    ),
   clearLocation: (id: string) =>
     request<LocationEntry | null>("DELETE", `/api/stations/${encodeURIComponent(id)}/location`),
 };
