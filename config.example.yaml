@@ -1,0 +1,30 @@
+# Copy to config.yaml and fill in your key:  cp config.example.yaml config.yaml
+# Relative paths are resolved from this file's directory.
+
+server:
+  port: 8080
+  # If you run `npm run build` in frontend/, the backend also serves the UI from here.
+  staticDir: frontend/dist
+
+google:
+  # Needs these APIs enabled on the key's project:
+  #   Places API (New), Geocoding API, Routes API
+  # (Can also be supplied via the GOOGLE_MAPS_API_KEY environment variable.)
+  apiKey: "YOUR_GOOGLE_API_KEY"
+  usePlacesSearch: true   # Places Text Search finds hospitals more precisely than Geocoding
+  travelMode: DRIVE       # DRIVE or TWO_WHEELER
+
+data:
+  vacanciesFile: data/vacancies.json   # extracted from the PDF (tools/extract_pdf.py)
+  geocacheFile: data/geocache.json     # station coordinates found via Google (auto-created)
+  overridesFile: data/overrides.json   # manual coordinate fixes made in the UI (auto-created)
+
+search:
+  defaultLimit: 10
+  maxRouteCandidates: 60   # stations (nearest by straight line) sent to the Routes API per search
+  maxSpeedKmh: 80          # used to pre-filter by straight-line distance for time limits
+  suspectDistanceKm: 75    # flag a geocode further than this from its district centre
+
+geocoding:
+  onStartup: true   # geocode any stations missing from geocache.json when the server starts
+  workers: 4

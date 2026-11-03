@@ -1,0 +1,5697 @@
+{
+  "ampara-ampara-chest-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 7.297771600000001,
+      "lng": 81.69021269999999
+    },
+    "source": "places",
+    "query": "Ampara Chest Clinic, Ampara District, Sri Lanka",
+    "matchedName": "District Chest Clinic - Ampara",
+    "address": "District chest, 7MXR+434 clinic, Ampara",
+    "districtDistanceKm": 0.9063165958924314,
+    "updatedAt": "2026-11-03T11:28:42.83227+05:30"
+  },
+  "ampara-ampara-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2990188,
+      "lng": 81.68944499999999
+    },
+    "source": "places",
+    "query": "Ampara District General Hospital, Ampara District, Sri Lanka",
+    "matchedName": "District General Hospital - Ampara",
+    "address": "Dharmapala Mawatha, Ampara 32000",
+    "districtDistanceKm": 0.8383263788726013,
+    "updatedAt": "2026-11-03T11:28:42.872457+05:30"
+  },
+  "ampara-damana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2006556,
+      "lng": 81.6559848
+    },
+    "source": "places",
+    "query": "Damana Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional hospital, Damana",
+    "address": "7°12'02. 81°39'21.7\"E, 3rd Ave, Ampara",
+    "districtDistanceKm": 11.14440151401389,
+    "updatedAt": "2026-11-03T11:28:42.902087+05:30"
+  },
+  "ampara-dehiattakandiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.672906799999999,
+      "lng": 81.0433745
+    },
+    "source": "places",
+    "query": "Dehiattakandiya Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Base Hospital Dehiattakandiya",
+    "address": "M2FV+3C5, B517, Dehiattakandiya",
+    "districtDistanceKm": 81.85109842329393,
+    "suspect": true,
+    "updatedAt": "2026-11-03T11:28:42.938233+05:30"
+  },
+  "ampara-koknahara-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.192600499999999,
+      "lng": 81.595435
+    },
+    "source": "places",
+    "query": "Koknahara Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Koknahara Central Dispensary",
+    "address": "Koknahara Rd",
+    "districtDistanceKm": 15.074284645795505,
+    "updatedAt": "2026-11-03T11:28:43.10849+05:30"
+  },
+  "ampara-kolomanthalawa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3321913,
+      "lng": 81.7422295
+    },
+    "source": "places",
+    "query": "Kolomanthalawa Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Malwatta",
+    "address": "Chadayantalawa Rd, Ampara",
+    "districtDistanceKm": 7.681527658789341,
+    "updatedAt": "2026-11-03T11:28:43.119643+05:30"
+  },
+  "ampara-lahugala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8783034,
+      "lng": 81.7179638
+    },
+    "source": "places",
+    "query": "Lahugala Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Lahugala divisional Hospital",
+    "address": "VPH9+85G, Colombo - Batticaloa Hwy, Lahugala",
+    "districtDistanceKm": 46.781158755145775,
+    "updatedAt": "2026-11-03T11:28:43.12776+05:30"
+  },
+  "ampara-maha-oya-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5301209999999985,
+      "lng": 81.3545778
+    },
+    "source": "places",
+    "query": "Maha Oya MOH Office, Ampara District, Sri Lanka",
+    "matchedName": "MOH Office Mahaoya",
+    "address": "G9J3+2RW, Maha Oya",
+    "districtDistanceKm": 44.41297262584975,
+    "updatedAt": "2026-11-03T11:28:43.388243+05:30"
+  },
+  "ampara-mahaoya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.531130500000001,
+      "lng": 81.3552471
+    },
+    "source": "places",
+    "query": "Mahaoya Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Base Hospital Mahaoya",
+    "address": "G9J4+F35, Maha Oya",
+    "districtDistanceKm": 44.41852486694672,
+    "updatedAt": "2026-11-03T11:28:43.424538+05:30"
+  },
+  "ampara-namaloya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2749159,
+      "lng": 81.5380041
+    },
+    "source": "places",
+    "query": "Namaloya Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Namaloya Regional Hospital (නාමල්ඔය ප්‍රාදේශීය රෝහල)",
+    "address": "7GFQ+X66, Dambethalawa",
+    "districtDistanceKm": 16.07962650532195,
+    "updatedAt": "2026-11-03T11:28:43.429092+05:30"
+  },
+  "ampara-padiyatalawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4099272,
+      "lng": 81.24260149999999
+    },
+    "source": "places",
+    "query": "Padiyatalawa Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Padiyathalawa",
+    "address": "C65R+VXM District Hospital, Peradeniya-Badulla-Chenkaladi Hwy, Padiyatalawa",
+    "districtDistanceKm": 50.04362690780688,
+    "updatedAt": "2026-11-03T11:28:43.63552+05:30"
+  },
+  "ampara-padiyatalawa-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4106263,
+      "lng": 81.2442819
+    },
+    "source": "places",
+    "query": "Padiyatalawa MOH Office, Ampara District, Sri Lanka",
+    "matchedName": "MOH Padiyathalawa",
+    "address": "Padiyatalawa",
+    "districtDistanceKm": 49.88371773133892,
+    "updatedAt": "2026-11-03T11:28:43.671332+05:30"
+  },
+  "ampara-padiyathalawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4099272,
+      "lng": 81.24260149999999
+    },
+    "source": "places",
+    "query": "Padiyathalawa Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Padiyathalawa",
+    "address": "C65R+VXM District Hospital, Peradeniya-Badulla-Chenkaladi Hwy, Padiyatalawa",
+    "districtDistanceKm": 50.04362690780688,
+    "updatedAt": "2026-11-03T11:28:43.724635+05:30"
+  },
+  "ampara-panama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.756083599999999,
+      "lng": 81.8044728
+    },
+    "source": "places",
+    "query": "Panama Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Panama",
+    "address": "Panama-Kumbukkana Rd, Panama",
+    "districtDistanceKm": 61.701333775899215,
+    "updatedAt": "2026-11-03T11:28:43.676126+05:30"
+  },
+  "ampara-pannalgama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0927305,
+      "lng": 81.65054540000001
+    },
+    "source": "places",
+    "query": "Pannalgama Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Pannalgama Central Dispensary",
+    "address": "Dammana - Ambalan Oya - Pannalgama Road",
+    "districtDistanceKm": 23.03222957288889,
+    "updatedAt": "2026-11-03T11:28:43.868814+05:30"
+  },
+  "ampara-senarathpura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.449327199999999,
+      "lng": 81.6262579
+    },
+    "source": "places",
+    "query": "Senarathpura Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Senarathpura",
+    "address": "Ampara - Uhana Rd, Ampara 32000",
+    "districtDistanceKm": 17.966672155985588,
+    "updatedAt": "2026-11-03T11:28:43.879768+05:30"
+  },
+  "ampara-thottama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.119456199999999,
+      "lng": 81.6887455
+    },
+    "source": "places",
+    "query": "Thottama Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "THOTTAMA DIVISIONAL HOSPITAL",
+    "address": "mahanagapura,, 4M9Q+QFQ, Bakmitiyawa",
+    "districtDistanceKm": 19.811547379978197,
+    "updatedAt": "2026-11-03T11:28:43.97872+05:30"
+  },
+  "ampara-uhana-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3661105000000004,
+      "lng": 81.63565729999999
+    },
+    "source": "places",
+    "query": "Uhana Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "MOH Office, Uhana",
+    "address": "9J8P+C7V, A27, Ampara",
+    "districtDistanceKm": 9.18289048169957,
+    "updatedAt": "2026-11-03T11:28:43.964843+05:30"
+  },
+  "ampara-weeragoda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3901254000000005,
+      "lng": 81.6965876
+    },
+    "source": "places",
+    "query": "Weeragoda Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Central Dispensary, Weeragoda",
+    "address": "Central Dispensary, 4th Ave, Ampara",
+    "districtDistanceKm": 10.424360337099815,
+    "updatedAt": "2026-11-03T11:28:44.156242+05:30"
+  },
+  "anuradhapura-andiyagala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.900890899999999,
+      "lng": 80.5225458
+    },
+    "source": "places",
+    "query": "Andiyagala Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Andiyagala Hospital",
+    "address": "WG2F+923, Andiyagala",
+    "districtDistanceKm": 47.48441921305496,
+    "updatedAt": "2026-11-03T11:28:44.176062+05:30"
+  },
+  "anuradhapura-anuradhapura-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3253474,
+      "lng": 80.4118944
+    },
+    "source": "places",
+    "query": "Anuradhapura RDHS Office, Anuradhapura District, Sri Lanka",
+    "matchedName": "RDHS Office Anuradhapura",
+    "address": "8CG6+4QJ, Kandy Rd, Anuradhapura",
+    "districtDistanceKm": 1.7939044035799598,
+    "updatedAt": "2026-11-03T11:28:44.19327+05:30"
+  },
+  "anuradhapura-anuradhapura-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3247652,
+      "lng": 80.4139682
+    },
+    "source": "places",
+    "query": "Anuradhapura Teaching Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Anuradhapura",
+    "address": "8CF7+WH4, Harischandra Mawatha, Anuradhapura",
+    "districtDistanceKm": 1.866809616569684,
+    "updatedAt": "2026-11-03T11:28:44.199226+05:30"
+  },
+  "anuradhapura-anuradhapura-th": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3247652,
+      "lng": 80.4139682
+    },
+    "source": "places",
+    "query": "Anuradhapura Teaching Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Anuradhapura",
+    "address": "8CF7+WH4, Harischandra Mawatha, Anuradhapura",
+    "districtDistanceKm": 1.866809616569684,
+    "updatedAt": "2026-11-03T11:28:44.363092+05:30"
+  },
+  "anuradhapura-eppawala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.1461478,
+      "lng": 80.4115735
+    },
+    "source": "places",
+    "query": "Eppawala Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Eppawala Divitional Hospital",
+    "address": "Talawa Rd, Eppawala",
+    "districtDistanceKm": 18.39562424374251,
+    "updatedAt": "2026-11-03T11:28:44.417627+05:30"
+  },
+  "anuradhapura-galkiriyagama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9382114999999995,
+      "lng": 80.5645035
+    },
+    "source": "places",
+    "query": "Galkiriyagama Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Galkiriyagama Divisional Hospital",
+    "address": "WHQ7+7RJ, Ulpathagama",
+    "districtDistanceKm": 45.11429644070589,
+    "updatedAt": "2026-11-03T11:28:44.410529+05:30"
+  },
+  "anuradhapura-gambirigaswewa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4816986,
+      "lng": 80.3841724
+    },
+    "source": "places",
+    "query": "Gambirigaswewa Primary Medical Care Unit, Anuradhapura District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit- Gambirigaswewa",
+    "address": "Gambirigaswewa, Anuradhapura,, F9JM+MMF, Anuradhapura",
+    "districtDistanceKm": 19.057788317643748,
+    "updatedAt": "2026-11-03T11:28:44.460735+05:30"
+  },
+  "anuradhapura-habarana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0384361,
+      "lng": 80.75618659999999
+    },
+    "source": "places",
+    "query": "Habarana Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Habarana",
+    "address": "2QQ4+9FF, A11, Habarana",
+    "districtDistanceKm": 49.25867744728165,
+    "updatedAt": "2026-11-03T11:28:44.685842+05:30"
+  },
+  "anuradhapura-huruluwewa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.2193215,
+      "lng": 80.7028527
+    },
+    "source": "places",
+    "query": "Huruluwewa Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Huruluwewa",
+    "address": "6P93+P4H, Yakalla",
+    "districtDistanceKm": 34.47424433426691,
+    "updatedAt": "2026-11-03T11:28:44.678749+05:30"
+  },
+  "anuradhapura-kahatagasdigiliya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.434414499999999,
+      "lng": 80.69891489999999
+    },
+    "source": "places",
+    "query": "Kahatagasdigiliya Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Base Hospital Kahatagasdigiliya | මූලික රෝහල කහටගස්දිගිලිය",
+    "address": "Puttalam - Anuradhapura - Trincomalee Hwy",
+    "districtDistanceKm": 35.239567999969374,
+    "updatedAt": "2026-11-03T11:28:44.678764+05:30"
+  },
+  "anuradhapura-kapugollewa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6646209,
+      "lng": 80.842063
+    },
+    "source": "places",
+    "query": "Kapugollewa Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kapugollewa",
+    "address": "MR7R+RRW",
+    "districtDistanceKm": 62.18371173516626,
+    "updatedAt": "2026-11-03T11:28:44.704909+05:30"
+  },
+  "anuradhapura-katiyawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.1019738,
+      "lng": 80.3831256
+    },
+    "source": "places",
+    "query": "Katiyawa Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Katiyawa",
+    "address": "Katiyawa Track 9",
+    "districtDistanceKm": 23.396959260372423,
+    "updatedAt": "2026-11-03T11:28:44.944765+05:30"
+  },
+  "anuradhapura-kebitigollewa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6421175,
+      "lng": 80.6679623
+    },
+    "source": "places",
+    "query": "Kebitigollewa Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Base Hospital - Kebithigollewa",
+    "address": "JMR9+R5W, Kebitigollewa",
+    "districtDistanceKm": 46.87245037408736,
+    "updatedAt": "2026-11-03T11:28:44.929375+05:30"
+  },
+  "anuradhapura-kekirawa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0438657,
+      "lng": 80.5958493
+    },
+    "source": "places",
+    "query": "Kekirawa Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Base Hospital Kekirawa",
+    "address": "2HVW+G8X, A9, Kekirawa",
+    "districtDistanceKm": 36.49986927585331,
+    "updatedAt": "2026-11-03T11:28:44.927824+05:30"
+  },
+  "anuradhapura-mahawilachchiya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4943251,
+      "lng": 80.1865617
+    },
+    "source": "places",
+    "query": "Mahawilachchiya Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Mahavilachchiya Divisional Hospital",
+    "address": "F5VP+PJM, Mahawilachchiya",
+    "districtDistanceKm": 31.372685903208456,
+    "updatedAt": "2026-11-03T11:28:44.95125+05:30"
+  },
+  "anuradhapura-maradankadawala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.126467,
+      "lng": 80.5644233
+    },
+    "source": "places",
+    "query": "Maradankadawala Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Maradankadawala",
+    "address": "4HG7+HQM, Maradankadawala-Habarana-Thirukkondaiadimdu Highway, Maradankadawala",
+    "districtDistanceKm": 27.124328192243397,
+    "updatedAt": "2026-11-03T11:28:45.202109+05:30"
+  },
+  "anuradhapura-medawachchiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.5409977,
+      "lng": 80.4913464
+    },
+    "source": "places",
+    "query": "Medawachchiya Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Base Hospital Medawachchiya பிரதேச வைத்தியசாலை மதவாச்சி",
+    "address": "GFRR+9GX, Kandy - Jaffna Hwy, Medawachchiya",
+    "districtDistanceKm": 27.28969854015234,
+    "updatedAt": "2026-11-03T11:28:45.201834+05:30"
+  },
+  "anuradhapura-mihintale-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.357642499999999,
+      "lng": 80.5090353
+    },
+    "source": "places",
+    "query": "Mihintale MOH Office, Anuradhapura District, Sri Lanka",
+    "matchedName": "MOH Office, Mihintale",
+    "address": "9G55+3J3, Puttalam - Anuradhapura - Trincomalee Hwy, Mihintale",
+    "districtDistanceKm": 12.678544492160938,
+    "updatedAt": "2026-11-03T11:28:45.250662+05:30"
+  },
+  "anuradhapura-nachchaduwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.246228,
+      "lng": 80.4586966
+    },
+    "source": "places",
+    "query": "Nachchaduwa Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Nachchaduwa Divisional Hospital",
+    "address": "6FW5+PF6, Nachchaduwa",
+    "districtDistanceKm": 9.441297312557564,
+    "updatedAt": "2026-11-03T11:28:45.202044+05:30"
+  },
+  "anuradhapura-negampaha-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9989143,
+      "lng": 80.4618863
+    },
+    "source": "places",
+    "query": "Negampaha Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital (C) Negampaha",
+    "address": "Negampaha Hospital, Galnewa - Negampaha - Palagala Road, අනුරාධපුර පෞරාණික නගරය",
+    "districtDistanceKm": 35.33214575608773,
+    "updatedAt": "2026-11-03T11:28:45.461646+05:30"
+  },
+  "anuradhapura-nochchiyagama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.264005299999999,
+      "lng": 80.2104346
+    },
+    "source": "places",
+    "query": "Nochchiyagama Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Nochchiyagama Base Hospital",
+    "address": "Hospital, Hospital, Trincomalee Road, Nochchiyagama",
+    "districtDistanceKm": 21.908984636668094,
+    "updatedAt": "2026-11-03T11:28:45.454714+05:30"
+  },
+  "anuradhapura-padaviya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.832325299999999,
+      "lng": 80.7690326
+    },
+    "source": "places",
+    "query": "Padaviya Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "පදවිය මූලික රෝහල | Base Hospital - Padaviya",
+    "address": "Padaviya Rd, Padaviya",
+    "districtDistanceKm": 70.48960351871168,
+    "updatedAt": "2026-11-03T11:28:45.427262+05:30"
+  },
+  "anuradhapura-palugaswewa-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0659209,
+      "lng": 80.70325079999999
+    },
+    "source": "places",
+    "query": "Palugaswewa MOH Office, Anuradhapura District, Sri Lanka",
+    "matchedName": "MOH Office Palugaswewa",
+    "address": "3P83+986, Palugaswewa",
+    "districtDistanceKm": 42.802123993607395,
+    "updatedAt": "2026-11-03T11:28:45.553927+05:30"
+  },
+  "anuradhapura-rajanganaya-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.1652643,
+      "lng": 80.2138695
+    },
+    "source": "places",
+    "query": "Rajanganaya MOH Office, Anuradhapura District, Sri Lanka",
+    "matchedName": "MOH Rajanganaya",
+    "address": "5687+4G5, Rajanganaya",
+    "districtDistanceKm": 26.46610833497664,
+    "updatedAt": "2026-11-03T11:28:45.728527+05:30"
+  },
+  "anuradhapura-rajanganaya-tr-11-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.198929099999999,
+      "lng": 80.15256959999999
+    },
+    "source": "places",
+    "query": "Rajanganaya Tr 11 Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Rajanganaya Track 11",
+    "address": "track 11, Gemunupura,, Rajanganaya",
+    "districtDistanceKm": 30.33319252936697,
+    "updatedAt": "2026-11-03T11:28:45.728567+05:30"
+  },
+  "anuradhapura-ranorawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3622617,
+      "lng": 80.23839640000001
+    },
+    "source": "places",
+    "query": "Ranorawa Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Ranorawa Divisional Hospital",
+    "address": "Oyamaduwa Rd",
+    "districtDistanceKm": 19.045758970489956,
+    "updatedAt": "2026-11-03T11:28:45.728534+05:30"
+  },
+  "anuradhapura-thambuttegama-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.154718599999999,
+      "lng": 80.2933156
+    },
+    "source": "places",
+    "query": "Thambuttegama Base Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Thambuththegama Base Hospital",
+    "address": "573V+V8P, Veheragala",
+    "districtDistanceKm": 21.23907691750181,
+    "updatedAt": "2026-11-03T11:28:45.780889+05:30"
+  },
+  "anuradhapura-thantirimale-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.5790692,
+      "lng": 80.2576965
+    },
+    "source": "places",
+    "query": "Thantirimale Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Thantirimale",
+    "address": "H7H5+J3G, Cave of Arts Rd, Thanthirimale",
+    "districtDistanceKm": 33.81934683707611,
+    "updatedAt": "2026-11-03T11:28:45.998916+05:30"
+  },
+  "anuradhapura-wahalkada-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7595101,
+      "lng": 80.8493258
+    },
+    "source": "places",
+    "query": "Wahalkada Divisional Hospital, Anuradhapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Wahalkada",
+    "address": "Unnamed Road, QR5X+RP4",
+    "districtDistanceKm": 69.88575788188382,
+    "updatedAt": "2026-11-03T11:28:45.956525+05:30"
+  },
+  "badulla-badulla-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9918084,
+      "lng": 81.05235019999999
+    },
+    "source": "places",
+    "query": "Badulla Teaching Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Teaching Hospital Badulla",
+    "address": "Daya Gunasekara Mawatha, Badulla",
+    "districtDistanceKm": 0.3418329245755609,
+    "updatedAt": "2026-11-03T11:28:45.973115+05:30"
+  },
+  "badulla-badulla-th": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9918084,
+      "lng": 81.05235019999999
+    },
+    "source": "places",
+    "query": "Badulla Teaching Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Teaching Hospital Badulla",
+    "address": "Daya Gunasekara Mawatha, Badulla",
+    "districtDistanceKm": 0.3418329245755609,
+    "updatedAt": "2026-11-03T11:28:46.019469+05:30"
+  },
+  "badulla-ballaketuwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.863122,
+      "lng": 81.09352799999999
+    },
+    "source": "places",
+    "query": "Ballaketuwa Primary Medical Care Unit, Badulla District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit- Ballaketuwa",
+    "address": "V37V+6CR, Balleketuwa",
+    "districtDistanceKm": 15.097619557220463,
+    "updatedAt": "2026-11-03T11:28:46.250956+05:30"
+  },
+  "badulla-bandarawela-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8400446,
+      "lng": 80.9848626
+    },
+    "source": "places",
+    "query": "Bandarawela Base Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Base Hospital Bandarawela",
+    "address": "RXRM+2W9, Bandarawela",
+    "districtDistanceKm": 18.7276120798688,
+    "updatedAt": "2026-11-03T11:28:46.589639+05:30"
+  },
+  "badulla-bogahakumbura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.862306299999999,
+      "lng": 80.8755273
+    },
+    "source": "places",
+    "query": "Bogahakumbura Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Bogahakumbura Divisional Hospital",
+    "address": "B48",
+    "districtDistanceKm": 24.595795477745813,
+    "updatedAt": "2026-11-03T11:28:46.252151+05:30"
+  },
+  "badulla-boralanda-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8295603,
+      "lng": 80.8954802
+    },
+    "source": "places",
+    "query": "Boralanda Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital Boralanda",
+    "address": "RVHW+R5H, Boralanda",
+    "districtDistanceKm": 25.337201059645434,
+    "updatedAt": "2026-11-03T11:28:46.328699+05:30"
+  },
+  "badulla-diyathalawa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8055498,
+      "lng": 80.9563659
+    },
+    "source": "places",
+    "query": "Diyathalawa Base Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Base Hospital Diyatalawa",
+    "address": "12 Fair Rd, Diyatalawa",
+    "districtDistanceKm": 23.555480043448785,
+    "updatedAt": "2026-11-03T11:28:46.497873+05:30"
+  },
+  "badulla-ekeriyankumbura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.298432399999999,
+      "lng": 81.22601279999999
+    },
+    "source": "places",
+    "query": "Ekeriyankumbura Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Ekiriyankumbura Divisional Hospital",
+    "address": "76XG+9CC, Ekiriyankumbura",
+    "districtDistanceKm": 38.81284561621313,
+    "updatedAt": "2026-11-03T11:28:46.549852+05:30"
+  },
+  "badulla-galauda-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0450194999999995,
+      "lng": 80.98257459999999
+    },
+    "source": "places",
+    "query": "Galauda Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Galauda",
+    "address": "Galauda-kandaketiya Rd",
+    "districtDistanceKm": 9.840392268330685,
+    "updatedAt": "2026-11-03T11:28:46.575662+05:30"
+  },
+  "badulla-girandurukotte-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.469390000000001,
+      "lng": 81.01910509999999
+    },
+    "source": "places",
+    "query": "Girandurukotte Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Girandurukotte District Hospital",
+    "address": "F299+QJ5, Girandurukotte",
+    "districtDistanceKm": 53.075576192710166,
+    "updatedAt": "2026-11-03T11:28:46.776236+05:30"
+  },
+  "badulla-kahataruppa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.024021299999999,
+      "lng": 81.1162241
+    },
+    "source": "places",
+    "query": "Kahataruppa Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kahataruppa",
+    "address": "24F8+JF5, Kahataruppa",
+    "districtDistanceKm": 7.566359084399631,
+    "updatedAt": "2026-11-03T11:28:46.786678+05:30"
+  },
+  "badulla-kandagolla-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9997685999999995,
+      "lng": 81.1015146
+    },
+    "source": "places",
+    "query": "Kandagolla Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Kendagolla Divisional Hospitel",
+    "address": "X4X2+WJ2, Kendagolla",
+    "districtDistanceKm": 5.182284941091931,
+    "updatedAt": "2026-11-03T11:28:46.91562+05:30"
+  },
+  "badulla-kandaketiya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1715364,
+      "lng": 81.00555609999999
+    },
+    "source": "places",
+    "query": "Kandaketiya Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "District Hospital - Kandeketiya",
+    "address": "52C4+J67, Karamettiya Kandakettiya Road, Kandakettiya Town",
+    "districtDistanceKm": 20.545533577355638,
+    "updatedAt": "2026-11-03T11:28:46.887988+05:30"
+  },
+  "badulla-kerkil-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9918084,
+      "lng": 81.05235019999999
+    },
+    "source": "places",
+    "query": "Kerkil Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Teaching Hospital Badulla",
+    "address": "Daya Gunasekara Mawatha, Badulla",
+    "districtDistanceKm": 0.3418329245755609,
+    "updatedAt": "2026-11-03T11:28:47.021313+05:30"
+  },
+  "badulla-liyangahawela-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8153557,
+      "lng": 81.0268833
+    },
+    "source": "places",
+    "query": "Liyangahawela Primary Medical Care Unit, Badulla District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Liyangahawela",
+    "address": "R28G+4QR, Liyangahawela",
+    "districtDistanceKm": 20.039441160343173,
+    "updatedAt": "2026-11-03T11:28:47.084192+05:30"
+  },
+  "badulla-lunugala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0375824,
+      "lng": 81.2007453
+    },
+    "source": "places",
+    "query": "Lunugala Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "District Hospital - Lunugala",
+    "address": "26Q2+27Q, Peradeniya-Badulla-Chenkaladi Hwy, Lunugala",
+    "districtDistanceKm": 16.818356810920758,
+    "updatedAt": "2026-11-03T11:28:47.10503+05:30"
+  },
+  "badulla-lunuwatta-pannalawel-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1210461,
+      "lng": 80.8157851
+    },
+    "source": "places",
+    "query": "Lunuwatta Pannalawel Primary Medical Care Unit, Badulla District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Munwatta",
+    "address": "Liyanwela - Brook Side Rd",
+    "districtDistanceKm": 29.97182732103309,
+    "updatedAt": "2026-11-03T11:28:47.188665+05:30"
+  },
+  "badulla-mahadowa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.990873499999999,
+      "lng": 81.05222719999999
+    },
+    "source": "places",
+    "query": "Mahadowa Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Badulla Hospital",
+    "address": "X3R2+8VX, Daya Gunasekara Mawatha, Badulla",
+    "districtDistanceKm": 0.41542412316870886,
+    "updatedAt": "2026-11-03T11:28:47.300947+05:30"
+  },
+  "badulla-mahiyanganaya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3254794,
+      "lng": 80.99094269999999
+    },
+    "source": "places",
+    "query": "Mahiyanganaya Base Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Base Hospital Mahiyanganaya",
+    "address": "8XGR+59W, Bibile - Uraniya - Mahiyangana Rd, Mahiyanganaya",
+    "districtDistanceKm": 37.59577874501935,
+    "updatedAt": "2026-11-03T11:28:47.302784+05:30"
+  },
+  "badulla-metigahatenna-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0695272,
+      "lng": 81.1617139
+    },
+    "source": "places",
+    "query": "Metigahatenna Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "District Hospital (B) - Metigahathenna",
+    "address": "Metigahathenna",
+    "districtDistanceKm": 14.503397313934993,
+    "updatedAt": "2026-11-03T11:28:47.353102+05:30"
+  },
+  "badulla-mirahawatta-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8687166,
+      "lng": 80.9515274
+    },
+    "source": "places",
+    "query": "Mirahawatta Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Mirahawaththa",
+    "address": "VX92+FJJ, Bandarawela - Welimada Rd, Welimada",
+    "districtDistanceKm": 17.96292377723333,
+    "updatedAt": "2026-11-03T11:28:47.470918+05:30"
+  },
+  "badulla-namunukula-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8755102,
+      "lng": 81.1129272
+    },
+    "source": "places",
+    "query": "Namunukula Primary Medical Care Unit, Badulla District, Sri Lanka",
+    "matchedName": "Namunukula Hospital",
+    "address": "V4G7+653, Namunukula",
+    "districtDistanceKm": 14.585049622598614,
+    "updatedAt": "2026-11-03T11:28:47.539514+05:30"
+  },
+  "badulla-passara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9335477,
+      "lng": 81.1525723
+    },
+    "source": "places",
+    "query": "Passara Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "District hospital passara",
+    "address": "W5M3+C28, Demodera - Spring Valley - Badulla Road, Passara",
+    "districtDistanceKm": 12.659979478853929,
+    "updatedAt": "2026-11-03T11:28:47.551728+05:30"
+  },
+  "badulla-rideemaliyadda-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2367051,
+      "lng": 81.10780190000001
+    },
+    "source": "places",
+    "query": "Rideemaliyadda MOH Office, Badulla District, Sri Lanka",
+    "matchedName": "MOH Office Rideemaliyadda",
+    "address": "64P5+M4M, B57, Uraniya",
+    "districtDistanceKm": 27.674501607222705,
+    "updatedAt": "2026-11-03T11:28:47.58128+05:30"
+  },
+  "badulla-roeberry-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.130426600000001,
+      "lng": 81.12913619999999
+    },
+    "source": "places",
+    "query": "Roeberry Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital Roeberry",
+    "address": "44JH+5MC, Roberiya",
+    "districtDistanceKm": 17.294078541898834,
+    "updatedAt": "2026-11-03T11:28:47.69534+05:30"
+  },
+  "badulla-uraniya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2360627,
+      "lng": 81.1082903
+    },
+    "source": "places",
+    "query": "Uraniya Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Uraniya",
+    "address": "64P5+C8F, Uraniya",
+    "districtDistanceKm": 27.616099626811614,
+    "updatedAt": "2026-11-03T11:28:47.825734+05:30"
+  },
+  "badulla-uvatissapura-nagadeepa-mapakadawewa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3254794,
+      "lng": 80.99094269999999
+    },
+    "source": "places",
+    "query": "Uvatissapura Nagadeepa Mapakadawewa Primary Medical Care Unit, Badulla District, Sri Lanka",
+    "matchedName": "Base Hospital Mahiyanganaya",
+    "address": "8XGR+59W, Bibile - Uraniya - Mahiyangana Rd, Mahiyanganaya",
+    "districtDistanceKm": 37.59577874501935,
+    "updatedAt": "2026-11-03T11:28:47.867212+05:30"
+  },
+  "badulla-welimada-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.908841,
+      "lng": 80.9085564
+    },
+    "source": "places",
+    "query": "Welimada Base Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Base Hospital welimada",
+    "address": "WW55+GCM",
+    "districtDistanceKm": 18.699880727344386,
+    "updatedAt": "2026-11-03T11:28:47.82569+05:30"
+  },
+  "badulla-wewegama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0097735,
+      "lng": 80.95359529999999
+    },
+    "source": "places",
+    "query": "Wewegama Divisional Hospital, Badulla District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Wewegama (Type C)",
+    "address": "2X63+2GM, Nikagolla",
+    "districtDistanceKm": 11.338727434185357,
+    "updatedAt": "2026-11-03T11:28:48.022035+05:30"
+  },
+  "batticaloa-batticaloa-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.708032299999998,
+      "lng": 81.6906221
+    },
+    "source": "places",
+    "query": "Batticaloa Teaching Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Teaching Hospital, Batticaloa",
+    "address": "PM5R+669, Hospital Ln, Batticaloa 30000",
+    "districtDistanceKm": 3.0984390047107944,
+    "updatedAt": "2026-11-03T11:28:48.0633+05:30"
+  },
+  "batticaloa-cheddipalayam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.579797399999999,
+      "lng": 81.7808434
+    },
+    "source": "places",
+    "query": "Cheddipalayam Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Cheddipalayam",
+    "address": "HQHJ+W88, Kaluwanchikudy",
+    "districtDistanceKm": 20.48182328386437,
+    "updatedAt": "2026-11-03T11:28:48.053237+05:30"
+  },
+  "batticaloa-chenkalady-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7835452,
+      "lng": 81.5899318
+    },
+    "source": "places",
+    "query": "Chenkalady Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Chenkalady",
+    "address": "QHMQ+CX7, Batticaloa Rd, Chenkaladi",
+    "districtDistanceKm": 11.01656798234296,
+    "updatedAt": "2026-11-03T11:28:48.192157+05:30"
+  },
+  "batticaloa-eravur-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.783167699999999,
+      "lng": 81.6059994
+    },
+    "source": "places",
+    "query": "Eravur Base Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Base Hospital Eravur",
+    "address": "QJM4+799, Eravur 30300",
+    "districtDistanceKm": 9.536387701641962,
+    "updatedAt": "2026-11-03T11:28:48.351907+05:30"
+  },
+  "batticaloa-kaluwanchikudy-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5172402,
+      "lng": 81.7851837
+    },
+    "source": "places",
+    "query": "Kaluwanchikudy Base Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Base Hospital - Kaluwanchikudy | ஆதார வைத்தியசாலை",
+    "address": "GQ8P+V3V, Kaluwanchikudy",
+    "districtDistanceKm": 26.70647059685028,
+    "updatedAt": "2026-11-03T11:28:48.515776+05:30"
+  },
+  "batticaloa-kangeyannoddi-kanyanodai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.6659359,
+      "lng": 81.7279715
+    },
+    "source": "places",
+    "query": "Kangeyannoddi Kanyanodai Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Kankeyanodai",
+    "address": "MP8H+95H",
+    "districtDistanceKm": 9.316690847834344,
+    "updatedAt": "2026-11-03T11:28:48.351979+05:30"
+  },
+  "batticaloa-karadiyanaru-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.700256199999999,
+      "lng": 81.5397952
+    },
+    "source": "places",
+    "query": "Karadiyanaru Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisonal Hospital Karadiyanaru",
+    "address": "PG2Q+4W3, Karadiyanaru",
+    "districtDistanceKm": 15.252947703463875,
+    "updatedAt": "2026-11-03T11:28:48.42511+05:30"
+  },
+  "batticaloa-kathiravely-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.2190159,
+      "lng": 81.4043338
+    },
+    "source": "places",
+    "query": "Kathiravely Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Kathiravely",
+    "address": "6C93+JP4, Trincomalee-Batticaloa Rd, Kathiraveli",
+    "districtDistanceKm": 61.8957218487859,
+    "updatedAt": "2026-11-03T11:28:48.672723+05:30"
+  },
+  "batticaloa-kattankudy-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.6851473,
+      "lng": 81.7390784
+    },
+    "source": "places",
+    "query": "Kattankudy Base Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Base Hospital Kattankudy",
+    "address": "MPPQ+3J4, Dr Badhiudeen Mahmood Mawatha, Kattankudy",
+    "districtDistanceKm": 8.736050037886496,
+    "updatedAt": "2026-11-03T11:28:48.582465+05:30"
+  },
+  "batticaloa-kawattamunai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9150963,
+      "lng": 81.5055642
+    },
+    "source": "places",
+    "query": "Kawattamunai Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary medical care unit Kawathamunai",
+    "address": "Oddamavadi - Vahaneri Rd",
+    "districtDistanceKm": 27.68024308470775,
+    "updatedAt": "2026-11-03T11:28:48.659901+05:30"
+  },
+  "batticaloa-kokkodicholai-mahiladithivu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.6231506,
+      "lng": 81.7183032
+    },
+    "source": "places",
+    "query": "Kokkodicholai Mahiladithivu Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mahiladithivu",
+    "address": "Muthalaikudah Kanchirankudah Rd",
+    "districtDistanceKm": 12.91910954334085,
+    "updatedAt": "2026-11-03T11:28:48.777567+05:30"
+  },
+  "batticaloa-mahilavedduvan-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.730997100000001,
+      "lng": 81.6747295
+    },
+    "source": "places",
+    "query": "Mahilavedduvan Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Mahilavadduwan",
+    "address": "PMJF+9VX, Batticaloa",
+    "districtDistanceKm": 0.0032663909255517976,
+    "updatedAt": "2026-11-03T11:28:48.87198+05:30"
+  },
+  "batticaloa-mandapathady-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.654829199999999,
+      "lng": 81.6572207
+    },
+    "source": "places",
+    "query": "Mandapathady Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Puthumandapathady Divisional Hospital",
+    "address": "Mandapathady, Batticaloa",
+    "districtDistanceKm": 8.686054730345992,
+    "updatedAt": "2026-11-03T11:28:48.89188+05:30"
+  },
+  "batticaloa-mankerney-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0138926,
+      "lng": 81.48685809999999
+    },
+    "source": "places",
+    "query": "Mankerney Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Care Medical Unit (PMCU)",
+    "address": "2F7P+HP5, Mankerni",
+    "districtDistanceKm": 37.6507366064538,
+    "updatedAt": "2026-11-03T11:28:48.977507+05:30"
+  },
+  "batticaloa-mavadivambu-vantharamoolai-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.80863,
+      "lng": 81.5667929
+    },
+    "source": "places",
+    "query": "Mavadivambu Vantharamoolai Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mavadivembu",
+    "address": "RH58+FP3, Thavapuram",
+    "districtDistanceKm": 14.691849193162811,
+    "updatedAt": "2026-11-03T11:28:49.054958+05:30"
+  },
+  "batticaloa-nawalkadu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.713686099999999,
+      "lng": 81.6405456
+    },
+    "source": "places",
+    "query": "Nawalkadu Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Navatkadu",
+    "address": "Navatladu, PJ7R+F6F, Batticaloa",
+    "districtDistanceKm": 4.227208511102789,
+    "updatedAt": "2026-11-03T11:28:49.070713+05:30"
+  },
+  "batticaloa-palamenamadu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.755241,
+      "lng": 81.6837094
+    },
+    "source": "places",
+    "query": "Palamenamadu Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Palameenmadu",
+    "address": "1996 Bar Rd, Batticaloa",
+    "districtDistanceKm": 2.872451271901252,
+    "updatedAt": "2026-11-03T11:28:49.090982+05:30"
+  },
+  "batticaloa-palayadivaddai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.492340500000001,
+      "lng": 81.686515
+    },
+    "source": "places",
+    "query": "Palayadivaddai Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit",
+    "address": "FMRP+WJJ, Unnamed Road, Aliyarvaddai",
+    "districtDistanceKm": 26.569655265708302,
+    "updatedAt": "2026-11-03T11:28:49.21247+05:30"
+  },
+  "batticaloa-panchenai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.6402578000000005,
+      "lng": 81.5585931
+    },
+    "source": "places",
+    "query": "Panchenai Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit- Unnichchai",
+    "address": "JHR5+4C4, Batticaloa",
+    "districtDistanceKm": 16.294455242925753,
+    "updatedAt": "2026-11-03T11:28:49.401924+05:30"
+  },
+  "batticaloa-periyapullumai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.862719200000001,
+      "lng": 81.50627820000001
+    },
+    "source": "places",
+    "query": "Periyapullumai Primary Medical Care Unit, Batticaloa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Pulipanjakal",
+    "address": "VG74+3GJ, Unnamed Road, Perillaveli",
+    "districtDistanceKm": 23.638742056260078,
+    "updatedAt": "2026-11-03T11:28:49.398623+05:30"
+  },
+  "batticaloa-thuraineelavanai-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4422276,
+      "lng": 81.8004129
+    },
+    "source": "places",
+    "query": "Thuraineelavanai Divisional Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Thuraineelavanai",
+    "address": "CRR2+V5V, Thuraineelavanai",
+    "districtDistanceKm": 34.97212667822182,
+    "updatedAt": "2026-11-03T11:28:49.398118+05:30"
+  },
+  "batticaloa-vakarai-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.134552,
+      "lng": 81.4353285
+    },
+    "source": "places",
+    "query": "Vakarai MOH Office, Batticaloa District, Sri Lanka",
+    "matchedName": "Divisional Hospital Vakarai",
+    "address": "4CMP+R4G, Trincomalee-Batticaloa Rd, Vakarai",
+    "districtDistanceKm": 52.04365798817208,
+    "updatedAt": "2026-11-03T11:28:49.450929+05:30"
+  },
+  "batticaloa-valaichchenai-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.911314999999998,
+      "lng": 81.53304639999999
+    },
+    "source": "places",
+    "query": "Valaichchenai Base Hospital, Batticaloa District, Sri Lanka",
+    "matchedName": "Valaichchenai Base Hospital | ஆதார வைத்தியசாலை - வாழைச்சேனை",
+    "address": "WG6M+G6F, Valaichchenai-Nasuvantivu-Navaladi Rd",
+    "districtDistanceKm": 25.406919956677697,
+    "updatedAt": "2026-11-03T11:28:49.622102+05:30"
+  },
+  "colombo-avissawella-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9560108,
+      "lng": 80.2081176
+    },
+    "source": "places",
+    "query": "Avissawella District General Hospital, Colombo District, Sri Lanka",
+    "matchedName": "District General Hospital - Avissawella",
+    "address": "X645+C65, Road, Avissawella",
+    "districtDistanceKm": 38.4274196549027,
+    "updatedAt": "2026-11-03T11:28:49.723356+05:30"
+  },
+  "colombo-director-planning-office-ministry-of-health": {
+    "status": "ok",
+    "location": {
+      "lat": 6.920222,
+      "lng": 79.865381
+    },
+    "source": "places",
+    "query": "Director Planning Office ( Ministry Of Health ), Colombo District, Sri Lanka",
+    "matchedName": "Management Development \u0026 Planning Unit of MOH",
+    "address": "38 A Second Floor, Ven Baddegama Wimalawansa Mawatha, Colombo 01000",
+    "districtDistanceKm": 0.8932602239288973,
+    "updatedAt": "2026-11-03T11:28:49.776565+05:30"
+  },
+  "galle-ambalangoda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.248476999999999,
+      "lng": 80.06290539999999
+    },
+    "source": "places",
+    "query": "Ambalangoda Primary Medical Care Unit, Galle District, Sri Lanka",
+    "matchedName": "Medical Officer Of Health (MOH Office) Ambalangoda",
+    "address": "63X7+95R, Ambalangoda",
+    "districtDistanceKm": 27.848270676682393,
+    "updatedAt": "2026-11-03T11:28:49.734881+05:30"
+  },
+  "galle-baddegama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.162990199999999,
+      "lng": 80.1795933
+    },
+    "source": "places",
+    "query": "Baddegama Divisional Hospital, Galle District, Sri Lanka",
+    "matchedName": "District Hospital - Baddegama",
+    "address": "557H+5RW, B128, Baddegama 80200",
+    "districtDistanceKm": 13.007052673839667,
+    "updatedAt": "2026-11-03T11:28:49.921692+05:30"
+  },
+  "galle-balapitiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2605907,
+      "lng": 80.0381462
+    },
+    "source": "places",
+    "query": "Balapitiya Base Hospital, Galle District, Sri Lanka",
+    "matchedName": "Base Hospital - Balapitiya",
+    "address": "726Q+67J, Galle - Colombo Rd, Balapitiya",
+    "districtDistanceKm": 30.64170043336509,
+    "updatedAt": "2026-11-03T11:28:49.96689+05:30"
+  },
+  "galle-elpitiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.293299600000001,
+      "lng": 80.1640656
+    },
+    "source": "places",
+    "query": "Elpitiya Base Hospital, Galle District, Sri Lanka",
+    "matchedName": "Base Hospital - Elpitiya, and MOH",
+    "address": "75V7+8J8, Elpitiya 80400",
+    "districtDistanceKm": 27.3972843291029,
+    "updatedAt": "2026-11-03T11:28:50.21296+05:30"
+  },
+  "galle-galle-national-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0670728,
+      "lng": 80.22607359999999
+    },
+    "source": "places",
+    "query": "Galle National Hospital, Galle District, Sri Lanka",
+    "matchedName": "National Hospital Galle",
+    "address": "Galle 80000",
+    "districtDistanceKm": 1.6101217420603835,
+    "updatedAt": "2026-11-03T11:28:50.031317+05:30"
+  },
+  "galle-hikkaduwa-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.140845199999999,
+      "lng": 80.1017233
+    },
+    "source": "places",
+    "query": "Hikkaduwa MOH Office, Galle District, Sri Lanka",
+    "matchedName": "Hikkaduwa MOH Office",
+    "address": "44R2+8MQ, Baddegama Rd, Hikkaduwa",
+    "districtDistanceKm": 16.37837832101976,
+    "updatedAt": "2026-11-03T11:28:50.454399+05:30"
+  },
+  "galle-karandeniya-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.268939,
+      "lng": 80.0998764
+    },
+    "source": "places",
+    "query": "Karandeniya MOH Office, Galle District, Sri Lanka",
+    "matchedName": "Karandeniya MOH Office/ my office",
+    "address": "739X+HXC, Elpitiya Rd, Karandeniya",
+    "districtDistanceKm": 27.44417785845428,
+    "updatedAt": "2026-11-03T11:28:50.212961+05:30"
+  },
+  "galle-mahainduruwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3629405,
+      "lng": 80.02033469999999
+    },
+    "source": "places",
+    "query": "Mahainduruwa Primary Medical Care Unit, Galle District, Sri Lanka",
+    "matchedName": "Primary medical care unit - Maha Induruwa",
+    "address": "927C+54G, Suduwelipotha Rd, Maha Induruwa",
+    "districtDistanceKm": 40.93861065111665,
+    "updatedAt": "2026-11-03T11:28:50.460842+05:30"
+  },
+  "galle-neluwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3584102,
+      "lng": 80.3587186
+    },
+    "source": "places",
+    "query": "Neluwa Divisional Hospital, Galle District, Sri Lanka",
+    "matchedName": "Neluwa MOH Office",
+    "address": "9955+9F8, Mawanana Rd",
+    "districtDistanceKm": 37.16555511858561,
+    "updatedAt": "2026-11-03T11:28:50.449319+05:30"
+  },
+  "galle-udugama-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1877815,
+      "lng": 80.34068189999999
+    },
+    "source": "places",
+    "query": "Udugama Base Hospital, Galle District, Sri Lanka",
+    "matchedName": "Base Hospital - Udugama",
+    "address": "B129, Udugama",
+    "districtDistanceKm": 19.95087211577059,
+    "updatedAt": "2026-11-03T11:28:50.448468+05:30"
+  },
+  "galle-uragahasmandiya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3436796,
+      "lng": 80.0784651
+    },
+    "source": "places",
+    "query": "Uragahasmandiya Divisional Hospital, Galle District, Sri Lanka",
+    "matchedName": "Uragasmanhandiya Peripheral Unit",
+    "address": "Kosgoda, Road, Uragasmanhandiya",
+    "districtDistanceKm": 35.908127832276435,
+    "updatedAt": "2026-11-03T11:28:50.823487+05:30"
+  },
+  "gampaha-alawala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1168147,
+      "lng": 80.182407
+    },
+    "source": "places",
+    "query": "Alawala Primary Medical Care Unit, Gampaha District, Sri Lanka",
+    "matchedName": "PMCU Alawala",
+    "address": "458J+PXF",
+    "districtDistanceKm": 20.501837916559538,
+    "updatedAt": "2026-11-03T11:28:50.708912+05:30"
+  },
+  "gampaha-attanagalla-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1447693,
+      "lng": 80.09495679999999
+    },
+    "source": "places",
+    "query": "Attanagalla MOH Office, Gampaha District, Sri Lanka",
+    "matchedName": "Aththanagalla Pradeshiya Sabawa",
+    "address": "43VV+WX4, Nittambuwa",
+    "districtDistanceKm": 12.366718182712654,
+    "updatedAt": "2026-11-03T11:28:50.708998+05:30"
+  },
+  "gampaha-kandawala-katana-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2354159,
+      "lng": 79.8787352
+    },
+    "source": "places",
+    "query": "Kandawala Katana Primary Medical Care Unit, Gampaha District, Sri Lanka",
+    "matchedName": "PMCU Kandawala, Katana",
+    "address": "6VPH+5F9, Katana Rd, Katana",
+    "districtDistanceKm": 21.149600225777338,
+    "updatedAt": "2026-11-03T11:28:51.166673+05:30"
+  },
+  "gampaha-kiribathgoda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9835147,
+      "lng": 79.9288893
+    },
+    "source": "places",
+    "query": "Kiribathgoda Base Hospital, Gampaha District, Sri Lanka",
+    "matchedName": "Base Hospital Kiribathgoda",
+    "address": "XWMH+CH2, Kiribathgoda",
+    "districtDistanceKm": 13.894096339558518,
+    "updatedAt": "2026-11-03T11:28:50.969723+05:30"
+  },
+  "gampaha-malwathuhiripitiya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.056364,
+      "lng": 80.0685579
+    },
+    "source": "places",
+    "query": "Malwathuhiripitiya Divisional Hospital, Gampaha District, Sri Lanka",
+    "matchedName": "Malwathuhiripitiya Hospital",
+    "address": "3349+GCV, Malwathu Hiripitiya",
+    "districtDistanceKm": 8.411220754691474,
+    "updatedAt": "2026-11-03T11:28:50.969709+05:30"
+  },
+  "gampaha-minuwangoda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1722567999999995,
+      "lng": 79.956152
+    },
+    "source": "places",
+    "query": "Minuwangoda Base Hospital, Gampaha District, Sri Lanka",
+    "matchedName": "Base Hospital - Minuwangoda",
+    "address": "166 Veyangoda Rd, Minuwangoda 11550",
+    "districtDistanceKm": 10.563708610086847,
+    "updatedAt": "2026-11-03T11:28:51.063502+05:30"
+  },
+  "gampaha-pugoda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.975809,
+      "lng": 80.12018979999999
+    },
+    "source": "places",
+    "query": "Pugoda Primary Medical Care Unit, Gampaha District, Sri Lanka",
+    "matchedName": "Pugoda Medical Center - Dr. Sisira Kumara",
+    "address": "Pugoda",
+    "districtDistanceKm": 18.236344902348527,
+    "updatedAt": "2026-11-03T11:28:51.285069+05:30"
+  },
+  "gampaha-specialized-kidney-stone-referral-centre-sksrc": {
+    "status": "ok",
+    "location": {
+      "lat": 7.093411400000001,
+      "lng": 79.9975371
+    },
+    "source": "places",
+    "query": "Specialized Kidney Stone Referral Centre (sksrc), Gampaha District, Sri Lanka",
+    "matchedName": "Sethma Hospitals (Pvt) Ltd",
+    "address": "3XVX+926, No: 36 Marybiso Rd, Gampaha 11000",
+    "districtDistanceKm": 0.698465955523331,
+    "updatedAt": "2026-11-03T11:28:51.193442+05:30"
+  },
+  "hambantota-abeysekaragama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1719503,
+      "lng": 81.0345165
+    },
+    "source": "places",
+    "query": "Abeysekaragama Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "Beragama Goverment Hostpital",
+    "address": "52CM+QRJ, Ambalantota",
+    "districtDistanceKm": 10.701308364670796,
+    "updatedAt": "2026-11-03T11:28:51.494977+05:30"
+  },
+  "hambantota-ambalanthota-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1711617,
+      "lng": 81.1269998
+    },
+    "source": "places",
+    "query": "Ambalanthota MOH Office, Hambantota District, Sri Lanka",
+    "matchedName": "MOH Office -Hambantota",
+    "address": "54CG+FQ9, Hambantota",
+    "districtDistanceKm": 5.3167242843075355,
+    "updatedAt": "2026-11-03T11:28:51.553184+05:30"
+  },
+  "hambantota-angunukolapelessa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1656496999999995,
+      "lng": 80.89955719999999
+    },
+    "source": "places",
+    "query": "Angunukolapelessa Divisional Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Distric Hospital - Agunukolapelessa",
+    "address": "Agunukolapelessa, Sri Lanka",
+    "districtDistanceKm": 24.642428092509657,
+    "updatedAt": "2026-11-03T11:28:51.495103+05:30"
+  },
+  "hambantota-bandagiriya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2374715,
+      "lng": 81.1660658
+    },
+    "source": "places",
+    "query": "Bandagiriya Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "Bandagiriya Primary Care Unit",
+    "address": "65P8+XCP, Hambantota",
+    "districtDistanceKm": 13.659053134365505,
+    "updatedAt": "2026-11-03T11:28:51.588211+05:30"
+  },
+  "hambantota-beliatte-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0510155999999995,
+      "lng": 80.7395537
+    },
+    "source": "places",
+    "query": "Beliatte Divisional Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Divisional Hospital-Beliatta",
+    "address": "Beliatta - Walasmulla Rd, Beliatta 82400",
+    "districtDistanceKm": 42.680118793418025,
+    "updatedAt": "2026-11-03T11:28:51.749585+05:30"
+  },
+  "hambantota-elalle-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3270518,
+      "lng": 81.056343
+    },
+    "source": "places",
+    "query": "Elalle Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Elalla",
+    "address": "83G4+RG, Migahajandura",
+    "districtDistanceKm": 23.589968258354002,
+    "updatedAt": "2026-11-03T11:28:51.730666+05:30"
+  },
+  "hambantota-getamanna-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0481105,
+      "lng": 80.66503689999999
+    },
+    "source": "places",
+    "query": "Getamanna Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "Gatamanna Medical Centre",
+    "address": "Beliatta-Kirinda Rd",
+    "districtDistanceKm": 50.84559912493214,
+    "updatedAt": "2026-11-03T11:28:51.8627+05:30"
+  },
+  "hambantota-hambantota-chest-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1567191,
+      "lng": 81.11052699999999
+    },
+    "source": "places",
+    "query": "Hambantota Chest Clinic, Hambantota District, Sri Lanka",
+    "matchedName": "District General Hospital - Hambantota(New) | දිස්ත්‍රික් මහ රෝහල - හම්බන්තොට",
+    "address": "Hambantota",
+    "districtDistanceKm": 3.7326516865182517,
+    "updatedAt": "2026-11-03T11:28:51.823033+05:30"
+  },
+  "hambantota-hambantota-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1567191,
+      "lng": 81.11052699999999
+    },
+    "source": "places",
+    "query": "Hambantota District General Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "District General Hospital - Hambantota(New) | දිස්ත්‍රික් මහ රෝහල - හම්බන්තොට",
+    "address": "Hambantota",
+    "districtDistanceKm": 3.7326516865182517,
+    "updatedAt": "2026-11-03T11:28:52.084873+05:30"
+  },
+  "hambantota-hambantota-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1171123,
+      "lng": 81.0775469
+    },
+    "source": "places",
+    "query": "Hambantota RDHS Office, Hambantota District, Sri Lanka",
+    "matchedName": "RDHS (Reginal Director of Health Service) Office, Hambantota",
+    "address": "438H+R2V, Hambantota",
+    "districtDistanceKm": 4.594003463916955,
+    "updatedAt": "2026-11-03T11:28:52.019091+05:30"
+  },
+  "hambantota-kirama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2069118,
+      "lng": 80.6683159
+    },
+    "source": "places",
+    "query": "Kirama Divisional Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Government Hospital Kirama",
+    "address": "6M49+Q88, Kirama",
+    "districtDistanceKm": 50.613328241499865,
+    "updatedAt": "2026-11-03T11:28:52.048751+05:30"
+  },
+  "hambantota-okewela-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1111276,
+      "lng": 80.7142088
+    },
+    "source": "places",
+    "query": "Okewela MOH Office, Hambantota District, Sri Lanka",
+    "matchedName": "MOH Office Okewela",
+    "address": "4P67+GQX, Walasmulla",
+    "districtDistanceKm": 44.722388540688684,
+    "updatedAt": "2026-11-03T11:28:52.215501+05:30"
+  },
+  "hambantota-palathuduwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0619032,
+      "lng": 80.79971859999999
+    },
+    "source": "places",
+    "query": "Palathuduwa Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "PMCU Palathuduwa",
+    "address": "3Q6X+QV8, Palathuduwa",
+    "districtDistanceKm": 35.91873507051432,
+    "updatedAt": "2026-11-03T11:28:52.380961+05:30"
+  },
+  "hambantota-ridiyagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.1890538,
+      "lng": 80.9771696
+    },
+    "source": "places",
+    "query": "Ridiyagama Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "පවුල් සෞඛ්‍ය කාර්යාලය",
+    "address": "5XQG+JVF, Unnamed Road, Ridiyagama",
+    "districtDistanceKm": 17.21315350854677,
+    "updatedAt": "2026-11-03T11:28:52.289027+05:30"
+  },
+  "hambantota-tangalle-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0228071,
+      "lng": 80.79661229999999
+    },
+    "source": "places",
+    "query": "Tangalle Base Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Base Hospital Tangalle",
+    "address": "2QFW+4JH, Tangalle",
+    "districtDistanceKm": 37.331044448582055,
+    "updatedAt": "2026-11-03T11:28:52.738441+05:30"
+  },
+  "hambantota-thissamaharamaya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2852466,
+      "lng": 81.2684893
+    },
+    "source": "places",
+    "query": "Thissamaharamaya Base Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Base Hospital - Tissamaharama",
+    "address": "77P9+39X, Tissamaharama Rd, Debarawewa",
+    "districtDistanceKm": 24.4128475072057,
+    "updatedAt": "2026-11-03T11:28:52.738453+05:30"
+  },
+  "hambantota-uduwila-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2594097,
+      "lng": 81.26602430000001
+    },
+    "source": "places",
+    "query": "Uduwila Primary Medical Care Unit, Hambantota District, Sri Lanka",
+    "matchedName": "Uduwila Medical Center",
+    "address": "Uduvila",
+    "districtDistanceKm": 22.188598674584174,
+    "updatedAt": "2026-11-03T11:28:52.540498+05:30"
+  },
+  "hambantota-walasmulla-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.146848299999999,
+      "lng": 80.6982249
+    },
+    "source": "places",
+    "query": "Walasmulla Base Hospital, Hambantota District, Sri Lanka",
+    "matchedName": "Walasmulla Base Hospital",
+    "address": "Beliatta - Walasmulla Rd, Walasmulla",
+    "districtDistanceKm": 46.53357273124388,
+    "updatedAt": "2026-11-03T11:28:52.606653+05:30"
+  },
+  "jaffna-alaveddy-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.768902299999999,
+      "lng": 80.0072382
+    },
+    "source": "places",
+    "query": "Alaveddy Divisional Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Divisional Hospital Alaveddy",
+    "address": "Q294+HV9, Alaveddy",
+    "districtDistanceKm": 12.1091481561851,
+    "updatedAt": "2026-11-03T11:28:52.796757+05:30"
+  },
+  "jaffna-chavakachcheri-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.6615395,
+      "lng": 80.1668072
+    },
+    "source": "places",
+    "query": "Chavakachcheri Base Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Chavakachcheri Base Hospital",
+    "address": "M568+JP7, BH, Chavakachcheri",
+    "districtDistanceKm": 15.489782482135812,
+    "updatedAt": "2026-11-03T11:28:52.829585+05:30"
+  },
+  "jaffna-jaffna-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 9.665911399999999,
+      "lng": 80.0155788
+    },
+    "source": "places",
+    "query": "Jaffna Teaching Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Teaching Hospital Jaffna",
+    "address": "M288+968, Hospital St, Jaffna 40000",
+    "districtDistanceKm": 1.1930393289948935,
+    "updatedAt": "2026-11-03T11:28:53.066919+05:30"
+  },
+  "jaffna-jaffna-th": {
+    "status": "ok",
+    "location": {
+      "lat": 9.665911399999999,
+      "lng": 80.0155788
+    },
+    "source": "places",
+    "query": "Jaffna Teaching Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Teaching Hospital Jaffna",
+    "address": "M288+968, Hospital St, Jaffna 40000",
+    "districtDistanceKm": 1.1930393289948935,
+    "updatedAt": "2026-11-03T11:28:52.96921+05:30"
+  },
+  "jaffna-kayts-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.693164099999999,
+      "lng": 79.86825999999999
+    },
+    "source": "places",
+    "query": "Kayts Base Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "ஊர்காவற்றுறை ஆதார வைத்தியசாலை | කයිට්ස් මූලික රෝහල | Base Hospital Kayts",
+    "address": "MVV9+786, Kayts",
+    "districtDistanceKm": 17.591439379342013,
+    "updatedAt": "2026-11-03T11:28:53.088978+05:30"
+  },
+  "jaffna-kayts-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.6978271,
+      "lng": 79.8663165
+    },
+    "source": "places",
+    "query": "Kayts MOH Office, Jaffna District, Sri Lanka",
+    "matchedName": "Moh Kayts",
+    "address": "MVX8+4GP, Kayts",
+    "districtDistanceKm": 17.90986705605621,
+    "updatedAt": "2026-11-03T11:28:53.072688+05:30"
+  },
+  "jaffna-maruthankerney-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.6221421,
+      "lng": 80.3966725
+    },
+    "source": "places",
+    "query": "Maruthankerney Divisional Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Maruthankerny, Thalaiyady",
+    "address": "Soranpattu-Talayadi Rd",
+    "districtDistanceKm": 40.924159947507455,
+    "updatedAt": "2026-11-03T11:28:53.266853+05:30"
+  },
+  "jaffna-nainativu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.604903,
+      "lng": 79.773072
+    },
+    "source": "places",
+    "query": "Nainativu Divisional Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Divisional Hospital Nainativu",
+    "address": "Velanai Pradesa Sabai, Main St",
+    "districtDistanceKm": 28.379502402176925,
+    "updatedAt": "2026-11-03T11:28:53.312038+05:30"
+  },
+  "jaffna-point-pedro-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.7291314,
+      "lng": 80.22659829999999
+    },
+    "source": "places",
+    "query": "Point Pedro Base Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Varany Divisional Hospital",
+    "address": "P6HG+MJ5, Point Pedro",
+    "districtDistanceKm": 23.28931791903847,
+    "updatedAt": "2026-11-03T11:28:53.327515+05:30"
+  },
+  "jaffna-pungudutivu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.5723782,
+      "lng": 79.8303066
+    },
+    "source": "places",
+    "query": "Pungudutivu Divisional Hospital, Jaffna District, Sri Lanka",
+    "matchedName": "Divisional Hospital Pungudutivu",
+    "address": "Punkudutivu, HRCJ+X43, Kurichchikadu",
+    "districtDistanceKm": 23.582710932565764,
+    "updatedAt": "2026-11-03T11:28:53.308997+05:30"
+  },
+  "jaffna-uduvil-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.7429496,
+      "lng": 80.0351012
+    },
+    "source": "places",
+    "query": "Uduvil MOH Office, Jaffna District, Sri Lanka",
+    "matchedName": "MOH UDUVIL",
+    "address": "P2VP+52H, Chunnakam",
+    "districtDistanceKm": 9.11771428032106,
+    "updatedAt": "2026-11-03T11:28:53.592657+05:30"
+  },
+  "jaffna-velanai-island-south-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.636900599999999,
+      "lng": 79.9030123
+    },
+    "source": "places",
+    "query": "Velanai Island South MOH Office, Jaffna District, Sri Lanka",
+    "matchedName": "Divisional Secretariat Island South Velanai",
+    "address": "JWP3+Q66, Velanai",
+    "districtDistanceKm": 13.703100877099985,
+    "updatedAt": "2026-11-03T11:28:53.593399+05:30"
+  },
+  "kalmunai-akkaraipattu-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2276045,
+      "lng": 81.8512954
+    },
+    "source": "places",
+    "query": "Akkaraipattu Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Akkaraipattu Base Hospital",
+    "address": "237 Colombo - Batticaloa Hwy, Akkaraipattu",
+    "districtDistanceKm": 21.369833282245512,
+    "updatedAt": "2026-11-03T11:28:53.592723+05:30"
+  },
+  "kalmunai-alamkulam-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2990188,
+      "lng": 81.68944499999999
+    },
+    "source": "places",
+    "query": "Alamkulam Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "District General Hospital - Ampara",
+    "address": "Dharmapala Mawatha, Ampara 32000",
+    "districtDistanceKm": 19.187843577364674,
+    "updatedAt": "2026-11-03T11:28:53.592816+05:30"
+  },
+  "kalmunai-irakkamam-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2491281999999995,
+      "lng": 81.71463229999999
+    },
+    "source": "places",
+    "query": "Irakkamam MOH Office, Ampara District, Sri Lanka",
+    "matchedName": "MOH Office, Irakkama",
+    "address": "6PX7+MV2, Eragama",
+    "districtDistanceKm": 21.769343917819132,
+    "updatedAt": "2026-11-03T11:28:53.825112+05:30"
+  },
+  "kalmunai-kalmunai-central-camp-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4200661,
+      "lng": 81.8223507
+    },
+    "source": "places",
+    "query": "Kalmunai Central Camp Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "| Base Hospital Kalmunai - North | கல்முனை வடக்கு ஆதார வைத்தியசாலை",
+    "address": "hospital near, CRCC+2WH, Kalmunai 32300",
+    "districtDistanceKm": 0.7268504392190798,
+    "updatedAt": "2026-11-03T11:28:53.852788+05:30"
+  },
+  "kalmunai-kalmunai-north-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4200661,
+      "lng": 81.8223507
+    },
+    "source": "places",
+    "query": "Kalmunai North Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "| Base Hospital Kalmunai - North | கல்முனை வடக்கு ஆதார வைத்தியசாலை",
+    "address": "hospital near, CRCC+2WH, Kalmunai 32300",
+    "districtDistanceKm": 0.7268504392190798,
+    "updatedAt": "2026-11-03T11:28:53.806926+05:30"
+  },
+  "kalmunai-kalmunai-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 7.413442000000001,
+      "lng": 81.8261407
+    },
+    "source": "places",
+    "query": "Kalmunai RDHS Office, Ampara District, Sri Lanka",
+    "matchedName": "Regional Directorate of Health Services Kalmunai",
+    "address": "CR7G+9FC, Colombo - Batticaloa Hwy, Kalmunai 32300",
+    "districtDistanceKm": 1.1022155977172854,
+    "updatedAt": "2026-11-03T11:28:53.801372+05:30"
+  },
+  "kalmunai-kalmunai-south-ashroff-memorial-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4030898999999994,
+      "lng": 81.8311515
+    },
+    "source": "places",
+    "query": "Kalmunai South Ashroff Memorial Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Ashraff Memorial Hospital (AMH) Kalmunai",
+    "address": "CR3J+6GX Ashraff Memorial Base Hospital, A4 A4, Kalmunai 32300",
+    "districtDistanceKm": 2.19763222251676,
+    "updatedAt": "2026-11-03T11:28:54.116983+05:30"
+  },
+  "kalmunai-komari-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.992785700000001,
+      "lng": 81.8639089
+    },
+    "source": "places",
+    "query": "Komari Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Komari Hospital PMCU",
+    "address": "XVV7+3HF, Komari",
+    "districtDistanceKm": 47.42394512608772,
+    "updatedAt": "2026-11-03T11:28:54.116916+05:30"
+  },
+  "kalmunai-malwatta-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3321913,
+      "lng": 81.7422295
+    },
+    "source": "places",
+    "query": "Malwatta Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Malwatta",
+    "address": "Chadayantalawa Rd, Ampara",
+    "districtDistanceKm": 12.479721793051247,
+    "updatedAt": "2026-11-03T11:28:54.11697+05:30"
+  },
+  "kalmunai-mawadipalli-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3690604,
+      "lng": 81.8214271
+    },
+    "source": "places",
+    "query": "Mawadipalli Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit (PMCU) Mavadipalli",
+    "address": "9R9C+HQX, Karaitivu",
+    "districtDistanceKm": 5.322866407834614,
+    "updatedAt": "2026-11-03T11:28:54.116951+05:30"
+  },
+  "kalmunai-nintavur-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.353368799999999,
+      "lng": 81.8569098
+    },
+    "source": "places",
+    "query": "Nintavur Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Base Hospital, Nintavur",
+    "address": "Nintavur Base Hospital, Hospital Rd, Nintavur 32340",
+    "districtDistanceKm": 8.321776659090617,
+    "updatedAt": "2026-11-03T11:28:54.349411+05:30"
+  },
+  "kalmunai-panankadu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1866294,
+      "lng": 81.8456446
+    },
+    "source": "places",
+    "query": "Panankadu Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Panankadu Divisional Hospital",
+    "address": "5RPW+M72",
+    "districtDistanceKm": 25.781098773532364,
+    "updatedAt": "2026-11-03T11:28:54.330818+05:30"
+  },
+  "kalmunai-pottuvil-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8760911,
+      "lng": 81.8304422
+    },
+    "source": "places",
+    "query": "Pottuvil Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "ஆதார வைத்தியசாலை මූලික රෝහල පොතුවිල් Base Hospital Pottuvil",
+    "address": "Base Hospital, Main Street Colombo - Batticaloa Hwy, Pottuvil 32500",
+    "districtDistanceKm": 60.13208477962295,
+    "updatedAt": "2026-11-03T11:28:54.404474+05:30"
+  },
+  "kalmunai-sammanthurai-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3684859,
+      "lng": 81.8127959
+    },
+    "source": "places",
+    "query": "Sammanthurai Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Base Hospital Sammanthurai | සමන්තුරේ මූලික රෝහල | சம்மாந்துறை ஆதார வைத்தியசாலை",
+    "address": "9R96+MWM, Hospital Rd, Sammanthurai",
+    "districtDistanceKm": 5.378420669248739,
+    "updatedAt": "2026-11-03T11:28:54.418958+05:30"
+  },
+  "kalmunai-sammanthurai-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.369577999999999,
+      "lng": 81.8122814
+    },
+    "source": "places",
+    "query": "Sammanthurai MOH Office, Ampara District, Sri Lanka",
+    "matchedName": "MOH Office Samanthurai",
+    "address": "9R96+RWM, Sammanthurai",
+    "districtDistanceKm": 5.262332809834831,
+    "updatedAt": "2026-11-03T11:28:54.6393+05:30"
+  },
+  "kalmunai-sennelkiramam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.449327199999999,
+      "lng": 81.6262579
+    },
+    "source": "places",
+    "query": "Sennelkiramam Divisional Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Senarathpura",
+    "address": "Ampara - Uhana Rd, Ampara 32000",
+    "districtDistanceKm": 21.309354763217783,
+    "updatedAt": "2026-11-03T11:28:54.639481+05:30"
+  },
+  "kalmunai-sorikalmunai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3906816,
+      "lng": 81.79318769999999
+    },
+    "source": "places",
+    "query": "Sorikalmunai Primary Medical Care Unit, Ampara District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit- Sorikalmunai",
+    "address": "9QRV+77, Sammanthurai",
+    "districtDistanceKm": 3.884835974619631,
+    "updatedAt": "2026-11-03T11:28:54.674097+05:30"
+  },
+  "kalmunai-thirukkovil-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1157134,
+      "lng": 81.8518869
+    },
+    "source": "places",
+    "query": "Thirukkovil Base Hospital, Ampara District, Sri Lanka",
+    "matchedName": "Base Hospital - Thirukkovil",
+    "address": "4V82+7QJ, Thirukkovil",
+    "districtDistanceKm": 33.69247417381527,
+    "updatedAt": "2026-11-03T11:28:54.700177+05:30"
+  },
+  "kalutara-aluthgamweediya-darga-town-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.443155399999999,
+      "lng": 80.0161301
+    },
+    "source": "places",
+    "query": "Aluthgamweediya Darga Town Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Government Hospital Dharga Town",
+    "address": "C2V8+7F6, Hospital Rd, Dharga Town",
+    "districtDistanceKm": 16.960953390429356,
+    "updatedAt": "2026-11-03T11:28:55.224291+05:30"
+  },
+  "kalutara-bandaragama-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7132905,
+      "lng": 79.9916995
+    },
+    "source": "places",
+    "query": "Bandaragama MOH Office, Kalutara District, Sri Lanka",
+    "matchedName": "Medical Officer of Health Office Bandaragama",
+    "address": "PX7R+8M8, Library Path, Bandaragama",
+    "districtDistanceKm": 14.627126881589783,
+    "updatedAt": "2026-11-03T11:28:55.17131+05:30"
+  },
+  "kalutara-bulathsinghala-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.644679099999999,
+      "lng": 80.179718
+    },
+    "source": "places",
+    "query": "Bulathsinghala MOH Office, Kalutara District, Sri Lanka",
+    "matchedName": "MOH Office Bulathsinhala",
+    "address": "J5VH+VVG, Nagoda - Kalawellawa - Bellapitiya Rd, Bulathsinhala",
+    "districtDistanceKm": 25.073486282184838,
+    "updatedAt": "2026-11-03T11:28:54.922119+05:30"
+  },
+  "kalutara-galpatha-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6349526999999995,
+      "lng": 80.0330082
+    },
+    "source": "places",
+    "query": "Galpatha Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Galpatha Divisional Hospital",
+    "address": "Galpata Hospital, B224, Kalutara",
+    "districtDistanceKm": 9.70309527508588,
+    "updatedAt": "2026-11-03T11:28:55.182508+05:30"
+  },
+  "kalutara-geekiyanakanda-estate-hospital-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5821213,
+      "lng": 80.1132887
+    },
+    "source": "places",
+    "query": "Geekiyanakanda Estate Hospital Primary Medical Care Unit, Kalutara District, Sri Lanka",
+    "matchedName": "ගීකියනකන්ද වතු රෝහල Geekiyanakanda Estate Hospital",
+    "address": "H4J7+R8V, Neboda",
+    "districtDistanceKm": 16.859138793501703,
+    "updatedAt": "2026-11-03T11:28:55.196026+05:30"
+  },
+  "kalutara-gonaduwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6714452,
+      "lng": 79.97259849999999
+    },
+    "source": "places",
+    "query": "Gonaduwa Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Gonaduwa",
+    "address": "Hospital Bus Stop, MXCF+H2H, Waskaduwa - Bandaragama Rd, Maha Gonaduwa",
+    "districtDistanceKm": 9.657626255355913,
+    "updatedAt": "2026-11-03T11:28:55.88354+05:30"
+  },
+  "kalutara-horana-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.710570199999999,
+      "lng": 80.06615730000001
+    },
+    "source": "places",
+    "query": "Horana District General Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "District General Hospital Horana",
+    "address": "District General Hospital, Hospital Ln, Horana",
+    "districtDistanceKm": 18.148893912276588,
+    "updatedAt": "2026-11-03T11:28:55.774391+05:30"
+  },
+  "kalutara-ittapana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4106821,
+      "lng": 80.08032209999999
+    },
+    "source": "places",
+    "query": "Ittapana Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "District Hospital - Ittapana",
+    "address": "C36J+74G, Ittapane - Horawala Thotupola Rd, Ittapane",
+    "districtDistanceKm": 23.49675749613343,
+    "updatedAt": "2026-11-03T11:28:55.763995+05:30"
+  },
+  "kalutara-kalutara-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5628863,
+      "lng": 79.9857775
+    },
+    "source": "places",
+    "query": "Kalutara Teaching Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Teaching Hospital Kalutara Nagoda",
+    "address": "Kalutara-Matugama Rd, Kalutara 12000",
+    "districtDistanceKm": 3.7337403708173684,
+    "updatedAt": "2026-11-03T11:28:55.768296+05:30"
+  },
+  "kalutara-katugahahena-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4893277,
+      "lng": 80.0847101
+    },
+    "source": "places",
+    "query": "Katugahahena Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Katugahahena Divisional Hospital",
+    "address": "F3QM+PVP, Bopitiya",
+    "districtDistanceKm": 17.372423837654352,
+    "updatedAt": "2026-11-03T11:28:56.408149+05:30"
+  },
+  "kalutara-molkawa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6055253,
+      "lng": 80.2355468
+    },
+    "source": "places",
+    "query": "Molkawa Primary Medical Care Unit, Kalutara District, Sri Lanka",
+    "matchedName": "Government hospital Molkawa",
+    "address": "b 584 Lathpandura - Molkawa Rd, Molkawa",
+    "districtDistanceKm": 30.4416738700802,
+    "updatedAt": "2026-11-03T11:28:56.408152+05:30"
+  },
+  "kalutara-naboda-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.570313199999999,
+      "lng": 80.07307899999999
+    },
+    "source": "places",
+    "query": "Naboda Divisional Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Neboda",
+    "address": "wellatha Neboda ., Neboda - Wellatha Rd",
+    "districtDistanceKm": 12.526554989262099,
+    "updatedAt": "2026-11-03T11:28:56.419169+05:30"
+  },
+  "kalutara-palindanuwara-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5171287,
+      "lng": 80.23117859999999
+    },
+    "source": "places",
+    "query": "Palindanuwara MOH Office, Kalutara District, Sri Lanka",
+    "matchedName": "Palindanuwara",
+    "address": "Palindanuwara",
+    "districtDistanceKm": 30.828745794675466,
+    "updatedAt": "2026-11-03T11:28:56.213317+05:30"
+  },
+  "kalutara-panadura-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7215557,
+      "lng": 79.90685119999999
+    },
+    "source": "places",
+    "query": "Panadura Base Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Base Hospital Panadura",
+    "address": "A2, Panadura",
+    "districtDistanceKm": 16.26608836979907,
+    "updatedAt": "2026-11-03T11:28:56.736322+05:30"
+  },
+  "kalutara-panadura-kethumathie-maternity-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 6.715324,
+      "lng": 79.90860049999999
+    },
+    "source": "places",
+    "query": "Panadura Kethumathie Maternity Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Kethumathi Women Hospital Panadura",
+    "address": "PW85+4CH, Sri Mahavihara Rd, Panadura",
+    "districtDistanceKm": 15.550680048473009,
+    "updatedAt": "2026-11-03T11:28:57.064443+05:30"
+  },
+  "kalutara-pimbura-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5759488,
+      "lng": 80.1583708
+    },
+    "source": "places",
+    "query": "Pimbura Base Hospital, Kalutara District, Sri Lanka",
+    "matchedName": "Base Hospital Pimbura - Agalawatta මූලික රෝහල පිඹුර - අගලවත්ත",
+    "address": "Pimbura District Hospital, Nagoda - Kalawellawa - Bellapitiya Rd, Kalutara",
+    "districtDistanceKm": 21.860450122118493,
+    "updatedAt": "2026-11-03T11:28:56.994906+05:30"
+  },
+  "kalutara-thiniyawala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4099514,
+      "lng": 80.32817829999999
+    },
+    "source": "places",
+    "query": "Thiniyawala Primary Medical Care Unit, Kalutara District, Sri Lanka",
+    "matchedName": "Thiniyawala Primary Hospital",
+    "address": "C85H+X7M, Thiniyawala",
+    "districtDistanceKm": 45.0432919914272,
+    "updatedAt": "2026-11-03T11:28:56.736422+05:30"
+  },
+  "kandy-bambaradeniya-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2042120999999995,
+      "lng": 80.5654002
+    },
+    "source": "places",
+    "query": "Bambaradeniya MOH Office, Kandy District, Sri Lanka",
+    "matchedName": "MOH office Bambaradeniya",
+    "address": "MOH Office, Horana - Anguruwatota - Mathugama - Aluthgama Road, Wewala, 6H38+M5J, Bambaradeniya",
+    "districtDistanceKm": 12.207911908848223,
+    "updatedAt": "2026-11-03T11:28:57.141881+05:30"
+  },
+  "kandy-deltota-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.170632999999999,
+      "lng": 80.7000709
+    },
+    "source": "places",
+    "query": "Deltota Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "District Hospital Deltota",
+    "address": "Deltota",
+    "districtDistanceKm": 15.216810216959765,
+    "updatedAt": "2026-11-03T11:28:57.071533+05:30"
+  },
+  "kandy-deltota-sisila-mental-rehabilitation-centre": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1557808,
+      "lng": 80.7059725
+    },
+    "source": "places",
+    "query": "Deltota Sisila Mental Rehabilitation Centre, Kandy District, Sri Lanka",
+    "matchedName": "Sisila Rehabilitation and training center, Naranhinna, Old hospital Junctin, Deltota.",
+    "address": "Naranhinna,Old hospital Junction, Deltota",
+    "districtDistanceKm": 16.979342177323876,
+    "updatedAt": "2026-11-03T11:28:57.786005+05:30"
+  },
+  "kandy-dolosbage-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0818494,
+      "lng": 80.47122329999999
+    },
+    "source": "places",
+    "query": "Dolosbage Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Dolosbage",
+    "address": "3FJC+PFQ, Dolosbage",
+    "districtDistanceKm": 29.32730219274865,
+    "updatedAt": "2026-11-03T11:28:57.310846+05:30"
+  },
+  "kandy-elamaldeniya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.210276,
+      "lng": 80.583305
+    },
+    "source": "places",
+    "query": "Elamaldeniya Primary Medical Care Unit, Kandy District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit, Elamaldeniya.",
+    "address": "6H6J+7WW, Elamaldeniya Rd, Muruthagahamula",
+    "districtDistanceKm": 10.520208770447436,
+    "updatedAt": "2026-11-03T11:28:57.458499+05:30"
+  },
+  "kandy-gampola-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.155887099999999,
+      "lng": 80.5643015
+    },
+    "source": "places",
+    "query": "Gampola Base Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Base Hospital Gampola",
+    "address": "100 Kandy Rd, Gampola",
+    "districtDistanceKm": 16.822279898698092,
+    "updatedAt": "2026-11-03T11:28:57.458487+05:30"
+  },
+  "kandy-gampola-udapalatha-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1635107,
+      "lng": 80.57015729999999
+    },
+    "source": "places",
+    "query": "Gampola Udapalatha MOH Office, Kandy District, Sri Lanka",
+    "matchedName": "Gangapahala Division Birth/ Death Registrar Udapalatha Office",
+    "address": "No. 172, Gampola",
+    "districtDistanceKm": 15.77458379086201,
+    "updatedAt": "2026-11-03T11:28:57.577823+05:30"
+  },
+  "kandy-hasalaka-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.354735499999999,
+      "lng": 80.9521891
+    },
+    "source": "places",
+    "query": "Hasalaka Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "ප්‍රාදේශීය රෝහල - හසලක",
+    "address": "Divisional Hospital - Hasalaka, Hospital Rd, Hasalaka",
+    "districtDistanceKm": 35.84218152270017,
+    "updatedAt": "2026-11-03T11:28:57.785971+05:30"
+  },
+  "kandy-kandy-kahawatta-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2876155,
+      "lng": 80.6322636
+    },
+    "source": "places",
+    "query": "Kandy Kahawatta Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "National Hospital - Kandy",
+    "address": "60, 4 William Gopallawa Mawatha, Kandy 20000",
+    "districtDistanceKm": 0.3677388217856273,
+    "updatedAt": "2026-11-03T11:28:57.786048+05:30"
+  },
+  "kandy-kandy-national-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2876155,
+      "lng": 80.6322636
+    },
+    "source": "places",
+    "query": "Kandy National Hospital, Kandy District, Sri Lanka",
+    "matchedName": "National Hospital - Kandy",
+    "address": "60, 4 William Gopallawa Mawatha, Kandy 20000",
+    "districtDistanceKm": 0.3677388217856273,
+    "updatedAt": "2026-11-03T11:28:57.982317+05:30"
+  },
+  "kandy-kandy-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 7.287079,
+      "lng": 80.63599529999999
+    },
+    "source": "places",
+    "query": "Kandy RDHS Office, Kandy District, Sri Lanka",
+    "matchedName": "Regional Director Of Health Services Office Kandy",
+    "address": "No56, Ehelapola kumarihami Rd,Bogambara, Kandy 20000",
+    "districtDistanceKm": 0.46623756989766385,
+    "updatedAt": "2026-11-03T11:28:58.057512+05:30"
+  },
+  "kandy-kotikambe-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3250899999999985,
+      "lng": 80.45955719999999
+    },
+    "source": "places",
+    "query": "Kotikambe Primary Medical Care Unit, Kandy District, Sri Lanka",
+    "matchedName": "Kotikambe Central Dispensary",
+    "address": "8FG5+2RM, Polwatte Ihalagama",
+    "districtDistanceKm": 19.58565517346479,
+    "updatedAt": "2026-11-03T11:28:58.025453+05:30"
+  },
+  "kandy-kurunduwaththa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1288016999999995,
+      "lng": 80.5312735
+    },
+    "source": "places",
+    "query": "Kurunduwaththa Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Kurunduwaththa Hospital",
+    "address": "4GHJ+GGC, Telihunna",
+    "districtDistanceKm": 21.24510781638179,
+    "updatedAt": "2026-11-03T11:28:58.051095+05:30"
+  },
+  "kandy-makuldeniya-rangala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.210276,
+      "lng": 80.583305
+    },
+    "source": "places",
+    "query": "Makuldeniya Rangala Primary Medical Care Unit, Kandy District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit, Elamaldeniya.",
+    "address": "6H6J+7WW, Elamaldeniya Rd, Muruthagahamula",
+    "districtDistanceKm": 10.520208770447436,
+    "updatedAt": "2026-11-03T11:28:58.356705+05:30"
+  },
+  "kandy-mapakanda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.016635,
+      "lng": 80.53155290000001
+    },
+    "source": "places",
+    "query": "Mapakanda Primary Medical Care Unit, Kandy District, Sri Lanka",
+    "matchedName": "Mapakanda Sub Hospital",
+    "address": "2G8J+MJ3, Mapakanda Road, Nawalapitiya",
+    "districtDistanceKm": 32.48129666630742,
+    "updatedAt": "2026-11-03T11:28:58.310489+05:30"
+  },
+  "kandy-medamahanuwara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.289569999999999,
+      "lng": 80.8149569
+    },
+    "source": "places",
+    "query": "Medamahanuwara Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Divisional Hospital Medamahanuwara",
+    "address": "7RQ7+RXG, Motamure Rd, Medamahanuwara",
+    "districtDistanceKm": 19.99225222652214,
+    "updatedAt": "2026-11-03T11:28:58.310416+05:30"
+  },
+  "kandy-nawalapitiya-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.053020999999999,
+      "lng": 80.5351725
+    },
+    "source": "places",
+    "query": "Nawalapitiya District General Hospital, Kandy District, Sri Lanka",
+    "matchedName": "District General Hospital - Nawalapitiya",
+    "address": "3G3P+633, Nawalapitiya - Dimbula Rd, Nawalapitiya",
+    "districtDistanceKm": 28.566521695722116,
+    "updatedAt": "2026-11-03T11:28:58.310435+05:30"
+  },
+  "kandy-peradeniya-sirimavo-bandaranayake-special-children-s-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2674581,
+      "lng": 80.5970157
+    },
+    "source": "places",
+    "query": "Peradeniya Sirimavo Bandaranayake Special Children S Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Sirimavo Bandaranayake Specialized Children's Hospital",
+    "address": "Sirimavo Bandaranayake Specialized Children's Hospital, Kandy",
+    "districtDistanceKm": 4.795173232487805,
+    "updatedAt": "2026-11-03T11:28:58.585339+05:30"
+  },
+  "kandy-peradeniya-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2662787,
+      "lng": 80.5976541
+    },
+    "source": "places",
+    "query": "Peradeniya Teaching Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Teaching Hospital Peradeniya",
+    "address": "7H8X+G36, Kandy 20400",
+    "districtDistanceKm": 4.808428812897369,
+    "updatedAt": "2026-11-03T11:28:58.623265+05:30"
+  },
+  "kandy-sangarajapura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.325785000000001,
+      "lng": 80.5057831
+    },
+    "source": "places",
+    "query": "Sangarajapura Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Sangarajapura Divisional Hospital",
+    "address": "Handabowa,Sangarajapura, 8GG4+887, Galagedara",
+    "districtDistanceKm": 14.640594650313446,
+    "updatedAt": "2026-11-03T11:28:58.672109+05:30"
+  },
+  "kandy-theldeniya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3071307999999995,
+      "lng": 80.7642927
+    },
+    "source": "places",
+    "query": "Theldeniya Base Hospital, Kandy District, Sri Lanka",
+    "matchedName": "District Base Hospital Teldeniya",
+    "address": "8Q47+RPW, A26, Karalliyadda",
+    "districtDistanceKm": 14.520394638286394,
+    "updatedAt": "2026-11-03T11:28:58.668538+05:30"
+  },
+  "kandy-thittapajjala-jayawickrama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.328847199999999,
+      "lng": 80.5819467
+    },
+    "source": "places",
+    "query": "Thittapajjala Jayawickrama Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "DH Thiththapajjala",
+    "address": "Katugastota - Kurunegala - Puttalam Hwy, Kandy 20000",
+    "districtDistanceKm": 7.118120162627385,
+    "updatedAt": "2026-11-03T11:28:58.835526+05:30"
+  },
+  "kandy-udagama-atabage-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1411720999999995,
+      "lng": 80.62201019999999
+    },
+    "source": "places",
+    "query": "Udagama Atabage Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Udagama Atabage divisional Hospital",
+    "address": "4JRC+FR6, Gampola - Pupuressa Rd, Udapalatha",
+    "districtDistanceKm": 16.66559077072337,
+    "updatedAt": "2026-11-03T11:28:58.848799+05:30"
+  },
+  "kandy-udathalawinna-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.343835500000001,
+      "lng": 80.6501483
+    },
+    "source": "places",
+    "query": "Udathalawinna Primary Medical Care Unit, Kandy District, Sri Lanka",
+    "matchedName": "Central dispensary udathalawinna",
+    "address": "8MV2+G3J, Katugastota",
+    "districtDistanceKm": 6.1912476516973625,
+    "updatedAt": "2026-11-03T11:28:58.926771+05:30"
+  },
+  "kandy-ulapane-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.106681699999999,
+      "lng": 80.56473570000001
+    },
+    "source": "places",
+    "query": "Ulapane Divisional Hospital, Kandy District, Sri Lanka",
+    "matchedName": "Ulapane Rural Hospital උලපනේ ග්‍රාමීය රෝහල",
+    "address": "4H47+MVH, Kandy Rd, Ulapane",
+    "districtDistanceKm": 21.820096723091787,
+    "updatedAt": "2026-11-03T11:28:59.222616+05:30"
+  },
+  "kegalle-algama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.158896,
+      "lng": 80.1650338
+    },
+    "source": "places",
+    "query": "Algama Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Algama Primary Medical Care Unit,Algama,Sri Lanka",
+    "address": "5558+G2C Algama Hospital, Algama",
+    "districtDistanceKm": 22.491837847384055,
+    "updatedAt": "2026-11-03T11:28:59.186683+05:30"
+  },
+  "kegalle-amanawala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0665930999999995,
+      "lng": 80.3841894
+    },
+    "source": "places",
+    "query": "Amanawala Divisional Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Rural Hospital amanawala",
+    "address": "398M+JMP, Amanawala",
+    "districtDistanceKm": 20.95736712646087,
+    "updatedAt": "2026-11-03T11:28:59.181283+05:30"
+  },
+  "kegalle-basnagala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.246017999999999,
+      "lng": 80.34464
+    },
+    "source": "places",
+    "query": "Basnagala Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Regional Director Of Health Services Kegalle",
+    "address": "68WV+CV2, Kegalle",
+    "districtDistanceKm": 0.6185857740904986,
+    "updatedAt": "2026-11-03T11:28:59.245034+05:30"
+  },
+  "kegalle-beligala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.2622472,
+      "lng": 80.2718522
+    },
+    "source": "places",
+    "query": "Beligala Divisional Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Divisional Hospital (B) Beligala",
+    "address": "Yattogoda Weragoda Rd",
+    "districtDistanceKm": 8.31255024946679,
+    "updatedAt": "2026-11-03T11:28:59.399708+05:30"
+  },
+  "kegalle-boralankada-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9663441,
+      "lng": 80.3391171
+    },
+    "source": "places",
+    "query": "Boralankada Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Primary Health Care Unit - Boralankada",
+    "address": "X88Q+GJQ, Deraniyagala",
+    "districtDistanceKm": 31.695838950966067,
+    "updatedAt": "2026-11-03T11:28:59.428611+05:30"
+  },
+  "kegalle-bulathkohupitiya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.109127000000001,
+      "lng": 80.3345653
+    },
+    "source": "places",
+    "query": "Bulathkohupitiya Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "MOH Office Bulathkohupitiya",
+    "address": "485M+MR4, Bulathkohupitiya",
+    "districtDistanceKm": 15.862740192004035,
+    "updatedAt": "2026-11-03T11:28:59.553845+05:30"
+  },
+  "kegalle-galapitamada-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1409755,
+      "lng": 80.23216219999999
+    },
+    "source": "places",
+    "query": "Galapitamada Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Galapitamada PMCU",
+    "address": "46RJ+9VV",
+    "districtDistanceKm": 17.587433223483192,
+    "updatedAt": "2026-11-03T11:28:59.553958+05:30"
+  },
+  "kegalle-halgolla-watta-edh-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.042564,
+      "lng": 80.366439
+    },
+    "source": "places",
+    "query": "Halgolla Watta (edh) Divisional Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Divisional Hospital Halgolla",
+    "address": "29V8+2H, Punugala",
+    "districtDistanceKm": 23.31544783947485,
+    "updatedAt": "2026-11-03T11:28:59.642992+05:30"
+  },
+  "kegalle-hemmathagama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.173439800000001,
+      "lng": 80.5014806
+    },
+    "source": "places",
+    "query": "Hemmathagama Divisional Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Divisional Hospital Hemmathagama",
+    "address": "5GF2+9HH, Mawanella - Hemmaththagama - Singhapitiya Road, Hemmathagama",
+    "districtDistanceKm": 19.173668331689843,
+    "updatedAt": "2026-11-03T11:28:59.892936+05:30"
+  },
+  "kegalle-karawanella-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0245298,
+      "lng": 80.2617521
+    },
+    "source": "places",
+    "query": "Karawanella Base Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Base Hospital Karawanella",
+    "address": "27F6+RP6, A21, Karawanella",
+    "districtDistanceKm": 26.88971727546643,
+    "updatedAt": "2026-11-03T11:28:59.751885+05:30"
+  },
+  "kegalle-kegalle-narangoda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1373888999999995,
+      "lng": 80.26127699999999
+    },
+    "source": "places",
+    "query": "Kegalle Narangoda Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Narangoda (Central Dispensary Narangoda)",
+    "address": "Weragala Rd",
+    "districtDistanceKm": 15.767745291764232,
+    "updatedAt": "2026-11-03T11:28:59.893052+05:30"
+  },
+  "kegalle-minuwangamuwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.228062700000001,
+      "lng": 80.4783357
+    },
+    "source": "places",
+    "query": "Minuwangamuwa Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Uyanwatte",
+    "address": "6FHH+68G",
+    "districtDistanceKm": 14.781213820784957,
+    "updatedAt": "2026-11-03T11:28:59.893177+05:30"
+  },
+  "kegalle-rambukkana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.326807499999999,
+      "lng": 80.39548920000001
+    },
+    "source": "places",
+    "query": "Rambukkana Divisional Hospital, Kegalle District, Sri Lanka",
+    "matchedName": "Divisional Hospital-A, Rambukkana",
+    "address": "89GW+P5H, Hospital Rd, Rambukkana 71100",
+    "districtDistanceKm": 9.990442640662094,
+    "updatedAt": "2026-11-03T11:29:00.289333+05:30"
+  },
+  "kegalle-wakirigala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.218067499999999,
+      "lng": 80.40885410000001
+    },
+    "source": "places",
+    "query": "Wakirigala Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "PMCU Wakirigala",
+    "address": "6C95+6GH, Wakirigala, Galathara, Kegalle",
+    "districtDistanceKm": 7.817765729845266,
+    "updatedAt": "2026-11-03T11:29:00.198535+05:30"
+  },
+  "kegalle-wattegedara-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.193015799999999,
+      "lng": 80.418476
+    },
+    "source": "places",
+    "query": "Wattegedara Primary Medical Care Unit, Kegalle District, Sri Lanka",
+    "matchedName": "Primary medical care unit - Waththegedara (Central Dispensary, Wattegedara)",
+    "address": "5CV9+695",
+    "districtDistanceKm": 10.25762949257748,
+    "updatedAt": "2026-11-03T11:29:00.144702+05:30"
+  },
+  "kilinochchi-akkarayan-kulam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3115955,
+      "lng": 80.3152861
+    },
+    "source": "places",
+    "query": "Akkarayan Kulam Divisional Hospital, Kilinochchi District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Akkarayankulam",
+    "address": "8868+J4M, Kilinochchi",
+    "districtDistanceKm": 10.208440392456165,
+    "updatedAt": "2026-11-03T11:29:00.190431+05:30"
+  },
+  "kilinochchi-jayapuram-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.665911399999999,
+      "lng": 80.0155788
+    },
+    "source": "places",
+    "query": "Jayapuram Primary Medical Care Unit, Kilinochchi District, Sri Lanka",
+    "matchedName": "Teaching Hospital Jaffna",
+    "address": "M288+968, Hospital St, Jaffna 40000",
+    "districtDistanceKm": 50.78862361765206,
+    "updatedAt": "2026-11-03T11:29:00.408465+05:30"
+  },
+  "kilinochchi-kandawalai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.4171029,
+      "lng": 80.5040981
+    },
+    "source": "places",
+    "query": "Kandawalai Primary Medical Care Unit, Kilinochchi District, Sri Lanka",
+    "matchedName": "Divisional Secretariat Kandawalai பிரதேச செயலகம் கண்டாவளை",
+    "address": "CG83+RJX, A35, Puliyampokkanai",
+    "districtDistanceKm": 14.531090566014946,
+    "updatedAt": "2026-11-03T11:29:00.419874+05:30"
+  },
+  "kilinochchi-kilinochchi-chest-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3727285,
+      "lng": 80.4117857
+    },
+    "source": "places",
+    "query": "Kilinochchi Chest Clinic, Kilinochchi District, Sri Lanka",
+    "matchedName": "District General Hospital Kilinochchi",
+    "address": "Ananthapuram, District General Hospital, A9, Kilinochchi",
+    "districtDistanceKm": 3.9080766241293103,
+    "updatedAt": "2026-11-03T11:29:00.419854+05:30"
+  },
+  "kilinochchi-kilinochchi-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3727285,
+      "lng": 80.4117857
+    },
+    "source": "places",
+    "query": "Kilinochchi District General Hospital, Kilinochchi District, Sri Lanka",
+    "matchedName": "District General Hospital Kilinochchi",
+    "address": "Ananthapuram, District General Hospital, A9, Kilinochchi",
+    "districtDistanceKm": 3.9080766241293103,
+    "updatedAt": "2026-11-03T11:29:00.601897+05:30"
+  },
+  "kilinochchi-kilinochchi-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3969227,
+      "lng": 80.40780939999999
+    },
+    "source": "places",
+    "query": "Kilinochchi RDHS Office, Kilinochchi District, Sri Lanka",
+    "matchedName": "Regional Directorate of Health Services - Kilinochchi",
+    "address": "9CW5+Q47, Kandy - Jaffna Hwy, Kilinochchi",
+    "districtDistanceKm": 3.8523438170286997,
+    "updatedAt": "2026-11-03T11:29:00.61905+05:30"
+  },
+  "kilinochchi-kilinochchi-std-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3727285,
+      "lng": 80.4117857
+    },
+    "source": "places",
+    "query": "Kilinochchi STD Clinic, Kilinochchi District, Sri Lanka",
+    "matchedName": "District General Hospital Kilinochchi",
+    "address": "Ananthapuram, District General Hospital, A9, Kilinochchi",
+    "districtDistanceKm": 3.9080766241293103,
+    "updatedAt": "2026-11-03T11:29:00.648573+05:30"
+  },
+  "kilinochchi-mulankavil-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.2434233,
+      "lng": 80.14389419999999
+    },
+    "source": "places",
+    "query": "Mulankavil Base Hospital, Kilinochchi District, Sri Lanka",
+    "matchedName": "Base Hospital - Mulankavil",
+    "address": "Base Hospital Mulankavil, A32 Road, Mulankavil, Kumulamunai",
+    "districtDistanceKm": 29.764295506527628,
+    "updatedAt": "2026-11-03T11:29:00.637378+05:30"
+  },
+  "kilinochchi-tharmapuram-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.4101307,
+      "lng": 80.51754199999999
+    },
+    "source": "places",
+    "query": "Tharmapuram Divisional Hospital, Kilinochchi District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Tharmapuram",
+    "address": "Divisional Hospital, Tharmapuram Paranthan-Mullaitivu Hwy",
+    "districtDistanceKm": 15.770703098537032,
+    "updatedAt": "2026-11-03T11:29:01.018532+05:30"
+  },
+  "kilinochchi-vaddakachchi-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.374875,
+      "lng": 80.45466359999999
+    },
+    "source": "places",
+    "query": "Vaddakachchi Divisional Hospital, Kilinochchi District, Sri Lanka",
+    "matchedName": "Divisional Hospital Vadakachchi",
+    "address": "9FF3+XV3 Divisional Hospital Vadakachchi, වඩකච්චි",
+    "districtDistanceKm": 8.54171660196127,
+    "updatedAt": "2026-11-03T11:29:00.83119+05:30"
+  },
+  "kurunegala-dambadeniya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.348634799999999,
+      "lng": 80.1373146
+    },
+    "source": "places",
+    "query": "Dambadeniya Base Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Base Hospital - Dambadeniya | මූලික රෝහල - දඹදෙණිය",
+    "address": "Negombo Rd",
+    "districtDistanceKm": 29.150570400184613,
+    "updatedAt": "2026-11-03T11:29:00.935308+05:30"
+  },
+  "kurunegala-galgamuwa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0012036,
+      "lng": 80.27723519999999
+    },
+    "source": "places",
+    "query": "Galgamuwa Base Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Base Hospital - Galgamuwa",
+    "address": "272G+FVQ, B126, Galgamuwa",
+    "districtDistanceKm": 58.01672551879712,
+    "updatedAt": "2026-11-03T11:29:00.952057+05:30"
+  },
+  "kurunegala-hiruwalpola-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.547780299999999,
+      "lng": 79.9374582
+    },
+    "source": "places",
+    "query": "Hiruwalpola Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Hiruwalpola",
+    "address": "Hiruwalpola",
+    "districtDistanceKm": 47.33057587559598,
+    "updatedAt": "2026-11-03T11:29:01.126981+05:30"
+  },
+  "kurunegala-kadigawa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7463861,
+      "lng": 80.1316927
+    },
+    "source": "places",
+    "query": "Kadigawa Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Kadigawa PMCU",
+    "address": "P4WJ+HM4 Kadigawa, Nikaweratiya",
+    "districtDistanceKm": 38.50142961317803,
+    "updatedAt": "2026-11-03T11:29:01.194718+05:30"
+  },
+  "kurunegala-kalegama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9017520999999995,
+      "lng": 80.08766949999999
+    },
+    "source": "places",
+    "query": "Kalegama Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Kelegama",
+    "address": "W32Q+P33, Divullewa",
+    "districtDistanceKm": 55.225954656411616,
+    "updatedAt": "2026-11-03T11:29:01.218553+05:30"
+  },
+  "kurunegala-kuliyapitiya-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.472042500000001,
+      "lng": 80.0446242
+    },
+    "source": "places",
+    "query": "Kuliyapitiya Teaching Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Teaching Hospital Kuliyapitiya",
+    "address": "F2CV+RR9, Kuliyapitiya",
+    "districtDistanceKm": 35.05927200582828,
+    "updatedAt": "2026-11-03T11:29:01.255732+05:30"
+  },
+  "kurunegala-kurunegala-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.479121800000001,
+      "lng": 80.3591149
+    },
+    "source": "places",
+    "query": "Kurunegala Teaching Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Kurunegala",
+    "address": "176 Ambepussa - Trincomalee Hwy, Kurunegala 60000",
+    "districtDistanceKm": 0.8720076706600017,
+    "updatedAt": "2026-11-03T11:29:01.454365+05:30"
+  },
+  "kurunegala-meegalewa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0571436,
+      "lng": 80.3557608
+    },
+    "source": "places",
+    "query": "Meegalewa Divisional Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Meegalewa Hospital/ මීගලෑව රෝහල",
+    "address": "Meegalewa Government Hospital, Meegalewa Rd, Meegalewa",
+    "districtDistanceKm": 63.479000635108925,
+    "updatedAt": "2026-11-03T11:29:01.514544+05:30"
+  },
+  "kurunegala-netiya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7474755,
+      "lng": 80.11444569999999
+    },
+    "source": "places",
+    "query": "Netiya Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Base Hospital - Nikaweratiya",
+    "address": "P4W7+XQW, Heelogama Road, Nikaweratiya",
+    "districtDistanceKm": 39.87000775263163,
+    "updatedAt": "2026-11-03T11:29:01.462764+05:30"
+  },
+  "kurunegala-nikaweratiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7474755,
+      "lng": 80.11444569999999
+    },
+    "source": "places",
+    "query": "Nikaweratiya Base Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Base Hospital - Nikaweratiya",
+    "address": "P4W7+XQW, Heelogama Road, Nikaweratiya",
+    "districtDistanceKm": 39.87000775263163,
+    "updatedAt": "2026-11-03T11:29:01.490874+05:30"
+  },
+  "kurunegala-pahalagiribawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.1167112,
+      "lng": 80.1933584
+    },
+    "source": "places",
+    "query": "Pahalagiribawa Divisional Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Pahala Giribawa Divisional Hospital",
+    "address": "Mahagalkadawala - Warawewa, Pahala Giribawa",
+    "districtDistanceKm": 72.52717123136831,
+    "updatedAt": "2026-11-03T11:29:01.719738+05:30"
+  },
+  "kurunegala-pansiyagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4884692,
+      "lng": 80.4171956
+    },
+    "source": "places",
+    "query": "Pansiyagama Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Digampitiya - Hindagolla",
+    "address": "FCQ8+9VP, B264, Kurunegala",
+    "districtDistanceKm": 6.056870630985983,
+    "updatedAt": "2026-11-03T11:29:01.719772+05:30"
+  },
+  "kurunegala-rajanganaya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.1513404,
+      "lng": 80.14560639999999
+    },
+    "source": "places",
+    "query": "Rajanganaya Divisional Hospital, Kurunegala District, Sri Lanka",
+    "matchedName": "Rajanganaya Divisional Hospital - ප්‍රාදේශීය රෝහල - පැරකුම්පුර",
+    "address": "8°09'04.9\"N 80°08'44, Perakumpura",
+    "districtDistanceKm": 77.70650248139168,
+    "suspect": true,
+    "updatedAt": "2026-11-03T11:29:01.784562+05:30"
+  },
+  "kurunegala-thalawa-moragollagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9386189,
+      "lng": 80.4377291
+    },
+    "source": "places",
+    "query": "Thalawa Moragollagama Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Thalawa",
+    "address": "WCQQ+C3X, Thalawa",
+    "districtDistanceKm": 50.97768206012316,
+    "updatedAt": "2026-11-03T11:29:01.77205+05:30"
+  },
+  "kurunegala-tisogama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4884692,
+      "lng": 80.4171956
+    },
+    "source": "places",
+    "query": "Tisogama Primary Medical Care Unit, Kurunegala District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Digampitiya - Hindagolla",
+    "address": "FCQ8+9VP, B264, Kurunegala",
+    "districtDistanceKm": 6.056870630985983,
+    "updatedAt": "2026-11-03T11:29:02.067562+05:30"
+  },
+  "mannar-adampan-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9429346,
+      "lng": 79.9965513
+    },
+    "source": "places",
+    "query": "Adampan Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Adampan Hospital",
+    "address": "Divisional Hospital Adampan, Maanthai - Adampan - Andankulam Rd, Adampan",
+    "districtDistanceKm": 10.971037206137577,
+    "updatedAt": "2026-11-03T11:29:01.978141+05:30"
+  },
+  "mannar-chilavaturai-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7482309,
+      "lng": 79.9492157
+    },
+    "source": "places",
+    "query": "Chilavaturai Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital Chilavathurai",
+    "address": "PWXX+7MW, South-Coast Rd, Silavathurai",
+    "districtDistanceKm": 26.3469107490095,
+    "updatedAt": "2026-11-03T11:29:02.019026+05:30"
+  },
+  "mannar-keerisuttan-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0124373,
+      "lng": 79.8751589
+    },
+    "source": "places",
+    "query": "Keerisuttan Primary Medical Care Unit, Mannar District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit, Tharapuram",
+    "address": "2V6G+X3F, Mannar",
+    "districtDistanceKm": 4.746911941536025,
+    "updatedAt": "2026-11-03T11:29:02.24395+05:30"
+  },
+  "mannar-madhu-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7742911,
+      "lng": 80.15634299999999
+    },
+    "source": "places",
+    "query": "Madhu MOH Office, Mannar District, Sri Lanka",
+    "matchedName": "MOH Office.Madu",
+    "address": "Puliyadi Irakkamam-Madhu Rd, Paraiyanalankulam",
+    "districtDistanceKm": 35.97839507357088,
+    "updatedAt": "2026-11-03T11:29:02.253359+05:30"
+  },
+  "mannar-mannar-anti-malaria-campaign-regional-office": {
+    "status": "ok",
+    "location": {
+      "lat": 8.910461,
+      "lng": 79.95686529999999
+    },
+    "source": "places",
+    "query": "Mannar Anti Malaria Campaign Regional Office, Mannar District, Sri Lanka",
+    "matchedName": "Anti Malaria Campaign Mannar",
+    "address": "WX64+5PQ, Thiruketheeswaram",
+    "districtDistanceKm": 9.733081958973015,
+    "updatedAt": "2026-11-03T11:29:02.279571+05:30"
+  },
+  "mannar-mannar-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9816618,
+      "lng": 79.90457359999999
+    },
+    "source": "places",
+    "query": "Mannar District General Hospital, Mannar District, Sri Lanka",
+    "matchedName": "District General Hospital Mannar",
+    "address": "Thalvupadu - Mannar Rd, Mannar 41000",
+    "districtDistanceKm": 0.07601876983533899,
+    "updatedAt": "2026-11-03T11:29:02.505035+05:30"
+  },
+  "mannar-mannar-mental-health-center": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9801333,
+      "lng": 79.9113593
+    },
+    "source": "places",
+    "query": "Mannar Mental Health Center, Mannar District, Sri Lanka",
+    "matchedName": "Family Rehabilitation Centre, Mannar",
+    "address": "XWJ6+3G5, Mannar",
+    "districtDistanceKm": 0.7704041962539668,
+    "updatedAt": "2026-11-03T11:29:02.504776+05:30"
+  },
+  "mannar-mannar-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9833816,
+      "lng": 79.9025654
+    },
+    "source": "places",
+    "query": "Mannar RDHS Office, Mannar District, Sri Lanka",
+    "matchedName": "Regional Director of Health Service",
+    "address": "XWM3+924, Thalvupadu - Mannar Rd, Mannar 41000",
+    "districtDistanceKm": 0.33276338650455434,
+    "updatedAt": "2026-11-03T11:29:02.552031+05:30"
+  },
+  "mannar-murunkan-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.8366784,
+      "lng": 80.0381644
+    },
+    "source": "places",
+    "query": "Murunkan Base Hospital, Mannar District, Sri Lanka",
+    "matchedName": "මුරුන්කන් මූලික රෝහල | Base Hospital Murunkan",
+    "address": "Sri Lanka",
+    "districtDistanceKm": 21.759148823408122,
+    "updatedAt": "2026-11-03T11:29:02.507697+05:30"
+  },
+  "mannar-musali-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7698518,
+      "lng": 79.9810706
+    },
+    "source": "places",
+    "query": "Musali MOH Office, Mannar District, Sri Lanka",
+    "matchedName": "Medical Officer of health musli",
+    "address": "B299",
+    "districtDistanceKm": 24.94387615342455,
+    "updatedAt": "2026-11-03T11:29:02.776556+05:30"
+  },
+  "mannar-nanattan-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.8342573,
+      "lng": 79.97850969999999
+    },
+    "source": "places",
+    "query": "Nanattan Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Nanattan",
+    "address": "Murunkan - Nanattan Rd",
+    "districtDistanceKm": 18.235283911934456,
+    "updatedAt": "2026-11-03T11:29:02.761233+05:30"
+  },
+  "mannar-periyapandivirichan-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.826202799999999,
+      "lng": 80.23345719999999
+    },
+    "source": "places",
+    "query": "Periyapandivirichan Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Periyapandiviruchchan",
+    "address": "Piramanalankulam Madhu Road",
+    "districtDistanceKm": 40.03742761752292,
+    "updatedAt": "2026-11-03T11:29:02.745336+05:30"
+  },
+  "mannar-pesalai-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0854802,
+      "lng": 79.81953600000001
+    },
+    "source": "places",
+    "query": "Pesalai Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital",
+    "address": "4 Saaminathar St, Pesalai 41016",
+    "districtDistanceKm": 14.893676163274774,
+    "updatedAt": "2026-11-03T11:29:02.841884+05:30"
+  },
+  "mannar-thalaimannar-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0888643,
+      "lng": 79.7273259
+    },
+    "source": "places",
+    "query": "Thalaimannar Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital, Talaimannar",
+    "address": "Talaimannar Lighthouse, A14, Talaimannar Pier 41000",
+    "districtDistanceKm": 22.846890690535155,
+    "updatedAt": "2026-11-03T11:29:03.029118+05:30"
+  },
+  "mannar-tharapuram-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0124373,
+      "lng": 79.8751589
+    },
+    "source": "places",
+    "query": "Tharapuram Primary Medical Care Unit, Mannar District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit, Tharapuram",
+    "address": "2V6G+X3F, Mannar",
+    "districtDistanceKm": 4.746911941536025,
+    "updatedAt": "2026-11-03T11:29:03.028853+05:30"
+  },
+  "mannar-vankalai-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.892350799999999,
+      "lng": 79.9349539
+    },
+    "source": "places",
+    "query": "Vankalai Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital",
+    "address": "VWRM+WXW, Vankalai",
+    "districtDistanceKm": 10.413031542609856,
+    "updatedAt": "2026-11-03T11:29:03.029112+05:30"
+  },
+  "mannar-vellankulam-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7899394,
+      "lng": 80.0087999
+    },
+    "source": "places",
+    "query": "Vellankulam Primary Medical Care Unit, Mannar District, Sri Lanka",
+    "matchedName": "Primary medical care unit PMCU Veppankulam",
+    "address": "Q2Q5+XG, Adiyakulam",
+    "districtDistanceKm": 24.143244801510832,
+    "updatedAt": "2026-11-03T11:29:03.098022+05:30"
+  },
+  "mannar-vidathaltivu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.011301200000002,
+      "lng": 80.064894
+    },
+    "source": "places",
+    "query": "Vidathaltivu Divisional Hospital, Mannar District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Vidathaltivu",
+    "address": "2367+GXC, Vidataltivu",
+    "districtDistanceKm": 17.945727588513087,
+    "updatedAt": "2026-11-03T11:29:03.276657+05:30"
+  },
+  "matale-dambulla-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.872573900000001,
+      "lng": 80.6508617
+    },
+    "source": "places",
+    "query": "Dambulla Base Hospital, Matale District, Sri Lanka",
+    "matchedName": "District Base Hospital - Dambulla | දිස්ත්‍රික් මූලික රෝහල - දඹුල්ල",
+    "address": "Dambulla, Sri Lanka",
+    "districtDistanceKm": 45.14371219912808,
+    "updatedAt": "2026-11-03T11:29:03.246537+05:30"
+  },
+  "matale-dewahuwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.843861200000001,
+      "lng": 80.5785621
+    },
+    "source": "places",
+    "query": "Dewahuwa Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Dewahuwa",
+    "address": "Dewahuwa, Makulugaswewa",
+    "districtDistanceKm": 42.14016361663888,
+    "updatedAt": "2026-11-03T11:29:03.276833+05:30"
+  },
+  "matale-galewela-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.760542,
+      "lng": 80.5715522
+    },
+    "source": "places",
+    "query": "Galewela Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Base Hospital Galewela",
+    "address": "QH6C+6J7, Galewela",
+    "districtDistanceKm": 33.08205263821852,
+    "updatedAt": "2026-11-03T11:29:03.609206+05:30"
+  },
+  "matale-gurubebila-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5255367,
+      "lng": 80.65742809999999
+    },
+    "source": "places",
+    "query": "Gurubebila Primary Medical Care Unit, Matale District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Gurubebila",
+    "address": "GMG4+6X7, Cloda",
+    "districtDistanceKm": 7.464535219839638,
+    "updatedAt": "2026-11-03T11:29:03.553783+05:30"
+  },
+  "matale-illukkumbura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5508694,
+      "lng": 80.7708056
+    },
+    "source": "places",
+    "query": "Illukkumbura Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Divisional Hospital Illukkumbura",
+    "address": "HQ2C+88V, Laggala",
+    "districtDistanceKm": 18.70845065680575,
+    "updatedAt": "2026-11-03T11:29:03.588162+05:30"
+  },
+  "matale-laggala-pallegama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5913536,
+      "lng": 80.8431604
+    },
+    "source": "places",
+    "query": "Laggala Pallegama Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Laggala | ප්‍රාදේශීය රෝහල - ලග්ගල",
+    "address": "HRRV+G7V, Laggala",
+    "districtDistanceKm": 27.866499161098798,
+    "updatedAt": "2026-11-03T11:29:03.553838+05:30"
+  },
+  "matale-matale-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4610981,
+      "lng": 80.6247132
+    },
+    "source": "places",
+    "query": "Matale District General Hospital, Matale District, Sri Lanka",
+    "matchedName": "District General Hospital Matale",
+    "address": "FJ6F+CVP, Matale",
+    "districtDistanceKm": 0.7264332725220175,
+    "updatedAt": "2026-11-03T11:29:03.853863+05:30"
+  },
+  "matale-matale-hettipola-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5402742,
+      "lng": 80.9144354
+    },
+    "source": "places",
+    "query": "Matale Hettipola Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Wilgamuwa",
+    "address": "GWR7+4Q3, Hettipola",
+    "districtDistanceKm": 33.08924815964759,
+    "updatedAt": "2026-11-03T11:29:04.179959+05:30"
+  },
+  "matale-matale-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4603091,
+      "lng": 80.6260452
+    },
+    "source": "places",
+    "query": "Matale RDHS Office, Matale District, Sri Lanka",
+    "matchedName": "RDHS OFFICE MATALE",
+    "address": "FJ6G+4CX, Matale",
+    "districtDistanceKm": 0.8511174794868446,
+    "updatedAt": "2026-11-03T11:29:03.854124+05:30"
+  },
+  "matale-matale-std-aids-control-programme": {
+    "status": "ok",
+    "location": {
+      "lat": 7.467465,
+      "lng": 80.6234161
+    },
+    "source": "geocode",
+    "query": "Matale STD Aids Control Programme, Matale District, Sri Lanka",
+    "address": "Matale, Sri Lanka",
+    "districtDistanceKm": 0.00427751116822511,
+    "updatedAt": "2026-11-03T11:29:04.077265+05:30"
+  },
+  "matale-muwandeniya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.465372899999999,
+      "lng": 80.6637959
+    },
+    "source": "places",
+    "query": "Muwandeniya Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Muwandeniya",
+    "address": "FM87+4GV, Muwandeniya",
+    "districtDistanceKm": 4.460009726182501,
+    "updatedAt": "2026-11-03T11:29:04.122376+05:30"
+  },
+  "matale-raththota-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.518412599999999,
+      "lng": 80.6765573
+    },
+    "source": "places",
+    "query": "Raththota Divisional Hospital, Matale District, Sri Lanka",
+    "matchedName": "Divisional Hospital (B) - Rattota",
+    "address": "GM9G+9J7, Rattota",
+    "districtDistanceKm": 8.148198054116286,
+    "updatedAt": "2026-11-03T11:29:04.137595+05:30"
+  },
+  "matara-deiyandara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.154028500000001,
+      "lng": 80.6008123
+    },
+    "source": "places",
+    "query": "Deiyandara Divisional Hospital, Matara District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Deiyandara",
+    "address": "Sri Hemaloka Mawatha, Deiyandara",
+    "districtDistanceKm": 22.714153219826173,
+    "updatedAt": "2026-11-03T11:29:04.308669+05:30"
+  },
+  "matara-deniyaya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.357625400000001,
+      "lng": 80.5680276
+    },
+    "source": "places",
+    "query": "Deniyaya Base Hospital, Matara District, Sri Lanka",
+    "matchedName": "Deniyaya Base Hospital (Type B)",
+    "address": "9H59+362, Deniyaya",
+    "districtDistanceKm": 44.804175902297445,
+    "updatedAt": "2026-11-03T11:29:04.796767+05:30"
+  },
+  "matara-kamburupitiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.0958269,
+      "lng": 80.56433559999999
+    },
+    "source": "places",
+    "query": "Kamburupitiya Base Hospital, Matara District, Sri Lanka",
+    "matchedName": "Base Hospital - Kamburupitiya",
+    "address": "Kamburupitiya Base Hospital, Thihagoda-Kamburupitiya-Mawarala-Kotapola Rd",
+    "districtDistanceKm": 15.704323768528328,
+    "updatedAt": "2026-11-03T11:29:04.422315+05:30"
+  },
+  "matara-kirinda-puhulwella-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.046395100000001,
+      "lng": 80.6324216
+    },
+    "source": "places",
+    "query": "Kirinda Puhulwella Divisional Hospital, Matara District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kirinda Puhulwella",
+    "address": "B630",
+    "districtDistanceKm": 13.296955686952975,
+    "updatedAt": "2026-11-03T11:29:04.601052+05:30"
+  },
+  "matara-matara-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 5.9475421,
+      "lng": 80.54937869999999
+    },
+    "source": "places",
+    "query": "Matara District General Hospital, Matara District, Sri Lanka",
+    "matchedName": "District General Hospital - Matara | දිස්ත්‍රික් මහ රෝහල - මාතර | மாவட்ட பொது வைத்தியசாலை - மாத்தறை",
+    "address": "District General Hospital, මාතර 81000",
+    "districtDistanceKm": 1.02756398129104,
+    "updatedAt": "2026-11-03T11:29:04.601113+05:30"
+  },
+  "matara-matara-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 5.9405508,
+      "lng": 80.5329495
+    },
+    "source": "places",
+    "query": "Matara RDHS Office, Matara District, Sri Lanka",
+    "matchedName": "RDHS Matara",
+    "address": "Matara",
+    "districtDistanceKm": 2.9142901348260235,
+    "updatedAt": "2026-11-03T11:29:04.647567+05:30"
+  },
+  "matara-midigama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 5.9709416,
+      "lng": 80.39359549999999
+    },
+    "source": "places",
+    "query": "Midigama Divisional Hospital, Matara District, Sri Lanka",
+    "matchedName": "Midigama Hospital",
+    "address": "X9CV+9CH, Unnamed Road #8",
+    "districtDistanceKm": 17.939156063190346,
+    "updatedAt": "2026-11-03T11:29:05.321486+05:30"
+  },
+  "matara-morawaka-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2434664,
+      "lng": 80.4930219
+    },
+    "source": "places",
+    "query": "Morawaka MOH Office, Matara District, Sri Lanka",
+    "matchedName": "MOH Office Morawaka",
+    "address": "Deniyaya Road, Kosnilgoda, Morawaka., 6FVV+96J, Morawaka",
+    "districtDistanceKm": 32.81069671714465,
+    "updatedAt": "2026-11-03T11:29:04.872011+05:30"
+  },
+  "matara-rotamba-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2423646,
+      "lng": 80.58879089999999
+    },
+    "source": "places",
+    "query": "Rotamba Primary Medical Care Unit, Matara District, Sri Lanka",
+    "matchedName": "Primary medical care unit - Rotumba",
+    "address": "6HRQ+XG3, Napathella",
+    "districtDistanceKm": 32.18220750944133,
+    "updatedAt": "2026-11-03T11:29:04.90183+05:30"
+  },
+  "matara-urubokka-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.2825643,
+      "lng": 80.633237
+    },
+    "source": "places",
+    "query": "Urubokka Divisional Hospital, Matara District, Sri Lanka",
+    "matchedName": "District Hospital - Urubokka",
+    "address": "Kotapola - Urubokka - Mulatiyana Rd",
+    "districtDistanceKm": 37.44733487956267,
+    "updatedAt": "2026-11-03T11:29:05.018461+05:30"
+  },
+  "matara-weligama-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 5.9748601,
+      "lng": 80.4197387
+    },
+    "source": "places",
+    "query": "Weligama MOH Office, Matara District, Sri Lanka",
+    "matchedName": "Medical Officer of Health (MOH) Office. Walana - Weligama.",
+    "address": "Walana Hospital Rd, Weligama",
+    "districtDistanceKm": 15.122693123909205,
+    "updatedAt": "2026-11-03T11:29:05.406472+05:30"
+  },
+  "moneragala-bibile-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.163977699999999,
+      "lng": 81.22520519999999
+    },
+    "source": "places",
+    "query": "Bibile Base Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Professor Senaka Bibile Memorial Hospital - Bibile",
+    "address": "567F+WX6, Peradeniya-Badulla-Chenkaladi Hwy, Bibile",
+    "districtDistanceKm": 35.21531791917846,
+    "updatedAt": "2026-11-03T11:29:05.20328+05:30"
+  },
+  "moneragala-buththala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7578567,
+      "lng": 81.2397787
+    },
+    "source": "places",
+    "query": "Buththala Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Buttala Divisional Hospital",
+    "address": "Q65Q+4WR, Colombo - Batticaloa Hwy, Buttala",
+    "districtDistanceKm": 17.701390121842294,
+    "updatedAt": "2026-11-03T11:29:05.321345+05:30"
+  },
+  "moneragala-deliwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0421385,
+      "lng": 81.3882804
+    },
+    "source": "places",
+    "query": "Deliwa Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "Deliwa Gramiya Rohala",
+    "address": "B56, Ruvalvela",
+    "districtDistanceKm": 19.28104970390688,
+    "updatedAt": "2026-11-03T11:29:05.523368+05:30"
+  },
+  "moneragala-dewathura-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8597567999999995,
+      "lng": 81.13975099999999
+    },
+    "source": "places",
+    "query": "Dewathura Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit - Dewathura",
+    "address": "V45Q+WW2, Namunukula",
+    "districtDistanceKm": 23.333343889313312,
+    "updatedAt": "2026-11-03T11:29:05.650391+05:30"
+  },
+  "moneragala-dombagahawela-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9037549,
+      "lng": 81.4483364
+    },
+    "source": "places",
+    "query": "Dombagahawela Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "Central Dispensary Dombagahawela",
+    "address": "Colombo - Batticaloa Hwy",
+    "districtDistanceKm": 11.31456898200111,
+    "updatedAt": "2026-11-03T11:29:05.650143+05:30"
+  },
+  "moneragala-ethimale-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8230455,
+      "lng": 81.534312
+    },
+    "source": "places",
+    "query": "Ethimale Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Ethimale",
+    "address": "Ethimale Divisional Hospital, Ethimale",
+    "districtDistanceKm": 21.012480366954854,
+    "updatedAt": "2026-11-03T11:29:05.650466+05:30"
+  },
+  "moneragala-hingurukaduwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8269917,
+      "lng": 81.1632903
+    },
+    "source": "places",
+    "query": "Hingurukaduwa Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Divisional Hospital Hingrukaduwa",
+    "address": "R5G7+Q8V, B359, Monaragala",
+    "districtDistanceKm": 21.308028572898824,
+    "updatedAt": "2026-11-03T11:29:05.848774+05:30"
+  },
+  "moneragala-inginiyagala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.226633700000001,
+      "lng": 81.5423469
+    },
+    "source": "places",
+    "query": "Inginiyagala Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Inginiyagala Divisional Hospital",
+    "address": "6GGR+MW5, Dam Road, Inginiyagala",
+    "districtDistanceKm": 44.66846587362498,
+    "updatedAt": "2026-11-03T11:29:05.881904+05:30"
+  },
+  "moneragala-katharagama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4125741,
+      "lng": 81.3388717
+    },
+    "source": "places",
+    "query": "Katharagama Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "District Hospital Kataragama",
+    "address": "C87Q+2GH, Kataragama",
+    "districtDistanceKm": 51.19145784651162,
+    "updatedAt": "2026-11-03T11:29:05.970747+05:30"
+  },
+  "moneragala-kotagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.131022,
+      "lng": 81.18609699999999
+    },
+    "source": "places",
+    "query": "Kotagama Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "PMCU Kotagama",
+    "address": "Badullagammana Rd",
+    "districtDistanceKm": 33.977297326089925,
+    "updatedAt": "2026-11-03T11:29:05.975585+05:30"
+  },
+  "moneragala-kotiyagala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7724724,
+      "lng": 81.5298729
+    },
+    "source": "places",
+    "query": "Kotiyagala Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "PMCU Kotiyagala",
+    "address": "QGCH+XWQ Primary Medical Care Unit, Kotiyagala",
+    "districtDistanceKm": 22.710864174253494,
+    "updatedAt": "2026-11-03T11:29:06.174116+05:30"
+  },
+  "moneragala-medagama-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.039833,
+      "lng": 81.2753008
+    },
+    "source": "places",
+    "query": "Medagama MOH Office, Moneragala District, Sri Lanka",
+    "matchedName": "MOH OFFICE MEDAGAMA",
+    "address": "Hospital Rd",
+    "districtDistanceKm": 20.352520102371365,
+    "updatedAt": "2026-11-03T11:29:06.174317+05:30"
+  },
+  "moneragala-moneragala-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8913557,
+      "lng": 81.3425783
+    },
+    "source": "places",
+    "query": "Moneragala District General Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "District General Hospital Monaragala",
+    "address": "Colombo - Batticaloa Hwy, Monaragala",
+    "districtDistanceKm": 2.2496822458443435,
+    "updatedAt": "2026-11-03T11:29:06.280662+05:30"
+  },
+  "moneragala-moneragala-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8595457,
+      "lng": 81.343442
+    },
+    "source": "places",
+    "query": "Moneragala RDHS Office, Moneragala District, Sri Lanka",
+    "matchedName": "RDHS Office, Monaragala",
+    "address": "V85V+R98, Monaragala",
+    "districtDistanceKm": 1.6775409654271267,
+    "updatedAt": "2026-11-03T11:29:06.20617+05:30"
+  },
+  "moneragala-ratmalgahaella-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.3236961,
+      "lng": 81.4187645
+    },
+    "source": "places",
+    "query": "Ratmalgahaella Primary Medical Care Unit, Moneragala District, Sri Lanka",
+    "matchedName": "central dispensary rathmalgahaella",
+    "address": "8CF9+FGC",
+    "districtDistanceKm": 50.69675389400543,
+    "updatedAt": "2026-11-03T11:29:06.479008+05:30"
+  },
+  "moneragala-siyambalanduwa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.905952699999999,
+      "lng": 81.54858109999999
+    },
+    "source": "places",
+    "query": "Siyambalanduwa Base Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Siyabalanduwa Base Hospital",
+    "address": "Base Hospital Siyambalanduwa, Colombo - Batticaloa Hwy, Siyambalanduwa",
+    "districtDistanceKm": 22.153371020247363,
+    "updatedAt": "2026-11-03T11:29:06.55143+05:30"
+  },
+  "moneragala-siyambalanduwa-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.927398300000001,
+      "lng": 81.5537499
+    },
+    "source": "places",
+    "query": "Siyambalanduwa MOH Office, Moneragala District, Sri Lanka",
+    "matchedName": "Medical officer of Health (MOH) office, Siyambalanduwa",
+    "address": "WHG3+XF5, Siyambalanduwa-Damana-Ampara Hwy, Siyambalanduwa",
+    "districtDistanceKm": 23.222218331504887,
+    "updatedAt": "2026-11-03T11:29:06.5431+05:30"
+  },
+  "moneragala-thanamalwila-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4356298999999995,
+      "lng": 81.13042829999999
+    },
+    "source": "places",
+    "query": "Thanamalwila Divisional Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Thanamalwila Divisional Hospital",
+    "address": "C4PJ+753, Colombo - Galle - Hambantota - Wellawaya Rd, Thanamalwila",
+    "districtDistanceKm": 54.35892006624104,
+    "updatedAt": "2026-11-03T11:29:06.698244+05:30"
+  },
+  "moneragala-wellawaya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7311141999999995,
+      "lng": 81.098342
+    },
+    "source": "places",
+    "query": "Wellawaya Base Hospital, Moneragala District, Sri Lanka",
+    "matchedName": "Base Hospital-Wellawaya",
+    "address": "P3JX+C8W, Colombo - Batticaloa Hwy, Wellawaya",
+    "districtDistanceKm": 32.009088123126375,
+    "updatedAt": "2026-11-03T11:29:06.705315+05:30"
+  },
+  "mullaitivu-alampil-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.163618200000002,
+      "lng": 80.85416049999999
+    },
+    "source": "places",
+    "query": "Alampil Divisional Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divitional Hospital - Alampil",
+    "address": "Alampil, 5V73+CMV, Chemmalai",
+    "districtDistanceKm": 12.314239643262011,
+    "updatedAt": "2026-11-03T11:29:06.757609+05:30"
+  },
+  "mullaitivu-iyankankulam-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.2095193,
+      "lng": 80.3301506
+    },
+    "source": "places",
+    "query": "Iyankankulam Primary Medical Care Unit, Mullaitivu District, Sri Lanka",
+    "matchedName": "PMCU IYANKANKULAM",
+    "address": "685J+R32",
+    "districtDistanceKm": 53.510122821103494,
+    "updatedAt": "2026-11-03T11:29:06.793451+05:30"
+  },
+  "mullaitivu-kiribbanwewa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9960123,
+      "lng": 80.8232882
+    },
+    "source": "places",
+    "query": "Kiribbanwewa Primary Medical Care Unit, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kiribbanwewa",
+    "address": "XRWF+C83, Welioya",
+    "districtDistanceKm": 30.160085231549598,
+    "updatedAt": "2026-11-03T11:29:06.958582+05:30"
+  },
+  "mullaitivu-mallavi-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.1346293,
+      "lng": 80.30870019999999
+    },
+    "source": "places",
+    "query": "Mallavi Base Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Base Hospital - Mallavi",
+    "address": "48M5+VF4, Mallavi",
+    "districtDistanceKm": 57.40774472261916,
+    "updatedAt": "2026-11-03T11:29:06.99923+05:30"
+  },
+  "mullaitivu-mankulam-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.1273818,
+      "lng": 80.4473146
+    },
+    "source": "places",
+    "query": "Mankulam Base Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Base Hospital - Mankulam",
+    "address": "4CGW+XW4, A9, Mankulam",
+    "districtDistanceKm": 43.164155693272434,
+    "updatedAt": "2026-11-03T11:29:06.969228+05:30"
+  },
+  "mullaitivu-mullaitivu-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.26205,
+      "lng": 80.8136598
+    },
+    "source": "places",
+    "query": "Mullaitivu District General Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mullaitivu | பிரதேச வைத்தியசாலை முல்லைத்தீவு",
+    "address": "7R67+RFF Unnappulavu, Mullaitivu",
+    "districtDistanceKm": 0.5646551563742696,
+    "updatedAt": "2026-11-03T11:29:07.111893+05:30"
+  },
+  "mullaitivu-mullaitivu-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 9.2614951,
+      "lng": 80.8137855
+    },
+    "source": "places",
+    "query": "Mullaitivu RDHS Office, Mullaitivu District, Sri Lanka",
+    "matchedName": "Regional Director of Health Services | பிராந்திய சுகாதார சேவைகள் பணிமனை",
+    "address": "7R67+HGV, Kokkilai Road, Mullaitivu",
+    "districtDistanceKm": 0.6248943305008743,
+    "updatedAt": "2026-11-03T11:29:07.223607+05:30"
+  },
+  "mullaitivu-naddankandal-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0552508,
+      "lng": 80.293852
+    },
+    "source": "places",
+    "query": "Naddankandal Divisional Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Naddankandal Divisional Hospital",
+    "address": "374V+4G5, Mullaitivu",
+    "districtDistanceKm": 61.78860368753445,
+    "updatedAt": "2026-11-03T11:29:07.223569+05:30"
+  },
+  "mullaitivu-oddusuddan-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.1629167,
+      "lng": 80.6602051
+    },
+    "source": "places",
+    "query": "Oddusuddan Divisional Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divisional Hospital Oddusuddaan | பிரதேச வைத்தியசாலை ஒட்டுசுட்டான்",
+    "address": "Divisional Hospital, Mankulam-Mullaitivu Hwy, Oddusuddan",
+    "districtDistanceKm": 20.49139726586936,
+    "updatedAt": "2026-11-03T11:29:07.317364+05:30"
+  },
+  "mullaitivu-puthukkudyiruppu-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.3153205,
+      "lng": 80.7044619
+    },
+    "source": "places",
+    "query": "Puthukkudyiruppu Base Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Base Hospital - Puthukkudiyiruppu",
+    "address": "Puthukkudiyiruppu Divisional Hospital, Paranthan-Mullaitivu Hwy, Puthukkudiyiruppu",
+    "districtDistanceKm": 13.18199660819663,
+    "updatedAt": "2026-11-03T11:29:07.417339+05:30"
+  },
+  "mullaitivu-sampathnuwara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.980449799999999,
+      "lng": 80.77255830000001
+    },
+    "source": "places",
+    "query": "Sampathnuwara Divisional Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Sampathnuwara",
+    "address": "XQJF+52F, Welioya",
+    "districtDistanceKm": 32.20024695720214,
+    "updatedAt": "2026-11-03T11:29:07.461598+05:30"
+  },
+  "mullaitivu-unnapulavu-dh-mullaitivu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 9.26205,
+      "lng": 80.8136598
+    },
+    "source": "places",
+    "query": "Unnapulavu (dh Mullaitivu) Divisional Hospital, Mullaitivu District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mullaitivu | பிரதேச வைத்தியசாலை முல்லைத்தீவு",
+    "address": "7R67+RFF Unnappulavu, Mullaitivu",
+    "districtDistanceKm": 0.5646551563742696,
+    "updatedAt": "2026-11-03T11:29:07.523941+05:30"
+  },
+  "nuwara-eliya-agarapathana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.870023499999999,
+      "lng": 80.685312
+    },
+    "source": "places",
+    "query": "Agarapathana Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Agarapatana",
+    "address": "Agarapatana, VMCP+243, Lindula",
+    "districtDistanceKm": 14.482847511538822,
+    "updatedAt": "2026-11-03T11:29:07.74813+05:30"
+  },
+  "nuwara-eliya-bogawanthalawa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7947893,
+      "lng": 80.6783581
+    },
+    "source": "places",
+    "query": "Bogawanthalawa Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Bagawanthalawa",
+    "address": "QMVH+W89, Norwood-Bogawantalawa-Campion Rd, Bogawantalawa",
+    "districtDistanceKm": 21.122792289500826,
+    "updatedAt": "2026-11-03T11:29:07.749651+05:30"
+  },
+  "nuwara-eliya-dayagama-west-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.853407,
+      "lng": 80.7580318
+    },
+    "source": "places",
+    "query": "Dayagama West Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Dayagama",
+    "address": "Dayagama",
+    "districtDistanceKm": 11.243141865662247,
+    "updatedAt": "2026-11-03T11:29:07.75002+05:30"
+  },
+  "nuwara-eliya-dickoya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8553668000000005,
+      "lng": 80.6008835
+    },
+    "source": "places",
+    "query": "Dickoya Base Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "District Base Hospital Dickoya (Glencairn Hospital - கிளங்கன் வைத்தியசாலை)",
+    "address": "VJ42+49R, Hatton - Maskeliya - Dalhousie Rd, Dick oya 22050",
+    "districtDistanceKm": 23.274702669846803,
+    "updatedAt": "2026-11-03T11:29:08.09843+05:30"
+  },
+  "nuwara-eliya-gonagahatenna-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.202242200000001,
+      "lng": 80.78210059999999
+    },
+    "source": "places",
+    "query": "Gonagahatenna Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Gonaganthenna",
+    "address": "Mahaweli Raja Mawatha",
+    "districtDistanceKm": 28.092031269445076,
+    "updatedAt": "2026-11-03T11:29:07.98444+05:30"
+  },
+  "nuwara-eliya-hangarapitiya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9356618,
+      "lng": 80.4687153
+    },
+    "source": "places",
+    "query": "Hangarapitiya Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Hangarapitiya Dispensary",
+    "address": "WFP9+7F8",
+    "districtDistanceKm": 35.398367912669606,
+    "updatedAt": "2026-11-03T11:29:08.025619+05:30"
+  },
+  "nuwara-eliya-hanguranketha-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.180072799999999,
+      "lng": 80.77290409999999
+    },
+    "source": "places",
+    "query": "Hanguranketha Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Hanguranketa",
+    "address": "Divisional Hospital - Hanguranketha, Hanguranketa 20710",
+    "districtDistanceKm": 25.67855760080668,
+    "updatedAt": "2026-11-03T11:29:08.017447+05:30"
+  },
+  "nuwara-eliya-hapugastalawa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.057579199999999,
+      "lng": 80.5710751
+    },
+    "source": "places",
+    "query": "Hapugastalawa Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Hospital, Hapugastalawa",
+    "address": "3H5C+2CP, Mosque Rd, Hapugastalawa",
+    "districtDistanceKm": 26.88665702754311,
+    "updatedAt": "2026-11-03T11:29:08.33993+05:30"
+  },
+  "nuwara-eliya-high-forest-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0667537,
+      "lng": 80.83997049999999
+    },
+    "source": "places",
+    "query": "High Forest Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional hospital Highforest",
+    "address": "Highforest no 03 division, Kandapola",
+    "districtDistanceKm": 14.17499871797206,
+    "updatedAt": "2026-11-03T11:29:08.341293+05:30"
+  },
+  "nuwara-eliya-kotagala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9391247,
+      "lng": 80.6251112
+    },
+    "source": "places",
+    "query": "Kotagala Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kotagala",
+    "address": "WJQG+J2X, Pathana Rd, Deltota",
+    "districtDistanceKm": 18.1391074138628,
+    "updatedAt": "2026-11-03T11:29:08.287242+05:30"
+  },
+  "nuwara-eliya-kothmale-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0620436,
+      "lng": 80.68553159999999
+    },
+    "source": "places",
+    "query": "Kothmale MOH Office, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "MOH OFFICE KOTHMALE",
+    "address": "3M6P+R67, Kothmale New Town",
+    "districtDistanceKm": 16.93229600371528,
+    "updatedAt": "2026-11-03T11:29:08.370341+05:30"
+  },
+  "nuwara-eliya-laxapana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9741029999999995,
+      "lng": 80.7801506
+    },
+    "source": "places",
+    "query": "Laxapana Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "District General Hospital Nuwara Eliya",
+    "address": "Nuwara Eliya-Uda Pussellawa Rd, Nuwara Eliya 22200",
+    "districtDistanceKm": 2.8876906779833345,
+    "updatedAt": "2026-11-03T11:29:08.556883+05:30"
+  },
+  "nuwara-eliya-lindula-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9221252,
+      "lng": 80.6867323
+    },
+    "source": "places",
+    "query": "Lindula Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Lindula",
+    "address": "Agarapathana-Dayagama-Lindula Rd, Lindula",
+    "districtDistanceKm": 11.708092138518754,
+    "updatedAt": "2026-11-03T11:29:08.896648+05:30"
+  },
+  "nuwara-eliya-madulla-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0537098,
+      "lng": 80.92646119999999
+    },
+    "source": "places",
+    "query": "Madulla Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Madulla",
+    "address": "C343",
+    "districtDistanceKm": 19.06782742850954,
+    "updatedAt": "2026-11-03T11:29:08.604495+05:30"
+  },
+  "nuwara-eliya-maldeniya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0281785,
+      "lng": 80.647176
+    },
+    "source": "places",
+    "query": "Maldeniya Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Maldeniya",
+    "address": "2JHW+7VF, නුවරඑළිය",
+    "districtDistanceKm": 17.930703515385915,
+    "updatedAt": "2026-11-03T11:29:08.619286+05:30"
+  },
+  "nuwara-eliya-manakola-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0721428,
+      "lng": 80.7822212
+    },
+    "source": "places",
+    "query": "Manakola Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Manakola",
+    "address": "3QCJ+VV5, Nuwara Eliya",
+    "districtDistanceKm": 13.636167211744239,
+    "updatedAt": "2026-11-03T11:29:08.833512+05:30"
+  },
+  "nuwara-eliya-mandaramnuwara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0392164,
+      "lng": 80.7828858
+    },
+    "source": "places",
+    "query": "Mandaramnuwara Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mandaramnuwara",
+    "address": "2QQM+M5J, Mandaramnuwara",
+    "districtDistanceKm": 9.977369961085888,
+    "updatedAt": "2026-11-03T11:29:09.39356+05:30"
+  },
+  "nuwara-eliya-maskeliya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8349134,
+      "lng": 80.57185849999999
+    },
+    "source": "places",
+    "query": "Maskeliya Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Maskeliya Clinic \u0026 Dental Care",
+    "address": "No.137 main St, Maskeliya 22070",
+    "districtDistanceKm": 27.16667152225924,
+    "updatedAt": "2026-11-03T11:29:08.865892+05:30"
+  },
+  "nuwara-eliya-muloya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0971779999999995,
+      "lng": 80.7509164
+    },
+    "source": "places",
+    "query": "Muloya Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Mooloya",
+    "address": "3QW2+V9F",
+    "districtDistanceKm": 16.93157674137547,
+    "updatedAt": "2026-11-03T11:29:09.104687+05:30"
+  },
+  "nuwara-eliya-munwatta-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.1210461,
+      "lng": 80.8157851
+    },
+    "source": "places",
+    "query": "Munwatta Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Munwatta",
+    "address": "Liyanwela - Brook Side Rd",
+    "districtDistanceKm": 19.279063877371772,
+    "updatedAt": "2026-11-03T11:29:09.126657+05:30"
+  },
+  "nuwara-eliya-nanuoya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.942381999999999,
+      "lng": 80.7445077
+    },
+    "source": "places",
+    "query": "Nanuoya Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Nanuoya",
+    "address": "pmcu, Nanuoya",
+    "districtDistanceKm": 4.988855016785222,
+    "updatedAt": "2026-11-03T11:29:09.128482+05:30"
+  },
+  "nuwara-eliya-nildandahinna-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0785312,
+      "lng": 80.89262889999999
+    },
+    "source": "places",
+    "query": "Nildandahinna Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Nildandahinna",
+    "address": "3VHV+C36, Walapane - Nildandahinna Rd, Nildandhahinna",
+    "districtDistanceKm": 18.323857280322954,
+    "updatedAt": "2026-11-03T11:29:09.855667+05:30"
+  },
+  "nuwara-eliya-nuwara-eliya-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9741029999999995,
+      "lng": 80.7801506
+    },
+    "source": "places",
+    "query": "Nuwara Eliya District General Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "District General Hospital Nuwara Eliya",
+    "address": "Nuwara Eliya-Uda Pussellawa Rd, Nuwara Eliya 22200",
+    "districtDistanceKm": 2.8876906779833345,
+    "updatedAt": "2026-11-03T11:29:09.374301+05:30"
+  },
+  "nuwara-eliya-nuwara-eliya-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9722504999999995,
+      "lng": 80.78064379999999
+    },
+    "source": "places",
+    "query": "Nuwara Eliya MOH Office, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Regional Directorate of Health Services. RDHS Office - Nuwaraeliya",
+    "address": "XQCJ+W72, B332, Nuwara Eliya 22200",
+    "districtDistanceKm": 2.6755774953783553,
+    "updatedAt": "2026-11-03T11:29:09.612335+05:30"
+  },
+  "nuwara-eliya-nuwara-eliya-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9722504999999995,
+      "lng": 80.78064379999999
+    },
+    "source": "places",
+    "query": "Nuwara Eliya RDHS Office, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Regional Directorate of Health Services. RDHS Office - Nuwaraeliya",
+    "address": "XQCJ+W72, B332, Nuwara Eliya 22200",
+    "districtDistanceKm": 2.6755774953783553,
+    "updatedAt": "2026-11-03T11:29:09.662935+05:30"
+  },
+  "nuwara-eliya-nuwara-eliya-std-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9741029999999995,
+      "lng": 80.7801506
+    },
+    "source": "places",
+    "query": "Nuwara Eliya STD Clinic, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "District General Hospital Nuwara Eliya",
+    "address": "Nuwara Eliya-Uda Pussellawa Rd, Nuwara Eliya 22200",
+    "districtDistanceKm": 2.8876906779833345,
+    "updatedAt": "2026-11-03T11:29:09.670311+05:30"
+  },
+  "nuwara-eliya-pundaluoya-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.012890199999999,
+      "lng": 80.66319639999999
+    },
+    "source": "places",
+    "query": "Pundaluoya Primary Medical Care Unit, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Punduloya",
+    "address": "Punduloya, 2M77+574, Road, Talawakelle 22120",
+    "districtDistanceKm": 15.57147270334755,
+    "updatedAt": "2026-11-03T11:29:10.786113+05:30"
+  },
+  "nuwara-eliya-ragala-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.0134368,
+      "lng": 80.8574931
+    },
+    "source": "places",
+    "query": "Ragala MOH Office, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Medical Officer of Health Office Ragala",
+    "address": "2V74+9XH, Ragala",
+    "districtDistanceKm": 10.354204005886704,
+    "updatedAt": "2026-11-03T11:29:09.900166+05:30"
+  },
+  "nuwara-eliya-ramboda-kotmale-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.062435799999999,
+      "lng": 80.68567519999999
+    },
+    "source": "places",
+    "query": "Ramboda Kotmale Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Kothmale",
+    "address": "3M6P+X7F, Ramboda - Sangilipalama Rd, Kothmale New Town",
+    "districtDistanceKm": 16.953818445924767,
+    "updatedAt": "2026-11-03T11:29:09.946005+05:30"
+  },
+  "nuwara-eliya-rikillagaskada-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.145326799999999,
+      "lng": 80.7825743
+    },
+    "source": "places",
+    "query": "Rikillagaskada Base Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Base Hospital Rikillagaskada",
+    "address": "District Base Hospital, Rikillagaskada",
+    "districtDistanceKm": 21.764624872805978,
+    "updatedAt": "2026-11-03T11:29:10.070662+05:30"
+  },
+  "nuwara-eliya-theripaha-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.120082600000001,
+      "lng": 80.9258658
+    },
+    "source": "places",
+    "query": "Theripaha Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Theripeha",
+    "address": "4WCG+28Q",
+    "districtDistanceKm": 24.222770357299364,
+    "updatedAt": "2026-11-03T11:29:10.163472+05:30"
+  },
+  "nuwara-eliya-watawala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9430755,
+      "lng": 80.5403566
+    },
+    "source": "places",
+    "query": "Watawala Divisional Hospital, Nuwara Eliya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Watawala",
+    "address": "Watawala District Hospital, A7, Watawala",
+    "districtDistanceKm": 27.46585923341217,
+    "updatedAt": "2026-11-03T11:29:10.187052+05:30"
+  },
+  "polonnaruwa-aralaganwila-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7879185,
+      "lng": 81.1879842
+    },
+    "source": "places",
+    "query": "Aralaganwila Divisional Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Aralaganwila Divisional Hospital",
+    "address": "Manampitiya-Aralaganwila-Maduru Oya Rd",
+    "districtDistanceKm": 25.18695073323682,
+    "updatedAt": "2026-11-03T11:29:10.663606+05:30"
+  },
+  "polonnaruwa-aselapura-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.968324199999999,
+      "lng": 81.2995966
+    },
+    "source": "places",
+    "query": "Aselapura Primary Medical Care Unit, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Aselapura",
+    "address": "X79X+8RH Aselapura, Welikanda",
+    "districtDistanceKm": 31.079363781218323,
+    "updatedAt": "2026-11-03T11:29:10.564397+05:30"
+  },
+  "polonnaruwa-bakamuna-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.7750981999999995,
+      "lng": 80.81991529999999
+    },
+    "source": "places",
+    "query": "Bakamuna Divisional Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Bakamoona",
+    "address": "QRG9+2XM, Dambulla - Bakamuna - Kalugahawela Road, Bakamuna",
+    "districtDistanceKm": 28.58973240532073,
+    "updatedAt": "2026-11-03T11:29:10.786829+05:30"
+  },
+  "polonnaruwa-bogaswewa-medagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 7.8169696,
+      "lng": 81.1361543
+    },
+    "source": "places",
+    "query": "Bogaswewa (medagama) Primary Medical Care Unit, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Bogaswewa Primary Medical Care Unit",
+    "address": "R48P+QFJ, Bogaswewa",
+    "districtDistanceKm": 18.845372671083016,
+    "updatedAt": "2026-11-03T11:29:10.894023+05:30"
+  },
+  "polonnaruwa-diyabeduma-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.934145099999999,
+      "lng": 80.870862
+    },
+    "source": "places",
+    "query": "Diyabeduma Divisional Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Diyabeduma",
+    "address": "WVMC+M85, Hathamuna Road, Polonnaruwa",
+    "districtDistanceKm": 16.306732110933634,
+    "updatedAt": "2026-11-03T11:29:10.894574+05:30"
+  },
+  "polonnaruwa-galoya-junction-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.137126600000002,
+      "lng": 80.8611114
+    },
+    "source": "places",
+    "query": "Galoya Junction Primary Medical Care Unit, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Galoya PMCU Hospital",
+    "address": "4VP6+VC5, B617, Galoya",
+    "districtDistanceKm": 27.93629744755141,
+    "updatedAt": "2026-11-03T11:29:11.08795+05:30"
+  },
+  "polonnaruwa-hingurakgoda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0460604,
+      "lng": 80.9646569
+    },
+    "source": "places",
+    "query": "Hingurakgoda Base Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Base Hospital Hingurakgoda",
+    "address": "2XW7+VMH, Airport Rd, Hingurakgoda 51400",
+    "districtDistanceKm": 13.18494871378004,
+    "updatedAt": "2026-11-03T11:29:11.087936+05:30"
+  },
+  "polonnaruwa-jayanthipura-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9927497999999995,
+      "lng": 80.96545019999999
+    },
+    "source": "places",
+    "query": "Jayanthipura Divisional Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Rehabilitation Hospital Jayanthipura",
+    "address": "XXV8+35W, Polonnaruwa",
+    "districtDistanceKm": 8.278244891023785,
+    "updatedAt": "2026-11-03T11:29:11.145293+05:30"
+  },
+  "polonnaruwa-medirigiriya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.143356599999999,
+      "lng": 80.9669456
+    },
+    "source": "places",
+    "query": "Medirigiriya Base Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "District Base Hospital, Medirigiriya",
+    "address": "4XV8+8QW, Hospital Road, Medirigiriya",
+    "districtDistanceKm": 23.28949400042826,
+    "updatedAt": "2026-11-03T11:29:11.13914+05:30"
+  },
+  "polonnaruwa-polonnaruwa-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.943001099999999,
+      "lng": 81.0091113
+    },
+    "source": "places",
+    "query": "Polonnaruwa District General Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "District General Hospital Polonnaruwa",
+    "address": "W2V5+6J5, Polonnaruwa",
+    "districtDistanceKm": 1.1084684517563554,
+    "updatedAt": "2026-11-03T11:29:11.311285+05:30"
+  },
+  "polonnaruwa-polonnaruwa-renal-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9411605,
+      "lng": 81.0141254
+    },
+    "source": "places",
+    "query": "Polonnaruwa Renal Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "National Nephrology Hospital",
+    "address": "W2R7+HFQ, Maradankadawala-Habarana-Thirukkondaiadimadu Hwy, Polonnaruwa",
+    "districtDistanceKm": 0.5236242314066483,
+    "updatedAt": "2026-11-03T11:29:11.617382+05:30"
+  },
+  "polonnaruwa-pulasthigama-bop-400-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.042809900000002,
+      "lng": 81.0787611
+    },
+    "source": "places",
+    "query": "Pulasthigama (bop 400) Divisional Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Pulasthigama Divisional Hospital",
+    "address": "Pulasthigama Hospital, Somawathiya Rd, Pulastigama",
+    "districtDistanceKm": 13.172783631439605,
+    "updatedAt": "2026-11-03T11:29:11.417751+05:30"
+  },
+  "polonnaruwa-welikanda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.9481171,
+      "lng": 81.2460396
+    },
+    "source": "places",
+    "query": "Welikanda Base Hospital, Polonnaruwa District, Sri Lanka",
+    "matchedName": "Welikanda Hospital",
+    "address": "W6XW+6CV, Maradankadawala-Habarana-Thirukkondaiadimadu Hwy, Welikanda",
+    "districtDistanceKm": 25.040488408306793,
+    "updatedAt": "2026-11-03T11:29:11.417701+05:30"
+  },
+  "puttalam-aluthgama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0279019,
+      "lng": 79.83874019999999
+    },
+    "source": "places",
+    "query": "Aluthgama Primary Medical Care Unit, Puttalam District, Sri Lanka",
+    "matchedName": "Base Hospital Puttalam",
+    "address": "2RHQ+5F9, Katugastota-Kurunegala-Puttalam Hwy, Puttalam",
+    "districtDistanceKm": 1.4740279213617875,
+    "updatedAt": "2026-11-03T11:29:11.774421+05:30"
+  },
+  "puttalam-anamaduwa-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.885088799999999,
+      "lng": 80.0024897
+    },
+    "source": "places",
+    "query": "Anamaduwa Base Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Anamaduwa Base Hospital",
+    "address": "Puttlum Road A10, Anamaduwa",
+    "districtDistanceKm": 25.500916756062377,
+    "updatedAt": "2026-11-03T11:29:11.650896+05:30"
+  },
+  "puttalam-chilaw-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.5723297999999994,
+      "lng": 79.7973064
+    },
+    "source": "places",
+    "query": "Chilaw District General Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "District General Hospital Chilaw",
+    "address": "HQFW+397 General Hospital, Chilaw",
+    "districtDistanceKm": 51.6928994821786,
+    "updatedAt": "2026-11-03T11:29:11.650907+05:30"
+  },
+  "puttalam-galmuruwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4961802,
+      "lng": 79.8806188
+    },
+    "source": "places",
+    "query": "Galmuruwa Divisional Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Divisional Hospital C - Galmuruwa",
+    "address": "FVWJ+F6H, Kurunegala-Narammala-Madampe Rd, Madampe",
+    "districtDistanceKm": 60.32349232405515,
+    "updatedAt": "2026-11-03T11:29:11.839672+05:30"
+  },
+  "puttalam-kalpitiya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.2340398,
+      "lng": 79.7666011
+    },
+    "source": "places",
+    "query": "Kalpitiya Base Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Base Hospital Kalpitiya",
+    "address": "6QM8+JJ9, Road, Kalpitiya",
+    "districtDistanceKm": 23.023287054304344,
+    "updatedAt": "2026-11-03T11:29:11.940678+05:30"
+  },
+  "puttalam-mahakumbukkadawala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.8476913,
+      "lng": 79.9057823
+    },
+    "source": "places",
+    "query": "Mahakumbukkadawala Divisional Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Mahakumbukkadawala Divisional Hospital",
+    "address": "RWX4+38F, Madurankuliya - Mahakumbukkadawala Rd, Mahakumbukkadawala",
+    "districtDistanceKm": 22.631491998043167,
+    "updatedAt": "2026-11-03T11:29:11.956899+05:30"
+  },
+  "puttalam-mampoori-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0723646,
+      "lng": 79.8371061
+    },
+    "source": "places",
+    "query": "Mampoori Primary Medical Care Unit, Puttalam District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit. Weppamadu",
+    "address": "Unnamed Road, 3RCP+WRX, Puttalam",
+    "districtDistanceKm": 4.136545939315539,
+    "updatedAt": "2026-11-03T11:29:12.137523+05:30"
+  },
+  "puttalam-mundalama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 7.788971200000001,
+      "lng": 79.82774839999999
+    },
+    "source": "places",
+    "query": "Mundalama Divisional Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Mundel Divisional Hospital",
+    "address": "Mundel, Colombo - Puttalam Rd",
+    "districtDistanceKm": 27.49065540691384,
+    "updatedAt": "2026-11-03T11:29:12.159398+05:30"
+  },
+  "puttalam-puttalam-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0279019,
+      "lng": 79.83874019999999
+    },
+    "source": "places",
+    "query": "Puttalam Base Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Base Hospital Puttalam",
+    "address": "2RHQ+5F9, Katugastota-Kurunegala-Puttalam Hwy, Puttalam",
+    "districtDistanceKm": 1.4740279213617875,
+    "updatedAt": "2026-11-03T11:29:12.180807+05:30"
+  },
+  "puttalam-puttalam-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 7.4864444,
+      "lng": 79.8316088
+    },
+    "source": "places",
+    "query": "Puttalam RDHS Office, Puttalam District, Sri Lanka",
+    "matchedName": "Puttalam Regional Directorate of Health Services (RDHS) - Madampe",
+    "address": "FRPM+RC4, Madampe",
+    "districtDistanceKm": 61.13112060395505,
+    "updatedAt": "2026-11-03T11:29:12.194959+05:30"
+  },
+  "puttalam-thabbowa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.0716454,
+      "lng": 79.9252167
+    },
+    "source": "places",
+    "query": "Thabbowa Divisional Hospital, Puttalam District, Sri Lanka",
+    "matchedName": "Divisional Hospital Thabbowa",
+    "address": "Tabbowa outer circular road, 3WCG+M34, Thabbowa",
+    "districtDistanceKm": 11.375000067048036,
+    "updatedAt": "2026-11-03T11:29:12.469236+05:30"
+  },
+  "rathnapura-ammaduwa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5398371,
+      "lng": 80.6540117
+    },
+    "source": "places",
+    "query": "Ammaduwa Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "Ammaduwa primary medical care unit",
+    "address": "Ammnaduwa, GMQ3+WJJ",
+    "districtDistanceKm": 32.324401152853596,
+    "updatedAt": "2026-11-03T11:29:12.469246+05:30"
+  },
+  "rathnapura-ayagama-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.9465778,
+      "lng": 79.9939471
+    },
+    "source": "places",
+    "query": "Ayagama Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Biyagama Hospital",
+    "address": "Hospital Rd",
+    "districtDistanceKm": 53.500361828807584,
+    "updatedAt": "2026-11-03T11:29:12.687118+05:30"
+  },
+  "rathnapura-balangoda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6585616,
+      "lng": 80.7123124
+    },
+    "source": "places",
+    "query": "Balangoda Base Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Base Hospital Balangoda",
+    "address": "MP56+CWF, A4, Balangoda",
+    "districtDistanceKm": 34.685680269240144,
+    "updatedAt": "2026-11-03T11:29:12.469257+05:30"
+  },
+  "rathnapura-buthkanda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3778405,
+      "lng": 80.6791514
+    },
+    "source": "places",
+    "query": "Buthkanda Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit",
+    "address": "9MHH+4MJ, A17, Buthkanda",
+    "districtDistanceKm": 45.89525243400455,
+    "updatedAt": "2026-11-03T11:29:12.814754+05:30"
+  },
+  "rathnapura-eheliyagoda-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.848163,
+      "lng": 80.2647136
+    },
+    "source": "places",
+    "query": "Eheliyagoda Base Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Base Hospital Eheliyagoda",
+    "address": "R7X7+7V8, Ratnapura Road, Eheliyagoda",
+    "districtDistanceKm": 23.635263464636836,
+    "updatedAt": "2026-11-03T11:29:12.727892+05:30"
+  },
+  "rathnapura-eheliyagoda-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8486926,
+      "lng": 80.26471590000001
+    },
+    "source": "places",
+    "query": "Eheliyagoda MOH Office, Rathnapura District, Sri Lanka",
+    "matchedName": "MOH Office",
+    "address": "R7X7+FVG, Eheliyagoda",
+    "districtDistanceKm": 23.68094173124922,
+    "updatedAt": "2026-11-03T11:29:12.733916+05:30"
+  },
+  "rathnapura-ellawala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.736565499999999,
+      "lng": 80.2214776
+    },
+    "source": "places",
+    "query": "Ellawala Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "Ellagawa Primary Medical Care Unit",
+    "address": "P6PC+JHH",
+    "districtDistanceKm": 20.51683486243529,
+    "updatedAt": "2026-11-03T11:29:12.991651+05:30"
+  },
+  "rathnapura-embilipitiya-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.3262163,
+      "lng": 80.8418666
+    },
+    "source": "places",
+    "query": "Embilipitiya District General Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "District General Hospital Embilipitiya",
+    "address": "Hospital Rd, Embilipitiya",
+    "districtDistanceKm": 62.9593473919386,
+    "updatedAt": "2026-11-03T11:29:13.027672+05:30"
+  },
+  "rathnapura-endana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.531279199999999,
+      "lng": 80.53263249999999
+    },
+    "source": "places",
+    "query": "Endana Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital Endana",
+    "address": "Endane Hospital, Hospital Rd, Endana",
+    "districtDistanceKm": 22.38502478556405,
+    "updatedAt": "2026-11-03T11:29:13.074213+05:30"
+  },
+  "rathnapura-gilimale-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.751570999999999,
+      "lng": 80.426881
+    },
+    "source": "places",
+    "query": "Gilimale Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital (B) Gilimale",
+    "address": "QC2G+QMG, Ratnapura",
+    "districtDistanceKm": 8.235337318480811,
+    "updatedAt": "2026-11-03T11:29:13.040009+05:30"
+  },
+  "rathnapura-godakawela-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.502412,
+      "lng": 80.6561345
+    },
+    "source": "places",
+    "query": "Godakawela Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital (A) - Godakawela",
+    "address": "District Hospital Godakawela, A18, Godakawela",
+    "districtDistanceKm": 34.75352132505994,
+    "updatedAt": "2026-11-03T11:29:13.343354+05:30"
+  },
+  "rathnapura-gurubewilagama-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6932263,
+      "lng": 80.5837877
+    },
+    "source": "places",
+    "query": "Gurubewilagama Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "Medical Center",
+    "address": "MHVM+9QP, Gurubevilagama",
+    "districtDistanceKm": 20.418482554594583,
+    "updatedAt": "2026-11-03T11:29:13.306205+05:30"
+  },
+  "rathnapura-kahawatta-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5789139,
+      "lng": 80.5752515
+    },
+    "source": "places",
+    "query": "Kahawatta Base Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Base Hospital Kahawatta",
+    "address": "HHHG+H46, A18, Kahawatta 70150",
+    "districtDistanceKm": 22.61748911618238,
+    "updatedAt": "2026-11-03T11:29:13.293387+05:30"
+  },
+  "rathnapura-kalawana-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.53006,
+      "lng": 80.3978654
+    },
+    "source": "places",
+    "query": "Kalawana Base Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Base Hospital Kalawana",
+    "address": "G9JX+24H, Kalawana-Depedene-Rakwana Rd, Manana",
+    "districtDistanceKm": 16.98455284407629,
+    "updatedAt": "2026-11-03T11:29:13.308808+05:30"
+  },
+  "rathnapura-kaltota-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6593994,
+      "lng": 80.88537869999999
+    },
+    "source": "places",
+    "query": "Kaltota Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Kalthota Hospital",
+    "address": "MV5P+Q52, Kalthota",
+    "districtDistanceKm": 53.75758799940141,
+    "updatedAt": "2026-11-03T11:29:13.566801+05:30"
+  },
+  "rathnapura-kiribathgala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.5970071,
+      "lng": 80.5021652
+    },
+    "source": "places",
+    "query": "Kiribathgala Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Kiribathgala",
+    "address": "Kiribathgala",
+    "districtDistanceKm": 14.843795942600632,
+    "updatedAt": "2026-11-03T11:29:13.604375+05:30"
+  },
+  "rathnapura-kiriella-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.740129500000001,
+      "lng": 80.2681976
+    },
+    "source": "places",
+    "query": "Kiriella Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital - Kiriella",
+    "address": "A8",
+    "districtDistanceKm": 15.809203825621365,
+    "updatedAt": "2026-11-03T11:29:13.813298+05:30"
+  },
+  "rathnapura-kolonna-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.406701000000001,
+      "lng": 80.6907715
+    },
+    "source": "places",
+    "query": "Kolonna Base Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Base Hospital Kolonna",
+    "address": "Main St",
+    "districtDistanceKm": 44.49742387713666,
+    "updatedAt": "2026-11-03T11:29:13.709036+05:30"
+  },
+  "rathnapura-mahingoda-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.8391630999999995,
+      "lng": 80.28007160000001
+    },
+    "source": "places",
+    "query": "Mahingoda Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "PMCU MAHINGODA",
+    "address": "Mahingoda",
+    "districtDistanceKm": 21.802229735746,
+    "updatedAt": "2026-11-03T11:29:13.857919+05:30"
+  },
+  "rathnapura-nivitigala-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.592731499999999,
+      "lng": 80.432172
+    },
+    "source": "places",
+    "query": "Nivitigala Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital (A) Nivithigala (Wathupitiya)",
+    "address": "Tiruwanaketiya-Agalawatte Rd",
+    "districtDistanceKm": 10.656722019097677,
+    "updatedAt": "2026-11-03T11:29:13.859123+05:30"
+  },
+  "rathnapura-pothupitiya-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.686824499999999,
+      "lng": 80.39308770000001
+    },
+    "source": "places",
+    "query": "Pothupitiya Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Ratnapura",
+    "address": "Colombo Rd, Ratnapura 70000",
+    "districtDistanceKm": 0.8098972732109477,
+    "updatedAt": "2026-11-03T11:29:14.038071+05:30"
+  },
+  "rathnapura-rakwana-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.4714431,
+      "lng": 80.6144789
+    },
+    "source": "places",
+    "query": "Rakwana Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Divisional Hospital A Rakwana",
+    "address": "FJC7+HQH, Rakwana",
+    "districtDistanceKm": 33.434128005103595,
+    "updatedAt": "2026-11-03T11:29:14.233788+05:30"
+  },
+  "rathnapura-rathganga-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.7225946,
+      "lng": 80.26067979999999
+    },
+    "source": "places",
+    "query": "Rathganga Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "PRIMARY MEDICAL CARE UNIT",
+    "address": "P7F6+27M, Madabaddara",
+    "districtDistanceKm": 15.924596377753767,
+    "updatedAt": "2026-11-03T11:29:14.103957+05:30"
+  },
+  "rathnapura-rathnapura-std-clinic": {
+    "status": "ok",
+    "location": {
+      "lat": 6.686824499999999,
+      "lng": 80.39308770000001
+    },
+    "source": "places",
+    "query": "Rathnapura STD Clinic, Rathnapura District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Ratnapura",
+    "address": "Colombo Rd, Ratnapura 70000",
+    "districtDistanceKm": 0.8098972732109477,
+    "updatedAt": "2026-11-03T11:29:14.103812+05:30"
+  },
+  "rathnapura-rathnapura-teaching-hospital": {
+    "status": "ok",
+    "location": {
+      "lat": 6.686824499999999,
+      "lng": 80.39308770000001
+    },
+    "source": "places",
+    "query": "Rathnapura Teaching Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Teaching Hospital - Ratnapura",
+    "address": "Colombo Rd, Ratnapura 70000",
+    "districtDistanceKm": 0.8098972732109477,
+    "updatedAt": "2026-11-03T11:29:14.273925+05:30"
+  },
+  "rathnapura-sooriyakanda-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 6.444624699999999,
+      "lng": 80.6325193
+    },
+    "source": "places",
+    "query": "Sooriyakanda Divisional Hospital, Rathnapura District, Sri Lanka",
+    "matchedName": "Sooriyakanda Divisional Hospital",
+    "address": "CJVM+R2R, Galle-Deniyaya-Madampe Hwy, Suriyakanda",
+    "districtDistanceKm": 36.95520940421529,
+    "updatedAt": "2026-11-03T11:29:14.646735+05:30"
+  },
+  "rathnapura-sri-palabaddala-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.6777280999999995,
+      "lng": 80.3572674
+    },
+    "source": "places",
+    "query": "Sri Palabaddala Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "PMCU Dellabada",
+    "address": "Karangoda, Dellabada, Ratnapura",
+    "districtDistanceKm": 4.665250166871354,
+    "updatedAt": "2026-11-03T11:29:14.359982+05:30"
+  },
+  "rathnapura-watapotha-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 6.584814,
+      "lng": 80.507217
+    },
+    "source": "places",
+    "query": "Watapotha Primary Medical Care Unit, Rathnapura District, Sri Lanka",
+    "matchedName": "Watapotha Health Centre",
+    "address": "HGM4+WVG, Watapotha",
+    "districtDistanceKm": 16.15705259595291,
+    "updatedAt": "2026-11-03T11:29:14.568765+05:30"
+  },
+  "trincomalee-eachchilampaththu-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.2895486,
+      "lng": 81.3589855
+    },
+    "source": "places",
+    "query": "Eachchilampaththu Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional Hospital-Echchalampattu | ஈச்சலம்பற்று மருத்துவமனைEchchalampattu Hospital",
+    "address": "Trincomalee-Batticaloa Rd",
+    "districtDistanceKm": 36.701815872989215,
+    "updatedAt": "2026-11-03T11:29:14.597357+05:30"
+  },
+  "trincomalee-gomarankadawela-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6821488,
+      "lng": 80.9533603
+    },
+    "source": "places",
+    "query": "Gomarankadawela Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Gomarankadawala Divisional Hospital",
+    "address": "Thiriyaya Rd",
+    "districtDistanceKm": 30.652703783524405,
+    "updatedAt": "2026-11-03T11:29:14.60601+05:30"
+  },
+  "trincomalee-gomarankadawela-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6747984,
+      "lng": 80.9556368
+    },
+    "source": "places",
+    "query": "Gomarankadawela MOH Office, Trincomalee District, Sri Lanka",
+    "matchedName": "Office of the Medical Officer of Health Gomarankadawala",
+    "address": "MXF4+W76, Gomarankadawala",
+    "districtDistanceKm": 30.144731235631777,
+    "updatedAt": "2026-11-03T11:29:14.813219+05:30"
+  },
+  "trincomalee-ilangai-thuraimuhaththuvaram-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3982666,
+      "lng": 81.09733589999999
+    },
+    "source": "places",
+    "query": "Ilangai Thuraimuhaththuvaram Primary Medical Care Unit, Trincomalee District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit Wan Ela",
+    "address": "Unnamed Road, 93XW+8W4, Kinniya",
+    "districtDistanceKm": 24.704394250819664,
+    "updatedAt": "2026-11-03T11:29:14.829682+05:30"
+  },
+  "trincomalee-kantale-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3667027,
+      "lng": 81.00479059999999
+    },
+    "source": "places",
+    "query": "Kantale Base Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Base Hospital - Kanthale",
+    "address": "Ambepussa - Kurunegala - Trincomalee Hwy, Kantale",
+    "districtDistanceKm": 33.730260768438775,
+    "updatedAt": "2026-11-03T11:29:14.81946+05:30"
+  },
+  "trincomalee-kinniya-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.5015393,
+      "lng": 81.1875393
+    },
+    "source": "places",
+    "query": "Kinniya Base Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "கிண்ணியா தள வைத்தியசாலை | කින්නියා මූලික රෝහල | Kinniya Base Hospital",
+    "address": "G52Q+J27, B541, Kinniya 31100",
+    "districtDistanceKm": 10.020065988910108,
+    "updatedAt": "2026-11-03T11:29:14.863867+05:30"
+  },
+  "trincomalee-mahadivulwewa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6208347,
+      "lng": 80.96881929999999
+    },
+    "source": "places",
+    "query": "Mahadivulwewa Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional hospital Mahadivulwewa",
+    "address": "JXC9+8GP, Unnamed Road, Mahadivul Wewa",
+    "districtDistanceKm": 27.341893136850146,
+    "updatedAt": "2026-11-03T11:29:15.086221+05:30"
+  },
+  "trincomalee-manalchenai-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3946369,
+      "lng": 81.2761453
+    },
+    "source": "places",
+    "query": "Manalchenai Primary Medical Care Unit, Trincomalee District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit (PMCU) - Manalchenai",
+    "address": "97VG+VF, Padditidal",
+    "districtDistanceKm": 22.457785701225834,
+    "updatedAt": "2026-11-03T11:29:15.085812+05:30"
+  },
+  "trincomalee-muthur-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4545335,
+      "lng": 81.2630179
+    },
+    "source": "places",
+    "query": "Muthur Base Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Muthur Base Hospital",
+    "address": "Main Street Old Batticaloa Rd, Mutur 31200",
+    "districtDistanceKm": 15.68197652396597,
+    "updatedAt": "2026-11-03T11:29:15.085934+05:30"
+  },
+  "trincomalee-pulmodai-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.9412038,
+      "lng": 80.98313920000001
+    },
+    "source": "places",
+    "query": "Pulmodai Base Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Base Hospital - Pulmoddai",
+    "address": "WXRM+F7J, Pulmoddai",
+    "districtDistanceKm": 46.8840450189757,
+    "updatedAt": "2026-11-03T11:29:15.111586+05:30"
+  },
+  "trincomalee-sampoor-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4812859,
+      "lng": 81.2927284
+    },
+    "source": "places",
+    "query": "Sampoor Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional Hospital Sampoor",
+    "address": "Trincomalee",
+    "districtDistanceKm": 14.556974296705215,
+    "updatedAt": "2026-11-03T11:29:15.306258+05:30"
+  },
+  "trincomalee-serunuwara-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3229718,
+      "lng": 81.2996955
+    },
+    "source": "places",
+    "query": "Serunuwara Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Serunuwara Govt Hospital",
+    "address": "87FX+5VP, Allai-Kantalai Rd, Serunuwara",
+    "districtDistanceKm": 30.836780432082794,
+    "updatedAt": "2026-11-03T11:29:15.322735+05:30"
+  },
+  "trincomalee-seruwila-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3719296,
+      "lng": 81.31724419999999
+    },
+    "source": "places",
+    "query": "Seruwila Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional Hospital Seruwila (DH SERUWILA)",
+    "address": "Palatoppu-Seruwawila Rd, Seruwawila",
+    "districtDistanceKm": 26.457401929656164,
+    "updatedAt": "2026-11-03T11:29:15.315784+05:30"
+  },
+  "trincomalee-thampalagamam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4776025,
+      "lng": 81.1093425
+    },
+    "source": "places",
+    "query": "Thampalagamam Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional Hospital Thambalagamuwa",
+    "address": "kinniya road, thampakakamam, F4H5+2PW, Aiyanatidal",
+    "districtDistanceKm": 16.86890272565807,
+    "updatedAt": "2026-11-03T11:29:15.413775+05:30"
+  },
+  "trincomalee-thampalagamam-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.4770614,
+      "lng": 81.1094236
+    },
+    "source": "places",
+    "query": "Thampalagamam MOH Office, Trincomalee District, Sri Lanka",
+    "matchedName": "MOH Office Thampalakamam",
+    "address": "Kovilady, F4G5+RQF, Trincomalee",
+    "districtDistanceKm": 16.906368921774448,
+    "updatedAt": "2026-11-03T11:29:15.61221+05:30"
+  },
+  "trincomalee-trincomalee-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.5648599,
+      "lng": 81.2394451
+    },
+    "source": "places",
+    "query": "Trincomalee District General Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "District General Hospital Trincomalee",
+    "address": "H67Q+WQW, Hospital Ln, Trincomalee",
+    "districtDistanceKm": 3.6589873728179696,
+    "updatedAt": "2026-11-03T11:29:15.612246+05:30"
+  },
+  "trincomalee-trincomalee-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 8.5647788,
+      "lng": 81.2375447
+    },
+    "source": "places",
+    "query": "Trincomalee RDHS Office, Trincomalee District, Sri Lanka",
+    "matchedName": "Regional Director of Health Services - Trincomalee",
+    "address": "H67Q+W27, Manayaweli",
+    "districtDistanceKm": 3.5161189605894663,
+    "updatedAt": "2026-11-03T11:29:15.612121+05:30"
+  },
+  "trincomalee-wan-ela-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.3986889,
+      "lng": 81.09741489999999
+    },
+    "source": "places",
+    "query": "Wan Ela Divisional Hospital, Trincomalee District, Sri Lanka",
+    "matchedName": "Divisional hospital Wan ela",
+    "address": "wan ela, Kantale 31308",
+    "districtDistanceKm": 24.659863314578715,
+    "updatedAt": "2026-11-03T11:29:15.661324+05:30"
+  },
+  "vavuniya-bogaswawa-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 8.8365294,
+      "lng": 80.6242436
+    },
+    "source": "places",
+    "query": "Bogaswawa Primary Medical Care Unit, Vavuniya District, Sri Lanka",
+    "matchedName": "Bogaswawa PMCU - Primary Medical Care Unit, Bogaswewa",
+    "address": "RJPF+JM9, Bogaswewa Rd, Vavuniya",
+    "districtDistanceKm": 16.8762519400224,
+    "updatedAt": "2026-11-03T11:29:15.935061+05:30"
+  },
+  "vavuniya-cheddikulam-bh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6589949,
+      "lng": 80.3124295
+    },
+    "source": "places",
+    "query": "Cheddikulam Base Hospital, Vavuniya District, Sri Lanka",
+    "matchedName": "Base Hospital Cheddikulam",
+    "address": "M856+HXV",
+    "districtDistanceKm": 22.75035341595436,
+    "updatedAt": "2026-11-03T11:29:15.84278+05:30"
+  },
+  "vavuniya-cheddikulam-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6573729,
+      "lng": 80.3126068
+    },
+    "source": "places",
+    "query": "Cheddikulam MOH Office, Vavuniya District, Sri Lanka",
+    "matchedName": "MOH Office",
+    "address": "M847+W2X, Mudaliyarkulam",
+    "districtDistanceKm": 22.81509372359407,
+    "updatedAt": "2026-11-03T11:29:15.843067+05:30"
+  },
+  "vavuniya-ganeshpuram-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0497771,
+      "lng": 80.5128005
+    },
+    "source": "places",
+    "query": "Ganeshpuram Primary Medical Care Unit, Vavuniya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit (PMCU) Kanagarayankulam",
+    "address": "Off, 2GX7+W47 Kanagarayankulam, A9, වවුනියාව 43000",
+    "districtDistanceKm": 33.222821961426185,
+    "updatedAt": "2026-11-03T11:29:15.927835+05:30"
+  },
+  "vavuniya-kankarayankulam-pmcu": {
+    "status": "ok",
+    "location": {
+      "lat": 9.0497771,
+      "lng": 80.5128005
+    },
+    "source": "places",
+    "query": "Kankarayankulam Primary Medical Care Unit, Vavuniya District, Sri Lanka",
+    "matchedName": "Primary Medical Care Unit (PMCU) Kanagarayankulam",
+    "address": "Off, 2GX7+W47 Kanagarayankulam, A9, වවුනියාව 43000",
+    "districtDistanceKm": 33.222821961426185,
+    "updatedAt": "2026-11-03T11:29:16.137126+05:30"
+  },
+  "vavuniya-mamaduwa-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.800366700000001,
+      "lng": 80.53533709999999
+    },
+    "source": "places",
+    "query": "Mamaduwa Divisional Hospital, Vavuniya District, Sri Lanka",
+    "matchedName": "Mamaduwa Hospital",
+    "address": "RG2P+44W, B442, Mamaduwa",
+    "districtDistanceKm": 6.877727447356735,
+    "updatedAt": "2026-11-03T11:29:16.137278+05:30"
+  },
+  "vavuniya-poovarasankulam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7525596,
+      "lng": 80.3672789
+    },
+    "source": "places",
+    "query": "Poovarasankulam Divisional Hospital, Vavuniya District, Sri Lanka",
+    "matchedName": "Poovarasankulam Hospital",
+    "address": "Q938+2WC, Vavuniya-Parayanalankulam Hwy, Nelumkulama",
+    "districtDistanceKm": 14.267947570147568,
+    "updatedAt": "2026-11-03T11:29:16.213791+05:30"
+  },
+  "vavuniya-ulukulam-dh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.6634011,
+      "lng": 80.4051927
+    },
+    "source": "places",
+    "query": "Ulukulam Divisional Hospital, Vavuniya District, Sri Lanka",
+    "matchedName": "Divisional Hospital Ulukkulam",
+    "address": "MC74+938, Nelukkulam-Neriyakulam Rd, Vavuniya",
+    "districtDistanceKm": 14.063923221564114,
+    "updatedAt": "2026-11-03T11:29:16.161061+05:30"
+  },
+  "vavuniya-vavuniya-dgh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.760589,
+      "lng": 80.5000512
+    },
+    "source": "places",
+    "query": "Vavuniya District General Hospital, Vavuniya District, Sri Lanka",
+    "matchedName": "District General Hospital Vavuniya",
+    "address": "QG62+62M, Hospital Circular Rd, Vavuniya",
+    "districtDistanceKm": 1.0720106478393527,
+    "updatedAt": "2026-11-03T11:29:16.437973+05:30"
+  },
+  "vavuniya-vavuniya-municipal-council": {
+    "status": "ok",
+    "location": {
+      "lat": 8.757659499999999,
+      "lng": 80.498001
+    },
+    "source": "places",
+    "query": "Vavuniya Municipal Council, Vavuniya District, Sri Lanka",
+    "matchedName": "Municipal Council Vavuniya || வவுனியா மாநகர சபை",
+    "address": "QF5X+366, Vavuniya",
+    "districtDistanceKm": 0.7030328201549202,
+    "updatedAt": "2026-11-03T11:29:16.370566+05:30"
+  },
+  "vavuniya-vavuniya-north-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.7542034,
+      "lng": 80.49822569999999
+    },
+    "source": "places",
+    "query": "Vavuniya North MOH Office, Vavuniya District, Sri Lanka",
+    "matchedName": "Northern Provincial Ministry of Health",
+    "address": "QF3X+M7Q, Vavuniya",
+    "districtDistanceKm": 0.33537592614721506,
+    "updatedAt": "2026-11-03T11:29:16.374857+05:30"
+  },
+  "vavuniya-vavuniya-rdhs": {
+    "status": "ok",
+    "location": {
+      "lat": 8.760805,
+      "lng": 80.49650729999999
+    },
+    "source": "places",
+    "query": "Vavuniya RDHS Office, Vavuniya District, Sri Lanka",
+    "matchedName": "Regional Directorate of Health Services (RDHS Office) Vavuniya",
+    "address": "Vavuniya-Parayanalankulam Hwy, Vavuniya",
+    "districtDistanceKm": 1.0478148608411022,
+    "updatedAt": "2026-11-03T11:29:16.427028+05:30"
+  },
+  "vavuniya-vavuniya-south-moh": {
+    "status": "ok",
+    "location": {
+      "lat": 8.703010899999999,
+      "lng": 80.4831797
+    },
+    "source": "places",
+    "query": "Vavuniya South MOH Office, Vavuniya District, Sri Lanka",
+    "matchedName": "office of the medical officer of health vavniya south",
+    "address": "PF3M+673, Vavuniya",
+    "districtDistanceKm": 5.5939101397417454,
+    "updatedAt": "2026-11-03T11:29:16.676331+05:30"
+  }
+}
