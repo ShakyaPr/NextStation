@@ -1,0 +1,11 @@
+# Never bake the local config (it holds the API key) into the image.
+config.yaml
+.git
+.choreo
+**/node_modules
+frontend/dist
+**/*.tsbuildinfo
+**/*.tmp
+**/.DS_Store
+*.pdf
+tools

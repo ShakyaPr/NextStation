@@ -83,6 +83,59 @@ Open http://localhost:5173. The Vite dev server proxies `/api` to `:8080`.
 To run a single process instead, run `npm run build` in `frontend/`. The backend then
 serves the UI at http://localhost:8080 (`server.staticDir`).
 
+## Docker
+
+```bash
+docker build -t station-finder .
+docker run -p 8080:8080 -e GOOGLE_MAPS_API_KEY=your-key station-finder
+# open http://localhost:8080
+```
+
+The image is a multi-stage build: Node builds the UI, Go builds the server, and the
+runtime is a distroless image (~10 MB) that serves both on port 8080. It uses
+`deploy/config.yaml`. Your local `config.yaml` is excluded by `.dockerignore`, so
+the API key is never baked into the image; pass it with `GOOGLE_MAPS_API_KEY`.
+
+Container behaviour:
+- Runs as UID `10014` and only writes to `/tmp`, so a read-only root filesystem works.
+- Starts from the committed `data/geocache.json` (and `data/overrides.json` if present),
+  so it makes no geocoding calls on startup.
+- Manual location fixes made in the UI are saved to `/tmp/stationfinder/` and are
+  **lost on restart**. To keep them, copy them into `data/overrides.json` and commit.
+- Environment variables:
+  - `GOOGLE_MAPS_API_KEY` (required)
+  - `PORT` (optional)
+  - `CONFIG_FILE` (optional; points to a different config, e.g. a mounted file)
+- Health check: `GET /healthz`
+
+## Deploy on Choreo
+
+1. Push this branch to GitHub.
+2. In the Choreo console, create a **Service** component from the `NextStation`
+   repository:
+   - **Buildpack:** Docker
+   - **Component directory:** `/`
+   - **Docker context:** `/`
+   - **Dockerfile:** `Dockerfile`
+
+   `.choreo/component.yaml` declares:
+   - the endpoint (port 8080, REST, public, all paths proxied)
+   - the `GOOGLE_MAPS_API_KEY` secret
+3. Build, then deploy. When prompted for configuration, enter the Google API key.
+4. Open the endpoint URL **with a trailing slash**, e.g.
+   `https://<host>/<project>/<component>/v1/`. The UI uses relative URLs, so it
+   works under Choreo's gateway path prefix. A missing trailing slash is added
+   automatically.
+
+Notes:
+- Choreo puts service endpoints behind its API gateway, which usually requires an
+  OAuth token. Disable security on this endpoint so a browser can open the UI. The
+  setting is under the component's deploy/endpoint settings; check the current
+  Choreo docs. Alternatively, create a **Web Application** component with the same
+  Dockerfile.
+- Once public, anyone with the URL can use your Google quota. In Google Cloud,
+  restrict the key to the Places, Geocoding and Routes APIs and set daily quotas.
+
 ## Using it
 
 - **Find stations.** Set a starting point in one of three ways:

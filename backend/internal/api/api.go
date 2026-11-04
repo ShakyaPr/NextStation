@@ -41,6 +41,9 @@ func New(bgCtx context.Context, cfg *config.Config, stations []*data.Station, st
 
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, _ *http.Request) {
+		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	})
 	mux.HandleFunc("GET /api/meta", s.meta)
 	mux.HandleFunc("GET /api/stations", s.listStations)
 	mux.HandleFunc("PUT /api/stations/{id}/location", s.setLocation)
@@ -84,7 +87,7 @@ func withLogging(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		next.ServeHTTP(w, r)
-		if r.URL.Path != "/api/geocode/status" {
+		if r.URL.Path != "/api/geocode/status" && r.URL.Path != "/healthz" {
 			log.Printf("%s %s (%s)", r.Method, r.URL.Path, time.Since(start).Round(time.Millisecond))
 		}
 	})

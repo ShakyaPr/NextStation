@@ -21,7 +21,11 @@ import (
 )
 
 func main() {
-	cfgPath := flag.String("config", "../config.yaml", "path to config file")
+	defaultCfg := "../config.yaml"
+	if env := os.Getenv("CONFIG_FILE"); env != "" {
+		defaultCfg = env
+	}
+	cfgPath := flag.String("config", defaultCfg, "path to config file (or CONFIG_FILE env)")
 	flag.Parse()
 
 	cfg, err := config.Load(*cfgPath)
@@ -33,8 +37,12 @@ func main() {
 		log.Fatal(err)
 	}
 	client := google.New(cfg.Google.APIKey)
-	store, err := locations.NewStore(cfg.Data.GeocacheFile, cfg.Data.OverridesFile, client,
-		cfg.Google.UsePlacesSearch, cfg.Search.SuspectDistanceKm)
+	store, err := locations.NewStoreWithSeeds(locations.Paths{
+		Cache:         cfg.Data.GeocacheFile,
+		Overrides:     cfg.Data.OverridesFile,
+		CacheSeed:     cfg.Data.GeocacheSeedFile,
+		OverridesSeed: cfg.Data.OverridesSeedFile,
+	}, client, cfg.Google.UsePlacesSearch, cfg.Search.SuspectDistanceKm)
 	if err != nil {
 		log.Fatal(err)
 	}

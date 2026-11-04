@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"gopkg.in/yaml.v3"
 )
@@ -37,6 +38,11 @@ type DataConfig struct {
 	VacanciesFile string `yaml:"vacanciesFile"`
 	GeocacheFile  string `yaml:"geocacheFile"`
 	OverridesFile string `yaml:"overridesFile"`
+	// Optional read-only copies used when GeocacheFile / OverridesFile do not exist yet.
+	// In containers the writable files live in /tmp and these point at the files baked
+	// into the image, so a fresh container starts with every station already located.
+	GeocacheSeedFile  string `yaml:"geocacheSeedFile"`
+	OverridesSeedFile string `yaml:"overridesSeedFile"`
 }
 
 type SearchConfig struct {
@@ -84,6 +90,13 @@ func Load(path string) (*Config, error) {
 	if env := os.Getenv("GOOGLE_MAPS_API_KEY"); env != "" {
 		cfg.Google.APIKey = env
 	}
+	if env := os.Getenv("PORT"); env != "" {
+		port, err := strconv.Atoi(env)
+		if err != nil {
+			return nil, fmt.Errorf("invalid PORT %q", env)
+		}
+		cfg.Server.Port = port
+	}
 	base := filepath.Dir(path)
 	resolve := func(p string) string {
 		if p == "" || filepath.IsAbs(p) {
@@ -94,6 +107,8 @@ func Load(path string) (*Config, error) {
 	cfg.Data.VacanciesFile = resolve(cfg.Data.VacanciesFile)
 	cfg.Data.GeocacheFile = resolve(cfg.Data.GeocacheFile)
 	cfg.Data.OverridesFile = resolve(cfg.Data.OverridesFile)
+	cfg.Data.GeocacheSeedFile = resolve(cfg.Data.GeocacheSeedFile)
+	cfg.Data.OverridesSeedFile = resolve(cfg.Data.OverridesSeedFile)
 	cfg.Server.StaticDir = resolve(cfg.Server.StaticDir)
 	if cfg.Google.TravelMode == "" {
 		cfg.Google.TravelMode = "DRIVE"

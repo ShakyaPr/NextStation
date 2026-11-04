@@ -1,0 +1,23 @@
+# Choreo component descriptor (https://wso2.com/choreo/docs/develop-components/configure-endpoints-body/)
+schemaVersion: "1.1"
+
+endpoints:
+  - name: station-finder
+    displayName: Station Finder
+    service:
+      basePath: /
+      port: 8080
+    type: REST
+    networkVisibilities:
+      - Public
+    # No schemaFilePath: the gateway then proxies all paths (/*), which the UI needs
+    # (/, /assets/*) in addition to /api/*.
+
+configurations:
+  env:
+    - name: GOOGLE_MAPS_API_KEY
+      valueFrom:
+        configForm:
+          displayName: Google Maps API key
+          type: secret
+          required: true

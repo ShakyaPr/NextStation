@@ -138,16 +138,16 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 }
 
 export const api = {
-  meta: () => request<Meta>("GET", "/api/meta"),
-  stations: () => request<Station[]>("GET", "/api/stations"),
-  search: (req: SearchRequest) => request<SearchResponse>("POST", "/api/search", req),
+  meta: () => request<Meta>("GET", "api/meta"),
+  stations: () => request<Station[]>("GET", "api/stations"),
+  search: (req: SearchRequest) => request<SearchResponse>("POST", "api/search", req),
   geocode: (retryFailed: boolean) =>
-    request<GeocodeProgress>("POST", `/api/geocode${retryFailed ? "?retryFailed=true" : ""}`),
-  geocodeStatus: () => request<GeocodeProgress>("GET", "/api/geocode/status"),
+    request<GeocodeProgress>("POST", `api/geocode${retryFailed ? "?retryFailed=true" : ""}`),
+  geocodeStatus: () => request<GeocodeProgress>("GET", "api/geocode/status"),
   setLocation: (id: string, p: LatLng) =>
-    request<LocationEntry>("PUT", `/api/stations/${encodeURIComponent(id)}/location`, p),
+    request<LocationEntry>("PUT", `api/stations/${encodeURIComponent(id)}/location`, p),
   autocomplete: (q: string, session: string, signal?: AbortSignal) =>
-    fetch(`/api/places/autocomplete?q=${encodeURIComponent(q)}&session=${encodeURIComponent(session)}`, { signal }).then(
+    fetch(`api/places/autocomplete?q=${encodeURIComponent(q)}&session=${encodeURIComponent(session)}`, { signal }).then(
       async (r) => {
         const data = await r.json();
         if (!r.ok) throw new Error(data.error ?? `HTTP ${r.status}`);
@@ -157,10 +157,10 @@ export const api = {
   placeDetails: (placeId: string, session: string) =>
     request<PlaceDetails>(
       "GET",
-      `/api/places/details?placeId=${encodeURIComponent(placeId)}&session=${encodeURIComponent(session)}`,
+      `api/places/details?placeId=${encodeURIComponent(placeId)}&session=${encodeURIComponent(session)}`,
     ),
   clearLocation: (id: string) =>
-    request<LocationEntry | null>("DELETE", `/api/stations/${encodeURIComponent(id)}/location`),
+    request<LocationEntry | null>("DELETE", `api/stations/${encodeURIComponent(id)}/location`),
 };
 
 export function formatDuration(min: number): string {

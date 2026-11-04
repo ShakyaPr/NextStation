@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -55,7 +56,18 @@ type Store struct {
 	progressMux sync.Mutex
 }
 
+// Paths holds the writable files and their optional read-only seeds.
+type Paths struct {
+	Cache, Overrides         string
+	CacheSeed, OverridesSeed string
+}
+
 func NewStore(cachePath, overridesPath string, client *google.Client, usePlaces bool, suspectKm float64) (*Store, error) {
+	return NewStoreWithSeeds(Paths{Cache: cachePath, Overrides: overridesPath}, client, usePlaces, suspectKm)
+}
+
+func NewStoreWithSeeds(p Paths, client *google.Client, usePlaces bool, suspectKm float64) (*Store, error) {
+	cachePath, overridesPath := p.Cache, p.Overrides
 	s := &Store{
 		cache:     map[string]*Entry{},
 		overrides: map[string]*Entry{},
@@ -65,13 +77,22 @@ func NewStore(cachePath, overridesPath string, client *google.Client, usePlaces 
 		usePlaces: usePlaces,
 		suspectKm: suspectKm,
 	}
-	if err := readJSON(cachePath, &s.cache); err != nil {
+	if err := readWithSeed(cachePath, p.CacheSeed, &s.cache); err != nil {
 		return nil, err
 	}
-	if err := readJSON(overridesPath, &s.overrides); err != nil {
+	if err := readWithSeed(overridesPath, p.OverridesSeed, &s.overrides); err != nil {
 		return nil, err
 	}
 	return s, nil
+}
+
+// readWithSeed reads path, or seed when path does not exist yet.
+func readWithSeed(path, seed string, v any) error {
+	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) && seed != "" {
+		log.Printf("%s not found, loading seed %s", path, seed)
+		return readJSON(seed, v)
+	}
+	return readJSON(path, v)
 }
 
 func readJSON(path string, v any) error {
@@ -91,6 +112,9 @@ func readJSON(path string, v any) error {
 func writeJSON(path string, v any) error {
 	raw, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {
+		return err
+	}
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return err
 	}
 	tmp := path + ".tmp"
