@@ -1,23 +1,23 @@
-# Choreo component descriptor (https://wso2.com/choreo/docs/develop-components/configure-endpoints-body/)
-schemaVersion: "1.1"
+# Choreo descriptor for the API *service* component (component directory: repo root).
+# The React UI is a separate Web Application component (directory: frontend) and has
+# no descriptor; its settings live in the console (see README).
+schemaVersion: "1.2"
 
 endpoints:
-  - name: station-finder
-    displayName: Station Finder
+  - name: station-finder-api
+    displayName: Station Finder API
     service:
       basePath: /
       port: 8080
     type: REST
     networkVisibilities:
       - Public
-    # No schemaFilePath: the gateway then proxies all paths (/*), which the UI needs
-    # (/, /assets/*) in addition to /api/*.
+    # The gateway exposes only the resources in this spec, and per-resource
+    # permissions (e.g. admin-only edits) are attached to them in the console.
+    # Keep the gateway's OAuth2 security ON: the web app calls this API with the
+    # signed-in user's session, and anonymous calls get 401.
+    schemaFilePath: backend/openapi.yaml
 
-configurations:
-  env:
-    - name: GOOGLE_MAPS_API_KEY
-      valueFrom:
-        configForm:
-          displayName: Google Maps API key
-          type: secret
-          required: true
+# No `configurations` section: the configuration form (configForm, schema 1.2) is not
+# available for Docker builds. Set GOOGLE_MAPS_API_KEY as a secret environment
+# variable in the console instead (Deploy → Configure & Deploy / Configs & Secrets).

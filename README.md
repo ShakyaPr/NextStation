@@ -81,60 +81,131 @@ npm run dev
 Open http://localhost:5173. The Vite dev server proxies `/api` to `:8080`.
 
 To run a single process instead, run `npm run build` in `frontend/`. The backend then
-serves the UI at http://localhost:8080 (`server.staticDir`).
+serves the UI at http://localhost:8080 (`server.staticDir` in your local `config.yaml`).
 
-## Docker
+## Docker (API service)
 
 ```bash
-docker build -t station-finder .
-docker run -p 8080:8080 -e GOOGLE_MAPS_API_KEY=your-key station-finder
-# open http://localhost:8080
+docker build -t station-finder-api .
+docker run -p 8080:8080 -e GOOGLE_MAPS_API_KEY=your-key station-finder-api
+curl localhost:8080/healthz
 ```
 
-The image is a multi-stage build: Node builds the UI, Go builds the server, and the
-runtime is a distroless image (~10 MB) that serves both on port 8080. It uses
-`deploy/config.yaml`. Your local `config.yaml` is excluded by `.dockerignore`, so
-the API key is never baked into the image; pass it with `GOOGLE_MAPS_API_KEY`.
+The image contains only the Go API (distroless, ~10 MB). It doesn't include the UI,
+which is deployed separately on Choreo. It uses `deploy/config.yaml`. Your local
+`config.yaml` is excluded by `.dockerignore`, so the API key is never baked into the
+image; pass it with `GOOGLE_MAPS_API_KEY`.
 
 Container behaviour:
 - Runs as UID `10014` and only writes to `/tmp`, so a read-only root filesystem works.
 - Starts from the committed `data/geocache.json` (and `data/overrides.json` if present),
   so it makes no geocoding calls on startup.
-- Manual location fixes made in the UI are saved to `/tmp/stationfinder/` and are
-  **lost on restart**. To keep them, copy them into `data/overrides.json` and commit.
+- Manual location fixes are saved to `/tmp/stationfinder/` and are **lost on restart**
+  (Choreo also scales idle apps to zero). To keep them, copy them into
+  `data/overrides.json` and commit.
 - Environment variables:
   - `GOOGLE_MAPS_API_KEY` (required)
   - `PORT` (optional)
-  - `CONFIG_FILE` (optional; points to a different config, e.g. a mounted file)
+  - `CONFIG_FILE` (optional)
 - Health check: `GET /healthz`
 
-## Deploy on Choreo
+## Deploy on Choreo with sign-in (managed authentication)
 
-1. Push this branch to GitHub.
-2. In the Choreo console, create a **Service** component from the `NextStation`
-   repository:
-   - **Buildpack:** Docker
+```
+Browser ─► Web App (React preset, managed auth) ─► /choreo-apis/... ─► gateway (OAuth2 on) ─► API service (Docker)
+             /auth/login → identity provider       session cookies        401 without a valid session
+```
+
+Only signed-in users can open the UI or call the API, and the browser never holds an
+access token. You control who can sign in by choosing which users exist in the
+identity provider.
+
+### 1. API service component
+1. Push the branch to GitHub.
+2. Create a **Service** component from the repository:
    - **Component directory:** `/`
+   - **Buildpack:** Docker
    - **Docker context:** `/`
    - **Dockerfile:** `Dockerfile`
+3. Before deploying, add the Google API key as a **secret** environment variable named
+   `GOOGLE_MAPS_API_KEY`, under **Deploy → Configure & Deploy** (or **Configs &
+   Secrets**). It isn't declared in `.choreo/component.yaml` because Choreo's
+   configuration form isn't available for Docker builds. Then build and deploy.
+4. Keep the endpoint **Public** and leave its **OAuth2 security on**.
+   - The gateway only forwards the resources listed in `backend/openapi.yaml`. A test
+     (`TestOpenAPIMatchesRoutes`) fails if the spec and the Go routes drift apart.
 
-   `.choreo/component.yaml` declares:
-   - the endpoint (port 8080, REST, public, all paths proxied)
-   - the `GOOGLE_MAPS_API_KEY` secret
-3. Build, then deploy. When prompted for configuration, enter the Google API key.
-4. Open the endpoint URL **with a trailing slash**, e.g.
-   `https://<host>/<project>/<component>/v1/`. The UI uses relative URLs, so it
-   works under Choreo's gateway path prefix. A missing trailing slash is added
-   automatically.
+### 2. Web application component
+1. Create a **Web Application** component from the same repository:
+   - **Component directory:** `frontend`
+   - **Build preset:** React
+   - **Build command:** `npm ci && npm run build`
+   - **Build path:** `dist`
+   - **Node version:** 22
+2. **Connections → + Create**: select the API service and copy the service URL it
+   shows.
+3. **Deploy → Configure & Deploy**: add a **file mount** that replaces `config.js`
+   (it sits next to `index.html`; the repo's default is `frontend/public/config.js`):
+   ```js
+   window.configs = {
+     apiUrl: "/choreo-apis/<path part of the service URL>",
+     managedAuth: true,
+   };
+   ```
+   - `apiUrl` must be the **relative** `/choreo-apis/...` path, not the full
+     `https://...` URL, so the session cookies are sent. Confirm the exact prefix
+     in your console.
+4. In **Authentication**:
+   - Turn on **Managed Authentication**.
+   - Set Post Login Path, Post Logout Path and Error Path to `/`.
+   - Deploy.
 
-Notes:
-- Choreo puts service endpoints behind its API gateway, which usually requires an
-  OAuth token. Disable security on this endpoint so a browser can open the UI. The
-  setting is under the component's deploy/endpoint settings; check the current
-  Choreo docs. Alternatively, create a **Web Application** component with the same
-  Dockerfile.
-- Once public, anyone with the URL can use your Google quota. In Google Cloud,
-  restrict the key to the Places, Geocoding and Routes APIs and set daily quotas.
+### 3. Who can sign in
+- **Built-in identity provider** (any plan): go to **Organization Settings →
+  Application Security → Identity Providers → Manage**, choose the environment, and
+  upload a CSV of users and groups. Choreo recommends it for testing rather than
+  production.
+- **Asgardeo** (if your plan offers it under **Settings → Authentication Keys**):
+  1. Create an OIDC app with the `Code` and `Refresh Token` grants and JWT access
+     tokens.
+  2. Add redirect URLs `<web-app-url>/auth/login/callback` and
+     `<web-app-url>/auth/logout/callback`.
+  3. Paste the client ID and secret into Choreo.
+  4. Turn off self sign-up and invite only the people you want.
+
+### 4. Optional: admin-only editing
+The write operations are tagged `admin` in `backend/openapi.yaml`:
+- `PUT /api/stations/{id}/location`
+- `DELETE /api/stations/{id}/location`
+- `POST /api/geocode`
+
+To restrict them:
+1. On the API component, go to **Deploy → Configure & Deploy → Endpoint Details →
+   Operation Level Security**.
+2. Create a permission (e.g. `admin`), attach it to those three operations, and
+   redeploy.
+3. Create a role with that permission under **Settings → Application Security**.
+4. Map the role to your admin group under **Role Management**.
+
+Other users get "You don't have permission to do this." in the UI. Choreo's console
+labels change over time, so check the RBAC docs if a menu has moved.
+
+### Try the sign-in flow locally
+`frontend/dev/mock-choreo.mjs` imitates Choreo's managed auth: the `/auth/*`
+endpoints, the `/choreo-apis` proxy with 401/403, and the `config.js` mount.
+```bash
+cd backend && go run ./cmd/server -config ../config.yaml        # API on :8080
+cd frontend && npm run build && npm run mock:choreo             # http://localhost:5174
+```
+- Click **Sign in** for a normal user.
+- To sign in as an admin, open http://localhost:5174/auth/login?user=admin.
+
+Plain `npm run dev` still runs without sign-in, because the default `config.js` has
+`managedAuth: false`.
+
+### Also protect the Google key
+Restrict the key to the Places, Geocoding and Routes APIs, and set daily quotas and a
+budget alert in Google Cloud.
 
 ## Using it
 

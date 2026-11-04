@@ -161,3 +161,12 @@ body { margin: 0; background: var(--bg); }
   .layout { grid-template-columns: 1fr; }
   .panel { border-right: 0; border-bottom: 1px solid var(--border); }
 }
+
+.signin { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.signin-card {
+  width: 100%; max-width: 380px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 10px; text-align: center;
+}
+.signin-card h1 { margin: 0; font-size: 22px; }
+.signin-card p { margin: 0; }
+.user { display: flex; align-items: center; gap: 8px; margin-left: 12px; padding-left: 12px; border-left: 1px solid var(--border); }

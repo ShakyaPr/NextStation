@@ -1,3 +1,5 @@
+import { apiFetch } from "./auth";
+
 export interface LatLng {
   lat: number;
   lng: number;
@@ -127,7 +129,7 @@ export interface SearchResponse {
 }
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
-  const res = await fetch(path, {
+  const res = await apiFetch(path, {
     method,
     headers: body ? { "Content-Type": "application/json" } : undefined,
     body: body ? JSON.stringify(body) : undefined,
@@ -147,7 +149,7 @@ export const api = {
   setLocation: (id: string, p: LatLng) =>
     request<LocationEntry>("PUT", `api/stations/${encodeURIComponent(id)}/location`, p),
   autocomplete: (q: string, session: string, signal?: AbortSignal) =>
-    fetch(`api/places/autocomplete?q=${encodeURIComponent(q)}&session=${encodeURIComponent(session)}`, { signal }).then(
+    apiFetch(`api/places/autocomplete?q=${encodeURIComponent(q)}&session=${encodeURIComponent(session)}`, { signal }).then(
       async (r) => {
         const data = await r.json();
         if (!r.ok) throw new Error(data.error ?? `HTTP ${r.status}`);
