@@ -1,0 +1,32 @@
+# Configuration baked into the Docker image (see Dockerfile).
+# Secrets are NOT stored here: provide the key with the GOOGLE_MAPS_API_KEY env var
+# (on Choreo: Configs & Secrets → secret). PORT and CONFIG_FILE env vars are also honoured.
+
+server:
+  port: 8080
+  staticDir: /app/web
+
+google:
+  apiKey: ""
+  usePlacesSearch: true
+  travelMode: DRIVE
+
+data:
+  vacanciesFile: /app/data/vacancies.json
+  # Writable copies live in /tmp (the only writable path on Choreo). They start from the
+  # seeds baked into the image and are lost when the container restarts. Commit
+  # data/overrides.json to keep manual location fixes permanently.
+  geocacheFile: /tmp/stationfinder/geocache.json
+  geocacheSeedFile: /app/data/geocache.json
+  overridesFile: /tmp/stationfinder/overrides.json
+  overridesSeedFile: /app/data/overrides.json
+
+search:
+  defaultLimit: 10
+  maxRouteCandidates: 60
+  maxSpeedKmh: 80
+  suspectDistanceKm: 75
+
+geocoding:
+  onStartup: true   # only stations missing from the seed are looked up
+  workers: 4

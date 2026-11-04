@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Station Finder</title>
+    <script>
+      // Relative URLs need a trailing slash, e.g. /prefix/ rather than /prefix.
+      if (!location.pathname.endsWith("/") && !/\.[a-z0-9]+$/i.test(location.pathname)) {
+        location.replace(location.pathname + "/" + location.search + location.hash);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
