@@ -76,7 +76,7 @@ export default function App() {
         <div className="brand">
           Station Finder
           {meta && (
-            <span className="muted small">
+            <span className="muted small brand-stats">
               {meta.vacancyCount} vacancies · {meta.stationCount} stations · {meta.locatedCount} located
               {meta.geocoding.running && ` · locating ${meta.geocoding.done}/${meta.geocoding.total}…`}
             </span>
@@ -92,15 +92,15 @@ export default function App() {
               <span className="dot" title="Some stations need review" />
             )}
           </button>
-          {runtimeConfig.managedAuth && (
-            <div className="user">
-              {auth.user && <span className="muted small">{displayName(auth.user)}</span>}
-              <button className="btn small" onClick={logout}>
-                Sign out
-              </button>
-            </div>
-          )}
         </nav>
+        {runtimeConfig.managedAuth && (
+          <div className="user">
+            {auth.user && <span className="muted small user-name">{displayName(auth.user)}</span>}
+            <button className="btn small" onClick={logout}>
+              Sign out
+            </button>
+          </div>
+        )}
       </header>
       {error && <p className="error banner">{error}</p>}
       {authError && <p className="error banner">{authError}</p>}

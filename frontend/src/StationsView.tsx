@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { api, locationQuality, titleCase } from "./api";
 import type { Meta, Station } from "./api";
 import StationMap, { type MapMarker } from "./StationMap";
+import { scrollToEl, useIsMobile } from "./useMediaQuery";
 
 type StatusFilter = "all" | "problems" | "manual";
 
@@ -17,6 +18,15 @@ export default function StationsView({ meta, onChanged }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isMobile = useIsMobile();
+  const topRef = useRef<HTMLElement>(null);
+
+  // On phones the list is below the map: jump back up to the map/details on selection.
+  function select(id: string, fromList: boolean) {
+    setSelected(id);
+    setEditing(false);
+    if (isMobile && fromList) scrollToEl(topRef.current);
+  }
 
   const load = () => api.stations().then(setStations).catch((e) => setError(e.message));
   useEffect(() => {
@@ -87,7 +97,7 @@ export default function StationsView({ meta, onChanged }: Props) {
   const g = meta.geocoding;
 
   return (
-    <div className="layout">
+    <div className="layout stations-layout">
       <aside className="panel">
         <h2>Station locations</h2>
         <p className="muted small">
@@ -125,7 +135,7 @@ export default function StationsView({ meta, onChanged }: Props) {
           {filtered.map((s) => {
             const q = locationQuality(s.location);
             return (
-              <li key={s.id} className={selected === s.id ? "selected" : ""} onClick={() => { setSelected(s.id); setEditing(false); }}>
+              <li key={s.id} className={selected === s.id ? "selected" : ""} onClick={() => select(s.id, true)}>
                 <div>
                   <div className="station-name">{titleCase(s.name)}</div>
                   <div className="muted small">
@@ -139,11 +149,11 @@ export default function StationsView({ meta, onChanged }: Props) {
         </ul>
       </aside>
 
-      <main className="content">
+      <main className="content" ref={topRef}>
         <StationMap
           markers={markers}
           selectedId={selected}
-          onMarkerClick={(id) => { setSelected(id); setEditing(false); }}
+          onMarkerClick={(id) => select(id, false)}
           fitKey={`${status}-${text}-${stations.length}`}
           crosshair={editing}
           onMapClick={(p) => editing && setManual(p)}
@@ -191,7 +201,7 @@ export default function StationsView({ meta, onChanged }: Props) {
             </dl>
             <div className="row gap">
               <button className={`btn small ${editing ? "active" : ""}`} onClick={() => setEditing((e) => !e)}>
-                {editing ? "Click the correct spot on the map…" : "Set location manually"}
+                {editing ? `${isMobile ? "Tap" : "Click"} the correct spot on the map…` : "Set location manually"}
               </button>
               {sel.location?.source === "manual" && (
                 <button className="btn small" onClick={clearManual}>
