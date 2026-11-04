@@ -127,8 +127,10 @@ identity provider.
    - **Buildpack:** Docker
    - **Docker context:** `/`
    - **Dockerfile:** `Dockerfile`
-3. Build and deploy. When prompted, enter the Google API key (the `GOOGLE_MAPS_API_KEY`
-   secret declared in `.choreo/component.yaml`).
+3. Before deploying, add the Google API key as a **secret** environment variable named
+   `GOOGLE_MAPS_API_KEY`, under **Deploy → Configure & Deploy** (or **Configs &
+   Secrets**). It isn't declared in `.choreo/component.yaml` because Choreo's
+   configuration form isn't available for Docker builds. Then build and deploy.
 4. Keep the endpoint **Public** and leave its **OAuth2 security on**.
    - The gateway only forwards the resources listed in `backend/openapi.yaml`. A test
      (`TestOpenAPIMatchesRoutes`) fails if the spec and the Go routes drift apart.
