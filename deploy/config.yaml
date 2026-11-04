@@ -4,7 +4,8 @@
 
 server:
   port: 8080
-  staticDir: /app/web
+  # The UI is a separate Choreo web app, so the API serves no static files.
+  staticDir: ""
 
 google:
   apiKey: ""

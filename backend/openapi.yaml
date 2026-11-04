@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Station Finder API
+  version: 1.0.0
+  description: |
+    Ranks vacancy stations by road distance / travel time from a starting point.
+    On Choreo the gateway exposes only the resources listed here, so every new
+    endpoint must be added to this file. The write operations (tagged "admin")
+    are meant to get an admin-only permission in Choreo's Operation Level Security.
+servers:
+  - url: /
+tags:
+  - name: search
+  - name: stations
+  - name: admin
+    description: Changes shared data. Restrict to administrators.
+paths:
+  /healthz:
+    get:
+      summary: Health check
+      responses:
+        "200": { description: OK }
+  /api/meta:
+    get:
+      tags: [search]
+      summary: Counts, filter options and geocoding progress
+      responses:
+        "200": { description: OK }
+  /api/search:
+    post:
+      tags: [search]
+      summary: Find stations near a starting point
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SearchRequest" }
+      responses:
+        "200": { description: Ranked stations }
+        "400": { description: Invalid request }
+        "502": { description: Google API error }
+  /api/places/autocomplete:
+    get:
+      tags: [search]
+      summary: Place suggestions (Google) and matching stations
+      parameters:
+        - { name: q, in: query, required: true, schema: { type: string } }
+        - { name: session, in: query, required: false, schema: { type: string } }
+      responses:
+        "200": { description: Suggestions }
+  /api/places/details:
+    get:
+      tags: [search]
+      summary: Coordinates of a suggested place
+      parameters:
+        - { name: placeId, in: query, required: true, schema: { type: string } }
+        - { name: session, in: query, required: false, schema: { type: string } }
+      responses:
+        "200": { description: Place }
+        "400": { description: Missing placeId or place outside Sri Lanka }
+  /api/stations:
+    get:
+      tags: [stations]
+      summary: All stations with their location entries
+      responses:
+        "200": { description: Stations }
+  /api/geocode/status:
+    get:
+      tags: [stations]
+      summary: Geocoding progress
+      responses:
+        "200": { description: Progress }
+  /api/stations/{id}/location:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    put:
+      tags: [admin]
+      summary: Set a station's location manually
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LatLng" }
+      responses:
+        "200": { description: Updated }
+        "400": { description: Invalid location }
+        "404": { description: Unknown station }
+    delete:
+      tags: [admin]
+      summary: Remove a manual location
+      responses:
+        "200": { description: Removed }
+  /api/geocode:
+    post:
+      tags: [admin]
+      summary: Locate missing stations (calls Google)
+      parameters:
+        - { name: retryFailed, in: query, required: false, schema: { type: boolean } }
+      responses:
+        "202": { description: Started }
+        "409": { description: Already running }
+components:
+  schemas:
+    LatLng:
+      type: object
+      required: [lat, lng]
+      properties:
+        lat: { type: number }
+        lng: { type: number }
+    SearchRequest:
+      type: object
+      required: [origin]
+      properties:
+        origin:
+          type: object
+          properties:
+            query: { type: string }
+            lat: { type: number }
+            lng: { type: number }
+            label: { type: string }
+        maxDistanceKm: { type: number }
+        maxDurationMin: { type: number }
+        limit: { type: integer }
+        sortBy: { type: string, enum: [duration, distance] }
+        provinces: { type: array, items: { type: string } }
+        districts: { type: array, items: { type: string } }
+        types: { type: array, items: { type: string } }
+        categories: { type: array, items: { type: string } }
+        designation: { type: string }

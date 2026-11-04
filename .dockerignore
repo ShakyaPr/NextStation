@@ -2,8 +2,8 @@
 config.yaml
 .git
 .choreo
-**/node_modules
-frontend/dist
+# The image is API-only; the UI is built by Choreo's React preset.
+frontend
 **/*.tsbuildinfo
 **/*.tmp
 **/.DS_Store

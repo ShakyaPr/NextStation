@@ -11,6 +11,8 @@ import (
 	"strings"
 	"testing"
 
+	"gopkg.in/yaml.v3"
+
 	"stationfinder/internal/config"
 	"stationfinder/internal/data"
 	"stationfinder/internal/geo"
@@ -137,5 +139,37 @@ func TestAutocompleteAndDetails(t *testing.T) {
 	}
 	if code := get(t, h, "/api/places/details", nil); code != 400 {
 		t.Errorf("missing placeId: status %d, want 400", code)
+	}
+}
+
+func TestOpenAPIMatchesRoutes(t *testing.T) {
+	raw, err := os.ReadFile("../../openapi.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var spec struct {
+		Paths map[string]map[string]any `yaml:"paths"`
+	}
+	if err := yaml.Unmarshal(raw, &spec); err != nil {
+		t.Fatal(err)
+	}
+	inSpec := map[string]bool{}
+	for path, ops := range spec.Paths {
+		for method := range ops {
+			if method == "parameters" {
+				continue
+			}
+			inSpec[strings.ToUpper(method)+" "+path] = true
+		}
+	}
+	s := &Server{}
+	for pattern := range s.routes() {
+		if !inSpec[pattern] {
+			t.Errorf("route %q is missing from openapi.yaml (the Choreo gateway would block it)", pattern)
+		}
+		delete(inSpec, pattern)
+	}
+	for op := range inSpec {
+		t.Errorf("openapi.yaml lists %q but the server has no such route", op)
 	}
 }

@@ -39,20 +39,30 @@ func New(bgCtx context.Context, cfg *config.Config, stations []*data.Station, st
 	return &Server{cfg: cfg, stations: stations, byID: byID, store: store, search: svc, google: gc, bgCtx: bgCtx}
 }
 
+// routes is the API surface. Keep backend/openapi.yaml in sync: on Choreo the
+// gateway only forwards resources listed there (enforced by TestOpenAPIMatchesRoutes).
+func (s *Server) routes() map[string]http.HandlerFunc {
+	return map[string]http.HandlerFunc{
+		"GET /healthz": func(w http.ResponseWriter, _ *http.Request) {
+			writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+		},
+		"GET /api/meta":                      s.meta,
+		"GET /api/stations":                  s.listStations,
+		"PUT /api/stations/{id}/location":    s.setLocation,
+		"DELETE /api/stations/{id}/location": s.clearLocation,
+		"POST /api/geocode":                  s.runGeocode,
+		"GET /api/geocode/status":            s.geocodeStatus,
+		"POST /api/search":                   s.doSearch,
+		"GET /api/places/autocomplete":       s.autocomplete,
+		"GET /api/places/details":            s.placeDetails,
+	}
+}
+
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, _ *http.Request) {
-		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
-	})
-	mux.HandleFunc("GET /api/meta", s.meta)
-	mux.HandleFunc("GET /api/stations", s.listStations)
-	mux.HandleFunc("PUT /api/stations/{id}/location", s.setLocation)
-	mux.HandleFunc("DELETE /api/stations/{id}/location", s.clearLocation)
-	mux.HandleFunc("POST /api/geocode", s.runGeocode)
-	mux.HandleFunc("GET /api/geocode/status", s.geocodeStatus)
-	mux.HandleFunc("POST /api/search", s.doSearch)
-	mux.HandleFunc("GET /api/places/autocomplete", s.autocomplete)
-	mux.HandleFunc("GET /api/places/details", s.placeDetails)
+	for pattern, h := range s.routes() {
+		mux.HandleFunc(pattern, h)
+	}
 
 	if dir := s.cfg.Server.StaticDir; dir != "" {
 		if _, err := os.Stat(filepath.Join(dir, "index.html")); err == nil {
