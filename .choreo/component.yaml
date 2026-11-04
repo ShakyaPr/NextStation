@@ -1,7 +1,7 @@
 # Choreo descriptor for the API *service* component (component directory: repo root).
 # The React UI is a separate Web Application component (directory: frontend) and has
 # no descriptor; its settings live in the console (see README).
-schemaVersion: "1.1"
+schemaVersion: "1.2"
 
 endpoints:
   - name: station-finder-api
