@@ -201,6 +201,20 @@ func TestSearchEndToEnd(t *testing.T) {
 		t.Fatalf("designation-filtered results = %+v", resp.Results)
 	}
 
+	// 3b. Straight-line ranking orders by the direct distance.
+	resp, err = svc.Search(context.Background(), Request{Origin: Origin{Lat: &lat, Lng: &lng}, SortBy: "straight"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i := 1; i < len(resp.Results); i++ {
+		if resp.Results[i-1].StraightLineKm > resp.Results[i].StraightLineKm {
+			t.Fatalf("not sorted by straight line: %+v", resp.Results)
+		}
+	}
+	if _, err := svc.Search(context.Background(), Request{Origin: Origin{Lat: &lat, Lng: &lng}, SortBy: "bogus"}); err == nil {
+		t.Error("expected error for unknown sortBy")
+	}
+
 	// 4. Manual override wins over geocoded location.
 	st := stations[0]
 	if _, err := store.SetManual(st, geo.LatLng{Lat: 7.0, Lng: 80.0}); err != nil {

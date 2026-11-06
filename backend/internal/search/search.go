@@ -30,7 +30,7 @@ type Request struct {
 	MaxDistanceKm  float64  `json:"maxDistanceKm,omitempty"`  // road distance limit, 0 = none
 	MaxDurationMin float64  `json:"maxDurationMin,omitempty"` // travel time limit, 0 = none
 	Limit          int      `json:"limit,omitempty"`
-	SortBy         string   `json:"sortBy,omitempty"` // duration | distance
+	SortBy         string   `json:"sortBy,omitempty"` // duration | distance | straight
 	Provinces      []string `json:"provinces,omitempty"`
 	Districts      []string `json:"districts,omitempty"`
 	Types          []string `json:"types,omitempty"`      // vacancy type: New, Difficult station, ...
@@ -148,8 +148,8 @@ func (s *Service) Search(ctx context.Context, req Request) (*Response, error) {
 	if req.SortBy == "" {
 		req.SortBy = "duration"
 	}
-	if req.SortBy != "duration" && req.SortBy != "distance" {
-		return nil, badRequest("sortBy must be duration or distance")
+	if req.SortBy != "duration" && req.SortBy != "distance" && req.SortBy != "straight" {
+		return nil, badRequest("sortBy must be duration, distance or straight")
 	}
 
 	origin, err := s.ResolveOrigin(ctx, req.Origin)
@@ -245,8 +245,11 @@ func (s *Service) Search(ctx context.Context, req Request) (*Response, error) {
 	resp.Stats.WithinLimits = len(within)
 	sort.SliceStable(within, func(i, j int) bool {
 		a, b := within[i].route, within[j].route
-		if req.SortBy == "distance" {
+		switch req.SortBy {
+		case "distance":
 			return a.DistanceKm < b.DistanceKm
+		case "straight":
+			return within[i].straight < within[j].straight
 		}
 		return a.DurationMin < b.DurationMin
 	})

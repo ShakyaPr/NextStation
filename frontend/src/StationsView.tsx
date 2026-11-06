@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api, locationQuality, titleCase } from "./api";
 import type { Meta, Station } from "./api";
 import StationMap, { type MapMarker } from "./StationMap";
-import { scrollToEl, useIsMobile } from "./useMediaQuery";
+import { useIsPhone } from "./useMediaQuery";
+import { Alert, QualityChip, Segmented, VacancyChips } from "./ui";
+import { CloseIcon, ExternalIcon, ListIcon, MapIcon, PinIcon, SearchIcon } from "./icons";
 
 type StatusFilter = "all" | "problems" | "manual";
 
@@ -18,14 +20,13 @@ export default function StationsView({ meta, onChanged }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const isMobile = useIsMobile();
-  const topRef = useRef<HTMLElement>(null);
+  const [view, setView] = useState<"list" | "map">("list"); // phone only
+  const phone = useIsPhone();
 
-  // On phones the list is below the map: jump back up to the map/details on selection.
-  function select(id: string, fromList: boolean) {
+  function select(id: string | null) {
     setSelected(id);
     setEditing(false);
-    if (isMobile && fromList) scrollToEl(topRef.current);
+    if (phone && id) setView("map");
   }
 
   const load = () => api.stations().then(setStations).catch((e) => setError(e.message));
@@ -48,21 +49,12 @@ export default function StationsView({ meta, onChanged }: Props) {
 
   const markers: MapMarker[] = filtered
     .filter((s) => s.location?.location)
-    .map((s) => {
-      const q = locationQuality(s.location);
-      return {
-        id: s.id,
-        pos: s.location!.location!,
-        label: "",
-        tone: q.tone,
-        popup: (
-          <div>
-            <strong>{titleCase(s.name)}</strong>
-            <div>{titleCase(s.district)}</div>
-          </div>
-        ),
-      };
-    });
+    .map((s) => ({
+      id: s.id,
+      pos: s.location!.location!,
+      label: `${titleCase(s.name)}, ${titleCase(s.district)}`,
+      tone: locationQuality(s.location).tone,
+    }));
 
   async function geocode(retry: boolean) {
     setError(null);
@@ -88,130 +80,232 @@ export default function StationsView({ meta, onChanged }: Props) {
 
   async function clearManual() {
     if (!sel) return;
-    await api.clearLocation(sel.id);
-    await load();
-    onChanged();
+    try {
+      await api.clearLocation(sel.id);
+      await load();
+      onChanged();
+    } catch (e) {
+      setError((e as Error).message);
+    }
   }
 
   const failed = stations.filter((s) => s.location?.status === "failed").length;
   const g = meta.geocoding;
 
-  return (
-    <div className="layout stations-layout">
-      <aside className="panel">
-        <h2>Station locations</h2>
-        <p className="muted small">
-          {meta.locatedCount} of {meta.stationCount} stations located · {meta.suspectCount} to check · {failed} not found
-        </p>
+  const listPanel = (
+    <aside className="st-panel" aria-label="Stations">
+      <div className="st-head">
+        <div>
+          <h1 className="results-title">Station locations</h1>
+          <p className="results-sub">
+            <strong className="num">{meta.locatedCount}</strong> of {meta.stationCount} located ·{" "}
+            <strong className="num">{meta.suspectCount}</strong> to check · <strong className="num">{failed}</strong> not found
+          </p>
+        </div>
         {g.running && (
-          <div className="progress">
-            <div style={{ width: `${(g.done / Math.max(g.total, 1)) * 100}%` }} />
+          <div className="progress" role="status">
+            <div className="progress-bar">
+              <div style={{ width: `${(g.done / Math.max(g.total, 1)) * 100}%` }} />
+            </div>
             <span>
-              Geocoding {g.done}/{g.total}…
+              Locating {g.done}/{g.total}…
             </span>
           </div>
         )}
-        <div className="row gap">
-          <button className="btn small" disabled={g.running || !meta.apiKeyConfigured} onClick={() => geocode(false)}>
+        <div className="btn-row">
+          <button className="btn btn-outlined btn-sm" disabled={g.running || !meta.apiKeyConfigured} onClick={() => geocode(false)}>
             Locate missing
           </button>
-          <button className="btn small" disabled={g.running || !meta.apiKeyConfigured || failed === 0} onClick={() => geocode(true)}>
+          <button
+            className="btn btn-outlined btn-sm"
+            disabled={g.running || !meta.apiKeyConfigured || failed === 0}
+            onClick={() => geocode(true)}
+          >
             Retry not found
           </button>
         </div>
-        {g.lastError && <p className="error small">Last error: {g.lastError}</p>}
-        {error && <p className="error">{error}</p>}
-
-        <input className="input" value={text} onChange={(e) => setText(e.target.value)} placeholder="Search station or district" />
-        <div className="seg">
-          {(["all", "problems", "manual"] as StatusFilter[]).map((s) => (
-            <button key={s} className={status === s ? "active" : ""} onClick={() => setStatus(s)}>
-              {s === "all" ? "All" : s === "problems" ? "Needs review" : "Manual"}
-            </button>
-          ))}
+        {g.lastError && <Alert severity="warning">Last error: {g.lastError}</Alert>}
+        {error && <Alert severity="error">{error}</Alert>}
+        <div className="search-field">
+          <SearchIcon />
+          <input
+            className="input"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Search station or district"
+            aria-label="Search station or district"
+          />
         </div>
+        <Segmented
+          label="Show"
+          stretch
+          value={status}
+          onChange={setStatus}
+          options={[
+            { value: "all", label: "All" },
+            { value: "problems", label: "Needs review" },
+            { value: "manual", label: "Manual" },
+          ]}
+        />
+      </div>
+      <ul className="station-list">
+        {filtered.map((s) => (
+          <li key={s.id} className={selected === s.id ? "on" : ""}>
+            <button type="button" className="station-item stretch" onClick={() => select(s.id)} aria-pressed={selected === s.id}>
+              <span className="station-item-text">
+                <span className="station-item-name">{titleCase(s.name)}</span>
+                <span className="result-meta">
+                  {titleCase(s.district)} · {s.vacancies.length} vacanc{s.vacancies.length === 1 ? "y" : "ies"}
+                </span>
+              </span>
+              <QualityChip entry={s.location} always />
+            </button>
+          </li>
+        ))}
+        {filtered.length === 0 && <li className="empty-results">No stations match.</li>}
+      </ul>
+    </aside>
+  );
 
-        <ul className="station-list">
-          {filtered.map((s) => {
-            const q = locationQuality(s.location);
-            return (
-              <li key={s.id} className={selected === s.id ? "selected" : ""} onClick={() => select(s.id, true)}>
-                <div>
-                  <div className="station-name">{titleCase(s.name)}</div>
-                  <div className="muted small">
-                    {titleCase(s.district)} · {s.vacancies.length} vacanc{s.vacancies.length === 1 ? "y" : "ies"}
-                  </div>
-                </div>
-                <span className={`badge ${q.tone}`}>{q.label}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </aside>
+  const details = sel && (
+    <section className="st-details" aria-label="Station details">
+      <div className="st-details-head">
+        <div>
+          <h2>{titleCase(sel.name)}</h2>
+          <span className="result-meta">
+            {titleCase(sel.district)}, {titleCase(sel.province)} · {sel.category}
+          </span>
+        </div>
+        <button type="button" className="icon-btn plain" aria-label="Close details" onClick={() => select(null)}>
+          <CloseIcon size={18} />
+        </button>
+      </div>
+      <dl className="details">
+        <dt>Status</dt>
+        <dd>
+          <QualityChip entry={sel.location} always />
+          {sel.location?.source && <span className="muted small"> via {sel.location.source}</span>}
+        </dd>
+        {sel.location?.location && (
+          <>
+            <dt>Coordinates</dt>
+            <dd>
+              <span className="mono">
+                {sel.location.location.lat.toFixed(5)}, {sel.location.location.lng.toFixed(5)}
+              </span>{" "}
+              <a
+                className="link"
+                href={`https://www.google.com/maps/search/?api=1&query=${sel.location.location.lat},${sel.location.location.lng}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Google Maps <ExternalIcon size={12} />
+              </a>
+            </dd>
+          </>
+        )}
+        {sel.location?.matchedName && (
+          <>
+            <dt>Matched</dt>
+            <dd>{sel.location.matchedName}</dd>
+          </>
+        )}
+        {sel.location?.address && (
+          <>
+            <dt>Address</dt>
+            <dd>{sel.location.address}</dd>
+          </>
+        )}
+        {sel.location?.query && (
+          <>
+            <dt>Query</dt>
+            <dd>{sel.location.query}</dd>
+          </>
+        )}
+        {sel.location?.districtDistanceKm !== undefined && (
+          <>
+            <dt>From district centre</dt>
+            <dd className="num">{sel.location.districtDistanceKm.toFixed(1)} km</dd>
+          </>
+        )}
+        {sel.location?.error && (
+          <>
+            <dt>Error</dt>
+            <dd className="text-error">{sel.location.error}</dd>
+          </>
+        )}
+        <dt>Vacancies</dt>
+        <dd>
+          <VacancyChips vacancies={sel.vacancies} />
+        </dd>
+      </dl>
+      <div className="btn-row">
+        <button className={`btn btn-outlined btn-sm${editing ? " pressed" : ""}`} onClick={() => setEditing((e) => !e)}>
+          <PinIcon size={14} />
+          {editing ? `${phone ? "Tap" : "Click"} the correct spot on the map…` : "Set location manually"}
+        </button>
+        {sel.location?.source === "manual" && (
+          <button className="btn btn-text btn-sm" onClick={clearManual}>
+            Remove manual location
+          </button>
+        )}
+      </div>
+    </section>
+  );
 
-      <main className="content" ref={topRef}>
+  const mapPane = (
+    <section className="map-pane st-map" aria-label="Map of stations">
+      {editing && (
+        <div className="map-hint" role="status">
+          <span>{phone ? "Tap" : "Click"} the correct location of {sel ? titleCase(sel.name) : "the station"}</span>
+          <button type="button" className="btn btn-text btn-sm" onClick={() => setEditing(false)}>
+            Cancel
+          </button>
+        </div>
+      )}
+      <div className="map-area">
         <StationMap
           markers={markers}
+          pinStyle="status"
           selectedId={selected}
-          onMarkerClick={(id) => select(id, false)}
+          onMarkerClick={(id) => select(id)}
           fitKey={`${status}-${text}-${stations.length}`}
           crosshair={editing}
+          compactControls={phone}
+          fitLabel="Fit to stations"
+          zoomOnSelect
           onMapClick={(p) => editing && setManual(p)}
         />
-        {sel && (
-          <section className="results">
-            <h3>{titleCase(sel.name)}</h3>
-            <p className="muted small">
-              {titleCase(sel.district)}, {titleCase(sel.province)} · {sel.category}
-            </p>
-            <dl className="details">
-              <dt>Status</dt>
-              <dd>
-                <span className={`badge ${locationQuality(sel.location).tone}`}>{locationQuality(sel.location).label}</span>
-                {sel.location?.source && <span className="muted small"> via {sel.location.source}</span>}
-              </dd>
-              {sel.location?.location && (
-                <>
-                  <dt>Coordinates</dt>
-                  <dd>
-                    {sel.location.location.lat.toFixed(5)}, {sel.location.location.lng.toFixed(5)}{" "}
-                    <a href={`https://www.google.com/maps/search/?api=1&query=${sel.location.location.lat},${sel.location.location.lng}`} target="_blank" rel="noreferrer">
-                      Open in Google Maps ↗
-                    </a>
-                  </dd>
-                </>
-              )}
-              {sel.location?.matchedName && (<><dt>Matched</dt><dd>{sel.location.matchedName}</dd></>)}
-              {sel.location?.address && (<><dt>Address</dt><dd>{sel.location.address}</dd></>)}
-              {sel.location?.query && (<><dt>Query</dt><dd>{sel.location.query}</dd></>)}
-              {sel.location?.districtDistanceKm !== undefined && (
-                <><dt>From district centre</dt><dd>{sel.location.districtDistanceKm.toFixed(1)} km</dd></>
-              )}
-              {sel.location?.error && (<><dt>Error</dt><dd className="error">{sel.location.error}</dd></>)}
-              <dt>Vacancies</dt>
-              <dd>
-                <div className="chips">
-                  {sel.vacancies.map((v, i) => (
-                    <span key={i} className={`chip ${v.type === "Difficult station" ? "chip-warn" : ""}`} title={v.type}>
-                      {v.designation}
-                    </span>
-                  ))}
-                </div>
-              </dd>
-            </dl>
-            <div className="row gap">
-              <button className={`btn small ${editing ? "active" : ""}`} onClick={() => setEditing((e) => !e)}>
-                {editing ? `${isMobile ? "Tap" : "Click"} the correct spot on the map…` : "Set location manually"}
-              </button>
-              {sel.location?.source === "manual" && (
-                <button className="btn small" onClick={clearManual}>
-                  Remove manual location
-                </button>
-              )}
-            </div>
-          </section>
-        )}
-      </main>
+        {!phone && details}
+      </div>
+      {phone && details}
+    </section>
+  );
+
+  if (phone) {
+    return (
+      <div className="st st-phone">
+        <div className="phone-top">
+          <nav className="view-toggle" aria-label="Stations view">
+            <button type="button" aria-current={view === "list" ? "page" : undefined} onClick={() => setView("list")}>
+              <ListIcon size={15} />
+              List
+            </button>
+            <button type="button" aria-current={view === "map" ? "page" : undefined} onClick={() => setView("map")}>
+              <MapIcon size={15} />
+              Map
+            </button>
+          </nav>
+        </div>
+        <div className="sv-body">{view === "list" ? listPanel : mapPane}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="st">
+      {listPanel}
+      {mapPane}
     </div>
   );
 }

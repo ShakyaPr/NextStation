@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api, titleCase } from "./api";
 import type { LatLng, PlaceSuggestion, StationSuggestion } from "./api";
+import { HospitalIcon, PinIcon, SearchIcon } from "./icons";
 
 export interface SelectedPlace extends LatLng {
   label: string;
@@ -15,6 +16,7 @@ interface Props {
   onTextChange: (t: string) => void;
   onSelect: (p: SelectedPlace) => void;
   placeholder?: string;
+  autoFocus?: boolean;
 }
 
 const newSession = () =>
@@ -27,7 +29,7 @@ const newSession = () =>
  * matching stations from the vacancy list. A session token groups the typing
  * and the final details lookup so Google bills them as one session.
  */
-export default function PlaceSearch({ text, onTextChange, onSelect, placeholder }: Props) {
+export default function PlaceSearch({ text, onTextChange, onSelect, placeholder, autoFocus }: Props) {
   const [items, setItems] = useState<Item[]>([]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -114,11 +116,13 @@ export default function PlaceSearch({ text, onTextChange, onSelect, placeholder 
   return (
     <div className="place-search">
       <div className="place-input">
-        <span className="place-icon" aria-hidden>
-          🔍
+        <span className="place-icon">
+          <SearchIcon />
         </span>
         <input
           className="input"
+          autoFocus={autoFocus}
+          aria-label="Starting point"
           value={text}
           placeholder={placeholder}
           onChange={(e) => {
@@ -149,18 +153,18 @@ export default function PlaceSearch({ text, onTextChange, onSelect, placeholder 
               >
                 {item.kind === "place" ? (
                   <>
-                    <span className="suggest-icon">📍</span>
-                    <span>
+                    <span className="suggest-icon"><PinIcon /></span>
+                    <span className="suggest-text">
                       <span className="suggest-main">{item.place.mainText}</span>
-                      {item.place.secondaryText && <span className="muted small"> {item.place.secondaryText}</span>}
+                      {item.place.secondaryText && <span className="suggest-sub">{item.place.secondaryText}</span>}
                     </span>
                   </>
                 ) : (
                   <>
-                    <span className="suggest-icon">🏥</span>
-                    <span>
+                    <span className="suggest-icon"><HospitalIcon /></span>
+                    <span className="suggest-text">
                       <span className="suggest-main">{titleCase(item.station.name)}</span>
-                      <span className="muted small"> {titleCase(item.station.district)}</span>
+                      <span className="suggest-sub">{titleCase(item.station.district)}</span>
                     </span>
                   </>
                 )}
@@ -168,11 +172,11 @@ export default function PlaceSearch({ text, onTextChange, onSelect, placeholder 
             </li>
           ))}
           {items.some((i) => i.kind === "place") && (
-            <li className="suggest-footer muted small">Place suggestions by Google</li>
+            <li className="suggest-footer">Place suggestions by Google</li>
           )}
         </ul>
       )}
-      {error && <p className="error small">{error}</p>}
+      {error && <p className="field-error">{error}</p>}
     </div>
   );
 }
