@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
-/** Phone / small-tablet layout. Keep in sync with the @media rule in styles.css. */
-export const MOBILE_QUERY = "(max-width: 860px)";
+/** Breakpoints. Keep in sync with the @media rules in styles.css. */
+export const PHONE_QUERY = "(max-width: 700px)";
+export const DESKTOP_QUERY = "(min-width: 1280px)";
+
+export type Layout = "phone" | "tablet" | "desktop";
 
 export function useMediaQuery(query: string): boolean {
   const get = () => typeof window !== "undefined" && window.matchMedia(query).matches;
@@ -16,9 +19,16 @@ export function useMediaQuery(query: string): boolean {
   return matches;
 }
 
-export const useIsMobile = () => useMediaQuery(MOBILE_QUERY);
+/** phone ≤ 700 px < tablet < 1280 px ≤ desktop */
+export function useLayout(): Layout {
+  const phone = useMediaQuery(PHONE_QUERY);
+  const desktop = useMediaQuery(DESKTOP_QUERY);
+  return phone ? "phone" : desktop ? "desktop" : "tablet";
+}
 
-/** Smoothly scroll an element into view (used on phones, where the map is below the form). */
+export const useIsPhone = () => useMediaQuery(PHONE_QUERY);
+
+/** Smoothly scroll an element into view. */
 export function scrollToEl(el: Element | null, block: ScrollLogicalPosition = "start") {
   el?.scrollIntoView({ behavior: "smooth", block });
 }

@@ -121,7 +121,7 @@ components:
         maxDistanceKm: { type: number }
         maxDurationMin: { type: number }
         limit: { type: integer }
-        sortBy: { type: string, enum: [duration, distance] }
+        sortBy: { type: string, enum: [duration, distance, straight] }
         provinces: { type: array, items: { type: string } }
         districts: { type: array, items: { type: string } }
         types: { type: array, items: { type: string } }

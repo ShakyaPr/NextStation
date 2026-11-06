@@ -168,7 +168,8 @@ export const api = {
 export function formatDuration(min: number): string {
   const m = Math.round(min);
   if (m < 60) return `${m} min`;
-  return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min`;
+  const h = Math.floor(m / 60);
+  return m % 60 ? `${h} h ${m % 60} min` : `${h} h`;
 }
 
 export function titleCase(s: string): string {
