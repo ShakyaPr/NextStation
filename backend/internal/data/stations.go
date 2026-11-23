@@ -22,13 +22,20 @@ type Vacancy struct {
 
 // Station is a unique institution (district + institution name) with its vacancies.
 type Station struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	District  string    `json:"district"`
-	Province  string    `json:"province"`
-	Category  string    `json:"category"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	District string `json:"district"`
+	Province string `json:"province"`
+	Category string `json:"category"`
+	// Difficult is true for a station on the difficult stations list: its vacancies
+	// are marked with the type "Difficult station" (tools/extract_scanned_pdf.py
+	// --mark-difficult).
+	Difficult bool      `json:"difficult"`
 	Vacancies []Vacancy `json:"vacancies"`
 }
+
+// DifficultType is the vacancy type that marks a vacancy at a difficult station.
+const DifficultType = "Difficult station"
 
 // Categories in display order.
 var Categories = []string{
@@ -177,6 +184,9 @@ func LoadStations(path string) ([]*Station, error) {
 			out = append(out, st)
 		}
 		st.Vacancies = append(st.Vacancies, v)
+		if strings.EqualFold(v.Type, DifficultType) {
+			st.Difficult = true
+		}
 	}
 	sort.Slice(out, func(i, j int) bool {
 		if out[i].District != out[j].District {

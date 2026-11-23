@@ -33,6 +33,8 @@ export interface Station {
   district: string;
   province: string;
   category: string;
+  /** On the difficult stations list. */
+  difficult: boolean;
   vacancies: Vacancy[];
   location?: LocationEntry | null;
 }
@@ -70,6 +72,8 @@ export interface Meta {
   defaultLimit: number;
   stationCount: number;
   vacancyCount: number;
+  /** Stations of this list that are on the difficult stations list. */
+  difficultCount: number;
   locatedCount: number;
   suspectCount: number;
   provinces: CountItem[];
@@ -119,6 +123,7 @@ export interface SearchRequest {
   types?: string[];
   categories?: string[];
   designation?: string;
+  difficultOnly?: boolean;
 }
 
 export interface SearchResult {

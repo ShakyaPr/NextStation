@@ -1,17 +1,17 @@
 # Station Finder
 
 Finds the most suitable stations for a given starting point and ranks them by real road
-travel time or distance, optionally within a time or distance limit. You pick the list
-to search in the app:
+travel time or distance, optionally within a time or distance limit.
 
-| List | Source PDF (`source-pdfs/`) | Rows | Stations |
-|---|---|---|---|
-| **Vacancy list – 2025.11.04 batch** (default) | `PDF345-vac-new2.pdf` | 1,416 vacancies | 537 |
-| **Difficult stations – 2026** | `Difficult Vacancy signed.pdf` | 265 stations | 265 |
-| **Draft vacancy list – Oct/Nov 2026** | `Draft vacancy list for preliminary grade appointments.pdf` | 1,300 vacancies | 438 |
+Stations are chosen from the **Vacancy list – 2025.11.04 batch**
+(`source-pdfs/PDF345-vac-new2.pdf`): 1,416 vacancies at 537 stations.
 
-In the 2025.11.04 list, the 126 vacancies at stations on the 2026 difficult stations
-list have the vacancy type **Difficult station**, so you can filter for them.
+The **Difficult stations list 2026** (`source-pdfs/Difficult Vacancy signed.pdf`,
+265 stations) only marks which of those stations are difficult: 115 stations with
+126 vacancies.
+- Difficult stations are shown in **red**: rank badge, map pin, post chips and a
+  "Difficult station" label.
+- **Filters → Difficult stations → Difficult only** limits a search to them.
 
 ```
 frontend/      React + Vite + Leaflet UI          (http://localhost:5173)
@@ -26,16 +26,21 @@ docker-compose.yml, Dockerfile, .env.example   VPS deployment
 
 ## How it works
 
-1. **Data.** Each list is a JSON file in `data/`, declared in `data/lists.json`.
-   - The draft list was a text PDF; `tools/extract_pdf.py` pulled out its 1,300 rows
-     and stripped the "DRAFT" watermark.
-   - The two newer lists are scans. `tools/extract_scanned_pdf.py` reads them with
-     macOS's OCR plus the PDF's own text layer, and cross-checks the two. Names are
-     snapped to the draft list's spellings, so the same station gets the same ID (and
-     the same location) in every list. The few cells the two readings disagreed on
-     were checked against the scans and fixed in `tools/corrections.json`.
-   - The backend groups rows into stations (district + institution): 702 distinct
-     stations across the three lists.
+1. **Data.** The searchable list is declared in `data/lists.json` and points at
+   `data/vacancies-2025-11-04.json`.
+   - Both new PDFs are scans. `tools/extract_scanned_pdf.py` reads them with macOS's OCR
+     plus the PDF's own text layer, and cross-checks the two. The few cells the two
+     readings disagreed on were checked against the scans and fixed in
+     `tools/corrections.json`.
+   - Names are snapped to the spellings of the older draft list
+     (`data/vacancies.json`, kept as the tool's reference). The same station then
+     keeps the same ID and cached location.
+   - With `--mark-difficult data/difficult-stations-2026.json`, vacancies at stations
+     on the difficult list get the type `Difficult station`. The backend marks those
+     stations as difficult.
+   - The backend groups rows into stations (district + institution).
+   - To offer more than one list again, add entries to `data/lists.json`; a list
+     picker then appears in the app.
 2. **Station locations.** On first start, the backend looks up each station once and
    caches the result in `data/geocache.json`. It tries these in order:
    - Places API (New) Text Search, with abbreviations expanded
@@ -87,9 +92,9 @@ go run ./cmd/server -config ../config.yaml
 ```
 
 The first start locates every station that isn't in `data/geocache.json` yet, in the
-background. That is 264 stations from the two new lists; the other 438 are already
-in the cache. It takes a minute or two and progress shows in the UI. Later starts reuse
-the cache. Then open **Station locations**, pick each list, and review *Needs review*.
+background. With the committed cache that is 116 of the 537 stations (the other 421
+were located for the draft list). It takes about a minute and progress shows in the UI.
+Later starts reuse the cache. Then open **Station locations** and review *Needs review*.
 Commit the updated `data/geocache.json` (and `data/overrides.json`), so the Docker image
 starts with every station already located.
 
@@ -332,14 +337,10 @@ budget alert in Google Cloud.
 
 ## Using it
 
-- **Choose a list.** *Station list* at the top of the search settings (and in
-  *Station locations*) switches between the lists above. Your choice is remembered in
-  this browser. Filters that don't apply to a list are hidden; the difficult stations
-  list, for example, has no posts.
 - **Find stations.** Set a starting point in one of three ways:
   - **Search**: start typing a town, address or landmark (e.g. `kegal`). Suggestions
-    come from Google Places, restricted to Sri Lanka. Matching stations from any
-    list are listed too, so you can start from one of them. Use ↑/↓ and
+    come from Google Places, restricted to Sri Lanka. Matching stations from the
+    vacancy list are listed too, so you can start from one of them. Use ↑/↓ and
     Enter, or click a suggestion. Selecting one runs the search straight away.
   - Click *Pick on map*.
   - Use *My location*.
@@ -348,11 +349,14 @@ budget alert in Google Cloud.
   - **Max travel time** and/or **Max road distance**
   - **Number of stations** (default 10)
   - **Rank by**: travel time or distance
-  - **Filters**: province, district, vacancy type (New / Difficult station / …),
-    station type (DH, BH, PMCU, AHWC, …), and designation (e.g. `SHO`, `ANAESTHESIA`)
+  - **Filters**:
+    - province and district
+    - station type (DH, BH, PMCU, AHWC, …)
+    - **Difficult stations**: *All stations* or *Difficult only*
+    - designation (e.g. `SHO`, `ANAESTHESIA`)
 
   Each result shows road distance, travel time, matching vacancies, and a
-  Google Maps *Directions* link.
+  Google Maps *Directions* link. Difficult stations are marked in red.
 - **Station locations.** Review the stations flagged *Needs review* and correct them.
 
 ## API
@@ -375,7 +379,7 @@ signed-in user and `GET /auth/logout` signs out of the app and Keycloak.
 
 ```bash
 curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
-  "list": "difficult-stations-2026",
+  "difficultOnly": true,
   "origin": {"query": "Kegalle"},
   "maxDurationMin": 90,
   "maxDistanceKm": 80,
@@ -392,7 +396,7 @@ curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
 ## Cost notes
 
 - Geocoding the stations is a one-time cost: one Places Text Search request per
-  station (438 for the draft list, 264 more for the two new lists), plus Geocoding
+  station (537 for the vacancy list, 421 of them already in the committed cache), plus Geocoding
   requests for any fallbacks. Results are cached on disk.
 - Place search uses Places Autocomplete with session tokens: the keystrokes and the
   final details lookup are billed as one session. Picking a station suggestion makes

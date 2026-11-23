@@ -143,3 +143,4 @@ components:
         types: { type: array, items: { type: string } }
         categories: { type: array, items: { type: string } }
         designation: { type: string }
+        difficultOnly: { type: boolean, description: "Only stations on the difficult stations list" }

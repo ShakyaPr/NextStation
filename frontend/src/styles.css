@@ -509,6 +509,18 @@ a:focus-visible {
 .field label.section-title {
   font-size: 14px;
 }
+.field-label {
+  font-size: 13px;
+}
+.difficult-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--color-error);
+  vertical-align: 1px;
+}
 .field-help {
   font-size: 11px;
   color: var(--text-secondary);
@@ -1421,6 +1433,15 @@ input[type="range"] {
 .result.on .rank {
   background: var(--orange-700);
 }
+/* Difficult stations are red; when selected they get a ring instead of turning orange. */
+.rank.difficult,
+.result.on .rank.difficult {
+  background: var(--color-error);
+}
+.rank.on.difficult,
+.result.on .rank.difficult {
+  box-shadow: 0 0 0 3px var(--color-error-soft);
+}
 .result-main {
   flex: 1 1 auto;
   min-width: 0;
@@ -1755,6 +1776,12 @@ input[type="range"] {
   background: var(--orange-700);
   font-size: 14px;
 }
+.pin.difficult {
+  background: var(--color-error);
+}
+.pin.on.difficult {
+  box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.3), var(--shadow-sm);
+}
 .dot-pin {
   width: 100%;
   height: 100%;
@@ -1841,6 +1868,10 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+.popup-head .chip {
+  align-self: flex-start;
+  margin-top: 4px;
 }
 .popup-title {
   font-size: 14px;

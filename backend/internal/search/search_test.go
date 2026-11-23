@@ -226,6 +226,15 @@ func TestSearchEndToEnd(t *testing.T) {
 		t.Errorf("override not applied: %+v", e)
 	}
 
+	// 4a. Only difficult stations (WARAKAPOLA DH has a "Difficult station" vacancy).
+	resp, err = svc.Search(context.Background(), Request{Origin: Origin{Query: "Kegalle"}, DifficultOnly: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(resp.Results) != 1 || resp.Results[0].Station.Name != "WARAKAPOLA DH" || !resp.Results[0].Station.Difficult {
+		t.Fatalf("difficult-only results = %+v", resp.Results)
+	}
+
 	// 4b. Another list searches only its own stations; an unknown list is a bad request.
 	resp, err = svc.Search(context.Background(), Request{List: "kandy-only", Origin: Origin{Query: "Kegalle"}})
 	if err != nil {
