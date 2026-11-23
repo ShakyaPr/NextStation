@@ -4,7 +4,7 @@ import type { LatLng, Meta, SearchRequest, SearchResponse, SearchResult } from "
 import StationMap, { type MapMarker } from "./StationMap";
 import PlaceSearch, { type SelectedPlace } from "./PlaceSearch";
 import { useLayout, type Layout } from "./useMediaQuery";
-import { Alert, QualityChip, Segmented, TypeLegend, VacancyChips } from "./ui";
+import { Alert, ListPicker, QualityChip, Segmented, TypeLegend, VacancyChips, listCounts } from "./ui";
 import {
   ChevronLeft,
   ChevronRight,
@@ -74,8 +74,9 @@ function activeFilterCount(s: Settings) {
   return [s.province, s.district, s.category, s.type, s.designation.trim()].filter(Boolean).length;
 }
 
-function buildRequest(origin: SelectedPlace, s: Settings): SearchRequest {
+function buildRequest(origin: SelectedPlace, s: Settings, list: string): SearchRequest {
   const req: SearchRequest = {
+    list,
     origin: { lat: origin.lat, lng: origin.lng, label: origin.label },
     limit: s.limit,
     sortBy: s.sort as SearchRequest["sortBy"],
@@ -105,6 +106,7 @@ const filtersPill = (s: Settings) => {
 
 interface SettingsFormProps {
   meta: Meta;
+  onListChange: (id: string) => void;
   layout: Layout;
   origin: SelectedPlace | null;
   originText: string;
@@ -134,6 +136,11 @@ function SettingsForm(p: SettingsFormProps) {
 
   return (
     <div className={`settings${big ? " big" : ""}`}>
+      {meta.lists.length > 1 && (
+        <section className="settings-section">
+          <ListPicker lists={meta.lists} value={meta.list} onChange={p.onListChange} id="f-list" labelClassName="section-title" />
+        </section>
+      )}
       <section className="settings-section">
         <h2 className="section-title">Starting point</h2>
         {p.origin ? (
@@ -308,18 +315,21 @@ function SettingsForm(p: SettingsFormProps) {
               ))}
             </select>
           </div>
-          <div className="field">
-            <label htmlFor="f-type">Vacancy type</label>
-            <select id="f-type" className="select" value={s.type} onChange={(e) => update({ type: e.target.value })}>
-              <option value="">Any vacancy type</option>
-              {meta.types.map((o) => (
-                <option key={o.name} value={o.name}>
-                  {o.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          {meta.types.length > 0 && (
+            <div className="field">
+              <label htmlFor="f-type">Vacancy type</label>
+              <select id="f-type" className="select" value={s.type} onChange={(e) => update({ type: e.target.value })}>
+                <option value="">Any vacancy type</option>
+                {meta.types.map((o) => (
+                  <option key={o.name} value={o.name}>
+                    {o.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
+        {meta.hasDesignations && (
         <div className="field">
           <label htmlFor="f-designation">Designation contains</label>
           <input
@@ -337,6 +347,7 @@ function SettingsForm(p: SettingsFormProps) {
           </datalist>
           <span className="field-help">Matches any part of the post name.</span>
         </div>
+        )}
       </section>
     </div>
   );
@@ -491,7 +502,7 @@ function StationSheet({
 /* Search view                                                        */
 /* ------------------------------------------------------------------ */
 
-export default function SearchView({ meta }: { meta: Meta }) {
+export default function SearchView({ meta, onListChange }: { meta: Meta; onListChange: (id: string) => void }) {
   const layout = useLayout();
   const phone = layout === "phone";
 
@@ -513,7 +524,8 @@ export default function SearchView({ meta }: { meta: Meta }) {
   const [view, setView] = useState<"list" | "map">("list"); // phone only
   const listRef = useRef<HTMLElement>(null);
 
-  const currentKey = origin ? JSON.stringify(buildRequest(origin, settings)) : "";
+  const currentKey = origin ? JSON.stringify(buildRequest(origin, settings, meta.list)) : "";
+  const listInfo = meta.lists.find((l) => l.id === meta.list);
   const dirty = !!resp && !!origin && currentKey !== lastKey;
   const results = resp?.results ?? [];
 
@@ -524,6 +536,25 @@ export default function SearchView({ meta }: { meta: Meta }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [panelOpen]);
+
+  // A different list has different filter options: drop filters it can't match and,
+  // if results are showing, search the new list from the same starting point.
+  const shownList = useRef(meta.list);
+  useEffect(() => {
+    if (shownList.current === meta.list) return;
+    shownList.current = meta.list;
+    const has = (items: { name: string }[], v: string) => !v || items.some((i) => i.name === v);
+    const next: Settings = {
+      ...settings,
+      province: has(meta.provinces, settings.province) ? settings.province : "",
+      district: has(meta.districts, settings.district) ? settings.district : "",
+      category: has(meta.categories, settings.category) ? settings.category : "",
+      type: has(meta.types, settings.type) ? settings.type : "",
+      designation: meta.hasDesignations ? settings.designation : "",
+    };
+    setSettings(next);
+    if (origin && resp) runSearch(origin, next);
+  }, [meta.list]);
 
   // The desktop has no drawer.
   useEffect(() => {
@@ -538,7 +569,7 @@ export default function SearchView({ meta }: { meta: Meta }) {
       return;
     }
     if (!meta.apiKeyConfigured) return;
-    const req = buildRequest(o, s);
+    const req = buildRequest(o, s, meta.list);
     setLoading(true);
     try {
       const r = await api.search(req);
@@ -626,6 +657,7 @@ export default function SearchView({ meta }: { meta: Meta }) {
 
   const formProps: SettingsFormProps = {
     meta,
+    onListChange,
     layout,
     origin,
     originText,
@@ -646,7 +678,7 @@ export default function SearchView({ meta }: { meta: Meta }) {
   const searchLabel = loading ? "Calculating routes…" : dirty ? "Update results" : "Find stations";
   const dataLine = (
     <span className="data-line">
-      Data: {num(meta.vacancyCount)} vacancies at {num(meta.stationCount)} stations
+      Data: {listInfo ? listCounts(listInfo) : `${num(meta.vacancyCount)} vacancies at ${num(meta.stationCount)} stations`}
       {meta.geocoding.running && ` · locating ${meta.geocoding.done}/${meta.geocoding.total}…`}
     </span>
   );
@@ -670,6 +702,7 @@ export default function SearchView({ meta }: { meta: Meta }) {
           {!phone && (
             <p className="results-sub">
               From {originLabel}, ranked by {sortInfo.phrase}
+              {meta.lists.length > 1 && listInfo && ` · ${listInfo.name}`}
             </p>
           )}
         </div>
@@ -928,6 +961,12 @@ export default function SearchView({ meta }: { meta: Meta }) {
             <SlidersIcon />
             {filtersPill(settings)}
           </button>
+          {meta.lists.length > 1 && listInfo && (
+            <button type="button" className="pill-btn" onClick={() => setPanelOpen(true)}>
+              <ListIcon size={16} />
+              {listInfo.name}
+            </button>
+          )}
         </div>
         <div className="sv-body">
           {resultsPane}
@@ -965,6 +1004,7 @@ export default function SearchView({ meta }: { meta: Meta }) {
           <span className="summary-text">
             <span className="summary-title">{origin ? origin.label : "Choose a starting point"}</span>
             <span className="summary-sub">
+              {meta.lists.length > 1 && listInfo && `${listInfo.name} · `}
               {timePill(settings)} · {distPill(settings)} · {filtersPill(settings)}
             </span>
           </span>

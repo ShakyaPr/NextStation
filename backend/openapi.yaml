@@ -4,9 +4,11 @@ info:
   version: 1.0.0
   description: |
     Ranks vacancy stations by road distance / travel time from a starting point.
+    Several lists can be loaded (see data/lists.json); pick one with `list`.
     On Choreo the gateway exposes only the resources listed here, so every new
     endpoint must be added to this file. The write operations (tagged "admin")
-    are meant to get an admin-only permission in Choreo's Operation Level Security.
+    are admin-only: with the built-in sign-in (Docker) the server enforces this,
+    on Choreo attach an admin permission in Operation Level Security.
 servers:
   - url: /
 tags:
@@ -23,9 +25,12 @@ paths:
   /api/meta:
     get:
       tags: [search]
-      summary: Counts, filter options and geocoding progress
+      summary: Available lists, plus counts and filter options for one list
+      parameters:
+        - $ref: "#/components/parameters/List"
       responses:
         "200": { description: OK }
+        "400": { description: Unknown list }
   /api/search:
     post:
       tags: [search]
@@ -61,9 +66,12 @@ paths:
   /api/stations:
     get:
       tags: [stations]
-      summary: All stations with their location entries
+      summary: The stations of one list with their location entries
+      parameters:
+        - $ref: "#/components/parameters/List"
       responses:
         "200": { description: Stations }
+        "400": { description: Unknown list }
   /api/geocode/status:
     get:
       tags: [stations]
@@ -100,6 +108,13 @@ paths:
         "202": { description: Started }
         "409": { description: Already running }
 components:
+  parameters:
+    List:
+      name: list
+      in: query
+      required: false
+      description: List id from /api/meta `lists` (default = the first list)
+      schema: { type: string }
   schemas:
     LatLng:
       type: object
@@ -111,6 +126,7 @@ components:
       type: object
       required: [origin]
       properties:
+        list: { type: string, description: "List id (default = the first list)" }
         origin:
           type: object
           properties:

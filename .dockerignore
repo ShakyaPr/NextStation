@@ -1,11 +1,19 @@
-# Never bake the local config (it holds the API key) into the image.
+# Never bake local secrets into the image: config.yaml holds the API key, .env and the
+# users file hold credentials. (deploy/config.yaml is the image's config and is kept.)
 config.yaml
+.env
+.env.*
+users.csv
+deploy/users.csv
 .git
 .choreo
-# The image is API-only; the UI is built by Choreo's React preset.
-frontend
+# Built inside the image.
+frontend/node_modules
+frontend/dist
+# Not needed at runtime: the source PDFs and the extraction tools.
+source-pdfs
+tools
+**/*.pdf
 **/*.tsbuildinfo
 **/*.tmp
 **/.DS_Store
-*.pdf
-tools

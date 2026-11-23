@@ -1,0 +1,52 @@
+# Station Finder on a VPS: the app plus Caddy for HTTPS (automatic Let's Encrypt).
+#
+#   cp .env.example .env              # fill in GOOGLE_MAPS_API_KEY and DOMAIN
+#   cp deploy/users.example.csv users.csv && chmod 644 users.csv   # who may sign in
+#   docker compose up -d --build
+#
+# See README → "Deploy on a VPS with Docker".
+services:
+  app:
+    build: .
+    image: station-finder:latest
+    restart: unless-stopped
+    environment:
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:?set GOOGLE_MAPS_API_KEY in .env}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+      STATE_DIR: /data
+      AUTH_USERS_FILE: /run/config/users.csv
+    volumes:
+      - app-data:/data                                  # locations, fixes, session key
+      - ./users.csv:/run/config/users.csv:ro            # sign-in users (not in the image)
+    # Not published: only Caddy reaches it. For a quick test without Caddy, add
+    #   ports: ["8080:8080"]
+    expose: ["8080"]
+    healthcheck:
+      test: ["CMD", "/app/stationfinder", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      # Your domain (DNS A record pointing at this server) for automatic HTTPS,
+      # or ":80" to serve plain HTTP on the server's IP.
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env (a domain name, or :80)}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data                                # certificates
+      - caddy-config:/config
+
+volumes:
+  app-data:
+  caddy-data:
+  caddy-config:

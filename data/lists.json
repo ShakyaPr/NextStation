@@ -1,0 +1,26 @@
+[
+  {
+    "id": "vacancies-2025-11-04",
+    "name": "Vacancy list – 2025.11.04 batch",
+    "description": "Vacancy list for the recruitment of preliminary grade medical officers (2025.11.04 batch). Vacancies at stations on the 2026 difficult stations list are marked \"Difficult station\".",
+    "file": "vacancies-2025-11-04.json",
+    "source": "source-pdfs/PDF345-vac-new2.pdf",
+    "kind": "vacancies"
+  },
+  {
+    "id": "difficult-stations-2026",
+    "name": "Difficult stations – 2026",
+    "description": "Difficult stations list 2026 (stations only, no posts).",
+    "file": "difficult-stations-2026.json",
+    "source": "source-pdfs/Difficult Vacancy signed.pdf",
+    "kind": "stations"
+  },
+  {
+    "id": "draft-2026",
+    "name": "Draft vacancy list – Oct/Nov 2026",
+    "description": "Draft vacancy list for preliminary grade appointments (Oct/Nov 2026).",
+    "file": "vacancies.json",
+    "source": "source-pdfs/Draft vacancy list for preliminary grade appointments.pdf",
+    "kind": "vacancies"
+  }
+]

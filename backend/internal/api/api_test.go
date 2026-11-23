@@ -76,8 +76,9 @@ func newTestServer(t *testing.T) (http.Handler, *[]string) {
 		t.Fatal(err)
 	}
 	cfg := &config.Config{}
-	svc := search.NewService(cfg, stations, store, client)
-	return New(context.Background(), cfg, stations, store, svc, client).Handler(), &calls
+	lists := []*data.List{data.NewList(data.ListInfo{ID: "main", Name: "Main"}, stations)}
+	svc := search.NewService(cfg, lists, store, client)
+	return New(context.Background(), cfg, lists, store, svc, client, nil).Handler(), &calls
 }
 
 func get(t *testing.T, h http.Handler, path string, out any) int {

@@ -14,9 +14,10 @@ type Vacancy struct {
 	Province    string `json:"province"`
 	District    string `json:"district"`
 	Institution string `json:"institution"`
-	Designation string `json:"designation"`
-	Type        string `json:"type"`
+	Designation string `json:"designation"` // empty in station-only lists (difficult stations)
+	Type        string `json:"type"`        // e.g. New, Difficult station; may be empty
 	Page        int    `json:"page"`
+	SN          int    `json:"sn,omitempty"` // serial number printed in the source list, if any
 }
 
 // Station is a unique institution (district + institution name) with its vacancies.
@@ -36,6 +37,7 @@ var Categories = []string{
 	"Base Hospital",
 	"Divisional Hospital",
 	"PMCU",
+	"AHWC",
 	"MOH Office",
 	"RDHS",
 	"Other",
@@ -59,7 +61,21 @@ func lastWord(s string) string {
 	return f[len(f)-1]
 }
 
+// prefixTypes are station types written before the place name (e.g. "AHWC KIRINDA").
+var prefixTypes = map[string]string{"AHWC": "AHWC"}
+
+func firstWord(s string) string {
+	f := strings.Fields(s)
+	if len(f) == 0 {
+		return ""
+	}
+	return f[0]
+}
+
 func categorize(name string) string {
+	if c, ok := prefixTypes[firstWord(name)]; ok {
+		return c
+	}
 	switch lastWord(name) {
 	case "DH":
 		return "Divisional Hospital"
@@ -89,7 +105,7 @@ func titleCase(s string) string {
 	words := strings.Fields(strings.ToLower(s))
 	for i, w := range words {
 		upper := strings.ToUpper(w)
-		if _, ok := suffixExpansions[upper]; ok || upper == "STD" || upper == "ICU" {
+		if _, ok := suffixExpansions[upper]; ok || upper == "STD" || upper == "ICU" || prefixTypes[upper] != "" {
 			words[i] = upper
 			continue
 		}
@@ -121,6 +137,9 @@ func (s *Station) TownQueries() []string {
 	words := strings.Fields(s.Name)
 	if _, ok := suffixExpansions[words[len(words)-1]]; ok && len(words) > 1 {
 		words = words[:len(words)-1]
+	}
+	if _, ok := prefixTypes[words[0]]; ok && len(words) > 1 {
+		words = words[1:]
 	}
 	district := queryDistrict(s.District)
 	var qs []string

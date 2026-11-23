@@ -1,7 +1,7 @@
 // Small building blocks styled after the Oxygen UI (WSO2) design system.
 import type { ReactNode } from "react";
 import { InfoIcon, AlertIcon } from "./icons";
-import type { LocationEntry, Vacancy } from "./api";
+import type { ListSummary, LocationEntry, Vacancy } from "./api";
 import { locationQuality } from "./api";
 
 /** Chip colour per vacancy type (the legend in the results header uses the same mapping). */
@@ -26,8 +26,9 @@ export function VacancyChips({ vacancies }: { vacancies: Vacancy[] }) {
   return (
     <div className="chips">
       {vacancies.map((v, i) => (
-        <Chip key={i} color={typeColor(v.type)} title={`${v.designation} · ${v.type}`}>
-          {v.designation}
+        <Chip key={i} color={typeColor(v.type)} title={[v.designation, v.type].filter(Boolean).join(" · ")}>
+          {/* Station-only lists (difficult stations) have no post name: show the type. */}
+          {v.designation || v.type || "Vacancy"}
         </Chip>
       ))}
     </div>
@@ -36,7 +37,7 @@ export function VacancyChips({ vacancies }: { vacancies: Vacancy[] }) {
 
 /** Legend for the vacancy types that appear in a list. */
 export function TypeLegend({ vacancies }: { vacancies: Vacancy[] }) {
-  const types = [...new Set(vacancies.map((v) => v.type))].sort(
+  const types = [...new Set(vacancies.map((v) => v.type).filter(Boolean))].sort(
     (a, b) => Object.keys(TYPE_COLORS).indexOf(a) - Object.keys(TYPE_COLORS).indexOf(b),
   );
   if (types.length === 0) return null;
@@ -47,6 +48,50 @@ export function TypeLegend({ vacancies }: { vacancies: Vacancy[] }) {
           {t}
         </Chip>
       ))}
+    </div>
+  );
+}
+
+const count = (n: number) => n.toLocaleString("en-US");
+
+/** One line describing a list's size. */
+export function listCounts(l: ListSummary): string {
+  return l.hasDesignations
+    ? `${count(l.vacancyCount)} vacancies at ${count(l.stationCount)} stations`
+    : `${count(l.stationCount)} stations`;
+}
+
+/** Chooses which vacancy / station list the app works on. */
+export function ListPicker({
+  lists,
+  value,
+  onChange,
+  id,
+  label = "Station list",
+  labelClassName,
+}: {
+  lists: ListSummary[];
+  value: string;
+  onChange: (id: string) => void;
+  id: string;
+  label?: string;
+  labelClassName?: string;
+}) {
+  const current = lists.find((l) => l.id === value);
+  if (lists.length < 2) return null;
+  return (
+    <div className="field">
+      <label htmlFor={id} className={labelClassName}>
+        {label}
+      </label>
+      <select id={id} className="select" value={value} onChange={(e) => onChange(e.target.value)}>
+        {lists.map((l) => (
+          <option key={l.id} value={l.id}>
+            {l.name}
+          </option>
+        ))}
+      </select>
+      {current && <span className="field-help">{listCounts(current)}</span>}
     </div>
   );
 }

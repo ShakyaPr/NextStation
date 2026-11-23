@@ -1,11 +1,15 @@
 # Configuration baked into the Docker image (see Dockerfile).
-# Secrets are NOT stored here: provide the key with the GOOGLE_MAPS_API_KEY env var
-# (on Choreo: Configs & Secrets → secret). PORT and CONFIG_FILE env vars are also honoured.
+# Secrets are NOT stored here; they come from environment variables:
+#   GOOGLE_MAPS_API_KEY   Google key (required)
+#   AUTH_USERS_FILE       users CSV; turns on the built-in sign-in (recommended on a VPS)
+#   SESSION_SECRET        optional; otherwise a key is generated in the state directory
+#   STATE_DIR             where writable files go (docker-compose.yml sets /data, a volume)
+#   PORT, CONFIG_FILE     also honoured
 
 server:
   port: 8080
-  # The UI is a separate Choreo web app, so the API serves no static files.
-  staticDir: ""
+  # The built UI is in the image, so one container serves the app and the API.
+  staticDir: /app/static
 
 google:
   apiKey: ""
@@ -13,10 +17,11 @@ google:
   travelMode: DRIVE
 
 data:
-  vacanciesFile: /app/data/vacancies.json
-  # Writable copies live in /tmp (the only writable path on Choreo). They start from the
-  # seeds baked into the image and are lost when the container restarts. Commit
-  # data/overrides.json to keep manual location fixes permanently.
+  # The vacancy / station lists shown in the app's list picker.
+  listsFile: /app/data/lists.json
+  # Writable copies. By default they live in /tmp (the only writable path on Choreo)
+  # and are lost when the container is replaced; STATE_DIR=/data with a volume keeps
+  # them. They start from - and are merged with - the seeds baked into the image.
   geocacheFile: /tmp/stationfinder/geocache.json
   geocacheSeedFile: /app/data/geocache.json
   overridesFile: /tmp/stationfinder/overrides.json
@@ -29,5 +34,9 @@ search:
   suspectDistanceKm: 75
 
 geocoding:
-  onStartup: true   # only stations missing from the seed are looked up
-  workers: 4
+  onStartup: true   # only stations missing from the seed / state are looked up
+
+auth:
+  # usersFile comes from AUTH_USERS_FILE. Members of adminGroup may fix locations.
+  adminGroup: admins
+  sessionHours: 168

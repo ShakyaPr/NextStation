@@ -506,6 +506,9 @@ a:focus-visible {
 .range-head label {
   font-size: 13px;
 }
+.field label.section-title {
+  font-size: 14px;
+}
 .field-help {
   font-size: 11px;
   color: var(--text-secondary);
@@ -2140,6 +2143,11 @@ input[type="range"] {
 }
 .signin-card p {
   margin: 0;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 /* ----- Phone ------------------------------------------------------------- */

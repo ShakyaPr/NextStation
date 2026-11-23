@@ -1,0 +1,16 @@
+# Reverse proxy in front of the app (docker-compose.yml). With DOMAIN set to a real
+# domain, Caddy gets and renews a Let's Encrypt certificate automatically and
+# redirects HTTP to HTTPS. With DOMAIN=":80" it serves plain HTTP.
+{$DOMAIN} {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+	reverse_proxy app:8080 {
+		health_uri /healthz
+		health_interval 30s
+	}
+}

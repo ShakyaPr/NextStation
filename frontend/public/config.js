@@ -1,7 +1,11 @@
 // Runtime configuration, loaded by index.html before the app starts.
 //
-// This default is for local development and the single-container Docker image:
-// the API is on the same origin and there is no sign-in.
+// This default is for local development (`npm run dev`): the API is on the same origin
+// (proxied by Vite) and there is no sign-in.
+//
+// When the Go backend serves the built UI (the Docker image), it answers /config.js
+// itself, turning on its built-in sign-in when a users file is configured:
+//   window.configs = { apiUrl: "", managedAuth: true, authMode: "local" };
 //
 // On Choreo this file is REPLACED by a file mount on the web app component, e.g.
 //   window.configs = {

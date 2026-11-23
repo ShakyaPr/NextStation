@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"errors"
 	"flag"
@@ -9,10 +10,12 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
 	"stationfinder/internal/api"
+	"stationfinder/internal/auth"
 	"stationfinder/internal/config"
 	"stationfinder/internal/data"
 	"stationfinder/internal/google"
@@ -21,6 +24,16 @@ import (
 )
 
 func main() {
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "hash-password":
+			hashPassword()
+			return
+		case "healthcheck":
+			healthcheck()
+			return
+		}
+	}
 	defaultCfg := "../config.yaml"
 	if env := os.Getenv("CONFIG_FILE"); env != "" {
 		defaultCfg = env
@@ -32,7 +45,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	stations, err := data.LoadStations(cfg.Data.VacanciesFile)
+	lists, err := data.LoadConfigured(cfg.Data.ListsFile, cfg.Data.VacanciesFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	stations := data.AllStations(lists)
+	au, err := auth.New(cfg.Auth)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,7 +64,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("loaded %d stations from %s", len(stations), cfg.Data.VacanciesFile)
+	for _, l := range lists {
+		log.Printf("list %q: %d stations (%s)", l.ID, len(l.Stations), l.Name)
+	}
+	log.Printf("%d distinct stations across %d list(s)", len(stations), len(lists))
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -59,10 +80,10 @@ func main() {
 		}
 	}
 
-	svc := search.NewService(cfg, stations, store, client)
+	svc := search.NewService(cfg, lists, store, client)
 	srv := &http.Server{
 		Addr:              fmt.Sprintf(":%d", cfg.Server.Port),
-		Handler:           api.New(ctx, cfg, stations, store, svc, client).Handler(),
+		Handler:           api.New(ctx, cfg, lists, store, svc, client, au).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	go func() {
@@ -75,4 +96,44 @@ func main() {
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	_ = srv.Shutdown(shutdownCtx)
+}
+
+// hashPassword reads a password from stdin and prints a bcrypt hash for the users file:
+//
+//	docker compose run --rm -T app hash-password
+func hashPassword() {
+	fmt.Fprint(os.Stderr, "Password: ")
+	line, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	if err != nil && line == "" {
+		log.Fatal("no password given")
+	}
+	pw := strings.TrimRight(line, "\r\n")
+	if len(pw) < 8 {
+		log.Fatal("use at least 8 characters")
+	}
+	h, err := auth.HashPassword(pw)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Fprintln(os.Stderr)
+	fmt.Println(h)
+}
+
+// healthcheck exits 0 if the server answers /healthz (the image has no curl or shell).
+func healthcheck() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	c := &http.Client{Timeout: 3 * time.Second}
+	res, err := c.Get("http://127.0.0.1:" + port + "/healthz")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		fmt.Fprintln(os.Stderr, "status", res.Status)
+		os.Exit(1)
+	}
 }

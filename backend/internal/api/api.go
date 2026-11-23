@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -13,6 +14,7 @@ import (
 	"strings"
 	"time"
 
+	"stationfinder/internal/auth"
 	"stationfinder/internal/config"
 	"stationfinder/internal/data"
 	"stationfinder/internal/geo"
@@ -22,21 +24,32 @@ import (
 )
 
 type Server struct {
-	cfg      *config.Config
-	stations []*data.Station
-	byID     map[string]*data.Station
-	store    *locations.Store
-	search   *search.Service
-	google   *google.Client
-	bgCtx    context.Context
+	cfg    *config.Config
+	lists  []*data.List
+	all    []*data.Station // one per station ID across all lists
+	byID   map[string]*data.Station
+	store  *locations.Store
+	search *search.Service
+	google *google.Client
+	auth   *auth.Auth // nil = sign-in off
+	bgCtx  context.Context
 }
 
-func New(bgCtx context.Context, cfg *config.Config, stations []*data.Station, store *locations.Store, svc *search.Service, gc *google.Client) *Server {
-	byID := make(map[string]*data.Station, len(stations))
-	for _, s := range stations {
+func New(bgCtx context.Context, cfg *config.Config, lists []*data.List, store *locations.Store, svc *search.Service, gc *google.Client, au *auth.Auth) *Server {
+	all := data.AllStations(lists)
+	byID := make(map[string]*data.Station, len(all))
+	for _, s := range all {
 		byID[s.ID] = s
 	}
-	return &Server{cfg: cfg, stations: stations, byID: byID, store: store, search: svc, google: gc, bgCtx: bgCtx}
+	return &Server{cfg: cfg, lists: lists, all: all, byID: byID, store: store, search: svc, google: gc, auth: au, bgCtx: bgCtx}
+}
+
+// adminRoutes change shared data. With built-in sign-in only the admin group may call
+// them; on Choreo they are tagged "admin" in openapi.yaml for the same purpose.
+var adminRoutes = map[string]bool{
+	"PUT /api/stations/{id}/location":    true,
+	"DELETE /api/stations/{id}/location": true,
+	"POST /api/geocode":                  true,
 }
 
 // routes is the API surface. Keep backend/openapi.yaml in sync: on Choreo the
@@ -61,11 +74,32 @@ func (s *Server) routes() map[string]http.HandlerFunc {
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	for pattern, h := range s.routes() {
-		mux.HandleFunc(pattern, h)
+		mux.HandleFunc(pattern, s.guard(pattern, h))
+	}
+	if s.auth != nil {
+		mux.HandleFunc("POST /auth/login", s.auth.Login)
+		mux.HandleFunc("GET /auth/userinfo", s.auth.UserInfo)
+		mux.HandleFunc("POST /auth/logout", s.auth.Logout)
+		// The frontend navigates to these in Choreo mode; here the app shows its own form.
+		mux.HandleFunc("GET /auth/login", func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, "/", http.StatusFound)
+		})
+		mux.HandleFunc("GET /auth/logout", func(w http.ResponseWriter, r *http.Request) {
+			s.auth.Logout(discardStatus{w}, r)
+			http.Redirect(w, r, "/", http.StatusFound)
+		})
 	}
 
 	if dir := s.cfg.Server.StaticDir; dir != "" {
 		if _, err := os.Stat(filepath.Join(dir, "index.html")); err == nil {
+			// Runtime config for the UI served from here: same origin, and sign-in on
+			// when a users file is configured. (On Choreo a file mount provides it.)
+			mux.HandleFunc("GET /config.js", func(w http.ResponseWriter, _ *http.Request) {
+				cfg, _ := json.Marshal(map[string]any{"apiUrl": "", "managedAuth": s.auth != nil, "authMode": "local"})
+				w.Header().Set("Content-Type", "text/javascript; charset=utf-8")
+				w.Header().Set("Cache-Control", "no-store")
+				fmt.Fprintf(w, "window.configs = %s;\n", cfg)
+			})
 			fs := http.FileServer(http.Dir(dir))
 			mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 				if _, err := os.Stat(filepath.Join(dir, filepath.Clean(r.URL.Path))); err != nil {
@@ -79,6 +113,31 @@ func (s *Server) Handler() http.Handler {
 	}
 	return withCORS(withLogging(mux))
 }
+
+// guard enforces sign-in on API routes when built-in auth is on.
+func (s *Server) guard(pattern string, h http.HandlerFunc) http.HandlerFunc {
+	if s.auth == nil || !strings.Contains(pattern, " /api/") {
+		return h
+	}
+	admin := adminRoutes[pattern]
+	return func(w http.ResponseWriter, r *http.Request) {
+		u := s.auth.User(r)
+		if u == nil {
+			writeErr(w, http.StatusUnauthorized, errors.New("sign in required"))
+			return
+		}
+		if admin && !s.auth.IsAdmin(u) {
+			writeErr(w, http.StatusForbidden, errors.New("only administrators can do this"))
+			return
+		}
+		h(w, r)
+	}
+}
+
+// discardStatus lets a handler set cookies while the caller decides the status.
+type discardStatus struct{ http.ResponseWriter }
+
+func (discardStatus) WriteHeader(int) {}
 
 func withCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -127,17 +186,56 @@ func sortedCounts(m map[string]int) []countItem {
 	return out
 }
 
-func (s *Server) meta(w http.ResponseWriter, _ *http.Request) {
+// list resolves the ?list= query parameter ("" = the default list).
+func (s *Server) list(w http.ResponseWriter, r *http.Request) (*data.List, bool) {
+	l, err := s.search.List(r.URL.Query().Get("list"))
+	if err != nil {
+		writeErr(w, http.StatusBadRequest, err)
+		return nil, false
+	}
+	return l, true
+}
+
+type listSummary struct {
+	ID              string `json:"id"`
+	Name            string `json:"name"`
+	Description     string `json:"description,omitempty"`
+	Source          string `json:"source,omitempty"`
+	StationCount    int    `json:"stationCount"`
+	VacancyCount    int    `json:"vacancyCount"`
+	HasDesignations bool   `json:"hasDesignations"` // false for station-only lists
+}
+
+func summarize(l *data.List) listSummary {
+	sum := listSummary{ID: l.ID, Name: l.Name, Description: l.Description, Source: l.Source, StationCount: len(l.Stations)}
+	for _, st := range l.Stations {
+		sum.VacancyCount += len(st.Vacancies)
+		for _, v := range st.Vacancies {
+			if v.Designation != "" && !l.StationsOnly() {
+				sum.HasDesignations = true
+			}
+		}
+	}
+	return sum
+}
+
+func (s *Server) meta(w http.ResponseWriter, r *http.Request) {
+	list, ok := s.list(w, r)
+	if !ok {
+		return
+	}
 	provinces, districts, types, cats := map[string]int{}, map[string]int{}, map[string]int{}, map[string]int{}
 	districtProvince := map[string]string{}
 	located, suspect, vacancies := 0, 0, 0
-	for _, st := range s.stations {
+	for _, st := range list.Stations {
 		provinces[st.Province]++
 		districts[st.District]++
 		districtProvince[st.District] = st.Province
 		cats[st.Category]++
 		for _, v := range st.Vacancies {
-			types[v.Type]++
+			if v.Type != "" {
+				types[v.Type]++
+			}
 			vacancies++
 		}
 		if e := s.store.Get(st.ID); e != nil && e.Location != nil {
@@ -153,11 +251,18 @@ func (s *Server) meta(w http.ResponseWriter, _ *http.Request) {
 			catList = append(catList, countItem{c, n})
 		}
 	}
+	lists := make([]listSummary, len(s.lists))
+	for i, l := range s.lists {
+		lists[i] = summarize(l)
+	}
 	writeJSON(w, http.StatusOK, map[string]any{
+		"list":             list.ID,
+		"lists":            lists,
+		"hasDesignations":  summarize(list).HasDesignations,
 		"apiKeyConfigured": s.cfg.Google.APIKey != "",
 		"travelMode":       s.cfg.Google.TravelMode,
 		"defaultLimit":     s.cfg.Search.DefaultLimit,
-		"stationCount":     len(s.stations),
+		"stationCount":     len(list.Stations),
 		"vacancyCount":     vacancies,
 		"locatedCount":     located,
 		"suspectCount":     suspect,
@@ -175,9 +280,13 @@ type stationView struct {
 	Location *locations.Entry `json:"location"`
 }
 
-func (s *Server) listStations(w http.ResponseWriter, _ *http.Request) {
-	out := make([]stationView, len(s.stations))
-	for i, st := range s.stations {
+func (s *Server) listStations(w http.ResponseWriter, r *http.Request) {
+	list, ok := s.list(w, r)
+	if !ok {
+		return
+	}
+	out := make([]stationView, len(list.Stations))
+	for i, st := range list.Stations {
 		out[i] = stationView{st, s.store.Get(st.ID)}
 	}
 	writeJSON(w, http.StatusOK, out)
@@ -216,7 +325,7 @@ func (s *Server) clearLocation(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) runGeocode(w http.ResponseWriter, r *http.Request) {
 	retry := r.URL.Query().Get("retryFailed") == "true"
-	if err := s.store.Run(s.bgCtx, s.stations, s.cfg.Geocoding.Workers, retry); err != nil {
+	if err := s.store.Run(s.bgCtx, s.all, s.cfg.Geocoding.Workers, retry); err != nil {
 		writeErr(w, http.StatusConflict, err)
 		return
 	}
@@ -253,7 +362,7 @@ type stationSuggestion struct {
 	Location geo.LatLng `json:"location"`
 }
 
-// autocomplete returns Google place predictions plus matching stations from the vacancy list.
+// autocomplete returns Google place predictions plus matching stations from any list.
 func (s *Server) autocomplete(w http.ResponseWriter, r *http.Request) {
 	q := strings.TrimSpace(r.URL.Query().Get("q"))
 	resp := struct {
@@ -267,7 +376,7 @@ func (s *Server) autocomplete(w http.ResponseWriter, r *http.Request) {
 	}
 
 	upper := strings.ToUpper(q)
-	for _, st := range s.stations {
+	for _, st := range s.all {
 		if len(resp.Stations) >= 5 {
 			break
 		}

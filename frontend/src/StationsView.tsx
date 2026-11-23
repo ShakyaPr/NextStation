@@ -3,7 +3,7 @@ import { api, locationQuality, titleCase } from "./api";
 import type { Meta, Station } from "./api";
 import StationMap, { type MapMarker } from "./StationMap";
 import { useIsPhone } from "./useMediaQuery";
-import { Alert, QualityChip, Segmented, VacancyChips } from "./ui";
+import { Alert, ListPicker, QualityChip, Segmented, VacancyChips } from "./ui";
 import { CloseIcon, ExternalIcon, ListIcon, MapIcon, PinIcon, SearchIcon } from "./icons";
 
 type StatusFilter = "all" | "problems" | "manual";
@@ -11,9 +11,10 @@ type StatusFilter = "all" | "problems" | "manual";
 interface Props {
   meta: Meta;
   onChanged: () => void;
+  onListChange: (id: string) => void;
 }
 
-export default function StationsView({ meta, onChanged }: Props) {
+export default function StationsView({ meta, onChanged, onListChange }: Props) {
   const [stations, setStations] = useState<Station[]>([]);
   const [text, setText] = useState("");
   const [status, setStatus] = useState<StatusFilter>("all");
@@ -29,10 +30,11 @@ export default function StationsView({ meta, onChanged }: Props) {
     if (phone && id) setView("map");
   }
 
-  const load = () => api.stations().then(setStations).catch((e) => setError(e.message));
+  const load = () => api.stations(meta.list).then(setStations).catch((e) => setError(e.message));
   useEffect(() => {
     load();
-  }, [meta.locatedCount, meta.geocoding.done]);
+  }, [meta.list, meta.locatedCount, meta.geocoding.done]);
+  useEffect(() => select(null), [meta.list]);
 
   const filtered = useMemo(() => {
     const t = text.trim().toUpperCase();
@@ -126,6 +128,7 @@ export default function StationsView({ meta, onChanged }: Props) {
         </div>
         {g.lastError && <Alert severity="warning">Last error: {g.lastError}</Alert>}
         {error && <Alert severity="error">{error}</Alert>}
+        <ListPicker lists={meta.lists} value={meta.list} onChange={onListChange} id="st-list" />
         <div className="search-field">
           <SearchIcon />
           <input
@@ -155,7 +158,8 @@ export default function StationsView({ meta, onChanged }: Props) {
               <span className="station-item-text">
                 <span className="station-item-name">{titleCase(s.name)}</span>
                 <span className="result-meta">
-                  {titleCase(s.district)} · {s.vacancies.length} vacanc{s.vacancies.length === 1 ? "y" : "ies"}
+                  {titleCase(s.district)}
+                  {meta.hasDesignations && ` · ${s.vacancies.length} vacanc${s.vacancies.length === 1 ? "y" : "ies"}`}
                 </span>
               </span>
               <QualityChip entry={s.location} always />
@@ -234,7 +238,7 @@ export default function StationsView({ meta, onChanged }: Props) {
             <dd className="text-error">{sel.location.error}</dd>
           </>
         )}
-        <dt>Vacancies</dt>
+        <dt>{meta.hasDesignations ? "Vacancies" : "Listed as"}</dt>
         <dd>
           <VacancyChips vacancies={sel.vacancies} />
         </dd>

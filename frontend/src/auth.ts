@@ -8,15 +8,22 @@
 // API calls through /choreo-apis/... are authorised by Choreo's session cookies,
 // so the browser never handles an access token.
 
+//
+// Self-hosted (Docker), the backend provides the same /auth/* endpoints itself and
+// serves config.js with authMode "local": the app then shows a username/password
+// form instead of redirecting to an identity provider.
+
 declare global {
   interface Window {
-    configs?: { apiUrl?: string; managedAuth?: boolean };
+    configs?: { apiUrl?: string; managedAuth?: boolean; authMode?: "choreo" | "local" };
   }
 }
 
 export const runtimeConfig = {
   apiUrl: (window.configs?.apiUrl ?? "").replace(/\/+$/, ""),
   managedAuth: window.configs?.managedAuth === true,
+  /** "local" = the backend's built-in sign-in (username + password form). */
+  localAuth: window.configs?.authMode === "local",
 };
 
 export interface User {
@@ -85,7 +92,9 @@ export async function loadUser(): Promise<User | null> {
   } catch {
     // fall through
   }
-  // 3. Fallback: what we stored at sign-in during this browser session.
+  // 3. Fallback: what we stored at sign-in during this browser session (Choreo only;
+  //    the built-in sign-in always answers /auth/userinfo).
+  if (runtimeConfig.localAuth) return null;
   const stored = safeSession(() => sessionStorage.getItem(USER_KEY));
   return stored ? (JSON.parse(stored) as User) : null;
 }
@@ -95,8 +104,27 @@ export function login() {
   window.location.href = "/auth/login";
 }
 
-export function logout() {
+/** Built-in sign-in: check the password and start a session (sets an HttpOnly cookie). */
+export async function loginWithPassword(username: string, password: string): Promise<User> {
+  const res = await fetch("/auth/login", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error ?? `Sign-in failed (HTTP ${res.status})`);
+  safeSession(() => sessionStorage.setItem(USER_KEY, JSON.stringify(data)));
+  return data as User;
+}
+
+export async function logout() {
   safeSession(() => sessionStorage.removeItem(USER_KEY));
+  if (runtimeConfig.localAuth) {
+    await fetch("/auth/logout", { method: "POST", credentials: "same-origin" }).catch(() => undefined);
+    window.location.href = "/";
+    return;
+  }
   const hint = getCookie("session_hint") ?? "";
   window.location.href = `/auth/logout?session_hint=${encodeURIComponent(hint)}`;
 }

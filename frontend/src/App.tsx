@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { api, type Meta } from "./api";
-import { authErrorFromUrl, displayName, loadUser, login, logout, runtimeConfig, type User } from "./auth";
+import { authErrorFromUrl, displayName, loadUser, login, loginWithPassword, logout, runtimeConfig, type User } from "./auth";
 import SearchView from "./SearchView";
 import StationsView from "./StationsView";
 import { useIsPhone } from "./useMediaQuery";
@@ -10,7 +10,80 @@ import { PinIcon, SearchIcon } from "./icons";
 type Tab = "search" | "stations";
 type AuthState = { status: "checking" } | { status: "signedOut" } | { status: "signedIn"; user: User | null };
 
-function SignIn({ error }: { error: string | null }) {
+const LIST_KEY = "stationFinder.list";
+
+function storedList(): string {
+  try {
+    return localStorage.getItem(LIST_KEY) ?? "";
+  } catch {
+    return ""; // storage can be unavailable (private mode, blocked site data)
+  }
+}
+
+function rememberList(id: string) {
+  try {
+    localStorage.setItem(LIST_KEY, id);
+  } catch {
+    // not remembered; the default list is used next time
+  }
+}
+
+/** Username + password form for the backend's built-in sign-in (self-hosted). */
+function PasswordForm({ onSignedIn }: { onSignedIn: (u: User) => void }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      onSignedIn(await loginWithPassword(username.trim(), password));
+    } catch (err) {
+      setError((err as Error).message);
+      setBusy(false);
+    }
+  }
+
+  return (
+    <form className="signin-form" onSubmit={submit}>
+      <div className="field">
+        <label htmlFor="si-user">Username</label>
+        <input
+          id="si-user"
+          className="input"
+          autoComplete="username"
+          autoCapitalize="none"
+          spellCheck={false}
+          required
+          autoFocus
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div className="field">
+        <label htmlFor="si-pass">Password</label>
+        <input
+          id="si-pass"
+          className="input"
+          type="password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      {error && <Alert severity="error">{error}</Alert>}
+      <button className="btn btn-contained btn-lg btn-full" type="submit" disabled={busy}>
+        {busy ? "Signing in…" : "Sign in"}
+      </button>
+    </form>
+  );
+}
+
+function SignIn({ error, onSignedIn }: { error: string | null; onSignedIn: (u: User) => void }) {
   return (
     <div className="signin">
       <div className="signin-card">
@@ -20,9 +93,13 @@ function SignIn({ error }: { error: string | null }) {
         </div>
         <h1>Sign in to continue</h1>
         <p className="muted">Find the vacancy stations that best match your location, travel time and preferences.</p>
-        <button className="btn btn-contained btn-lg btn-full" onClick={login}>
-          Sign in
-        </button>
+        {runtimeConfig.localAuth ? (
+          <PasswordForm onSignedIn={onSignedIn} />
+        ) : (
+          <button className="btn btn-contained btn-lg btn-full" onClick={login}>
+            Sign in
+          </button>
+        )}
         <p className="muted small">Access is limited to invited users.</p>
         {error && <Alert severity="error">{error}</Alert>}
       </div>
@@ -65,6 +142,7 @@ export default function App() {
   const [meta, setMeta] = useState<Meta | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("search");
+  const [listId, setListId] = useState(storedList);
   const phone = useIsPhone();
 
   useEffect(() => {
@@ -76,12 +154,24 @@ export default function App() {
 
   const refresh = useCallback(() => {
     api
-      .meta()
+      .meta(listId || undefined)
       .then((m) => {
         setMeta(m);
         setError(null);
       })
-      .catch((e) => setError(`Cannot reach the backend: ${e.message}`));
+      .catch((e) => {
+        // A remembered list that no longer exists: fall back to the default list.
+        if (listId && String(e.message).includes("unknown list")) {
+          setListId("");
+          return;
+        }
+        setError(`Cannot reach the backend: ${e.message}`);
+      });
+  }, [listId]);
+
+  const changeList = useCallback((id: string) => {
+    rememberList(id);
+    setListId(id);
   }, []);
 
   const signedIn = auth.status === "signedIn";
@@ -106,7 +196,7 @@ export default function App() {
     );
   }
   if (auth.status === "signedOut") {
-    return <SignIn error={authError} />;
+    return <SignIn error={authError} onSignedIn={(user) => setAuth({ status: "signedIn", user })} />;
   }
 
   const needsReview = !!meta && meta.suspectCount + (meta.stationCount - meta.locatedCount) > 0;
@@ -158,12 +248,12 @@ export default function App() {
         {/* The search stays mounted so its results survive a tab switch. */}
         {meta && (
           <div className="tab-panel" hidden={tab !== "search"}>
-            <SearchView meta={meta} />
+            <SearchView meta={meta} onListChange={changeList} />
           </div>
         )}
         {meta && tab === "stations" && (
           <div className="tab-panel">
-            <StationsView meta={meta} onChanged={refresh} />
+            <StationsView meta={meta} onChanged={refresh} onListChange={changeList} />
           </div>
         )}
         {!meta && !error && (
