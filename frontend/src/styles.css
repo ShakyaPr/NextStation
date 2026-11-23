@@ -609,6 +609,7 @@ input[type="range"] {
   border: 1px solid var(--border-default);
   border-radius: 12px;
   background: #ffffff;
+  cursor: pointer;
 }
 .origin-card-icon {
   flex: none;
