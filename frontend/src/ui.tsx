@@ -6,7 +6,7 @@ import { locationQuality } from "./api";
 
 /** Chip colour per vacancy type (the legend in the results header uses the same mapping). */
 const TYPE_COLORS: Record<string, string> = {
-  "Difficult station": "primary",
+  "Difficult station": "error", // difficult stations are marked red everywhere
   New: "default",
   "Special Requests": "info",
   "AT Replacement": "success",
@@ -32,6 +32,15 @@ export function VacancyChips({ vacancies }: { vacancies: Vacancy[] }) {
         </Chip>
       ))}
     </div>
+  );
+}
+
+/** Red label for a station on the difficult stations list. */
+export function DifficultChip() {
+  return (
+    <Chip color="error" dot>
+      Difficult station
+    </Chip>
   );
 }
 

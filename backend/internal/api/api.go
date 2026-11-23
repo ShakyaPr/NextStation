@@ -215,14 +215,18 @@ func (s *Server) meta(w http.ResponseWriter, r *http.Request) {
 	}
 	provinces, districts, types, cats := map[string]int{}, map[string]int{}, map[string]int{}, map[string]int{}
 	districtProvince := map[string]string{}
-	located, suspect, vacancies := 0, 0, 0
+	located, suspect, vacancies, difficult := 0, 0, 0, 0
 	for _, st := range list.Stations {
+		if st.Difficult {
+			difficult++
+		}
 		provinces[st.Province]++
 		districts[st.District]++
 		districtProvince[st.District] = st.Province
 		cats[st.Category]++
 		for _, v := range st.Vacancies {
-			if v.Type != "" {
+			// Difficult stations have their own filter (difficultOnly), not a vacancy type.
+			if v.Type != "" && v.Type != data.DifficultType {
 				types[v.Type]++
 			}
 			vacancies++
@@ -252,6 +256,7 @@ func (s *Server) meta(w http.ResponseWriter, r *http.Request) {
 		"travelMode":       s.cfg.Google.TravelMode,
 		"defaultLimit":     s.cfg.Search.DefaultLimit,
 		"stationCount":     len(list.Stations),
+		"difficultCount":   difficult,
 		"vacancyCount":     vacancies,
 		"locatedCount":     located,
 		"suspectCount":     suspect,

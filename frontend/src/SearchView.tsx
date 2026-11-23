@@ -4,7 +4,7 @@ import type { LatLng, Meta, SearchRequest, SearchResponse, SearchResult } from "
 import StationMap, { type MapMarker } from "./StationMap";
 import PlaceSearch, { type SelectedPlace } from "./PlaceSearch";
 import { useLayout, type Layout } from "./useMediaQuery";
-import { Alert, ListPicker, QualityChip, Segmented, TypeLegend, VacancyChips, listCounts } from "./ui";
+import { Alert, DifficultChip, ListPicker, QualityChip, Segmented, TypeLegend, VacancyChips, listCounts } from "./ui";
 import {
   ChevronLeft,
   ChevronRight,
@@ -46,6 +46,7 @@ interface Settings {
   category: string;
   type: string;
   designation: string;
+  difficultOnly: boolean;
 }
 
 const defaults = (limit: number): Settings => ({
@@ -58,6 +59,7 @@ const defaults = (limit: number): Settings => ({
   category: "",
   type: "",
   designation: "",
+  difficultOnly: false,
 });
 
 const DESIGNATIONS = ["MO", "SHO", "MOIC", "ADDITIONAL MOH", "MO OPD", "ANAESTHESIA", "PAEDIATRICS", "MEDICINE", "SURGERY"];
@@ -87,7 +89,7 @@ function directionsUrl(from: LatLng, to: LatLng) {
 }
 
 function activeFilterCount(s: Settings) {
-  return [s.province, s.district, s.category, s.type, s.designation.trim()].filter(Boolean).length;
+  return [s.province, s.district, s.category, s.type, s.designation.trim(), s.difficultOnly].filter(Boolean).length;
 }
 
 function buildRequest(origin: SelectedPlace, s: Settings, list: string): SearchRequest {
@@ -104,6 +106,7 @@ function buildRequest(origin: SelectedPlace, s: Settings, list: string): SearchR
   if (s.category) req.categories = [s.category];
   if (s.type) req.types = [s.type];
   if (s.designation.trim()) req.designation = s.designation.trim();
+  if (s.difficultOnly) req.difficultOnly = true;
   return req;
 }
 
@@ -291,7 +294,7 @@ function SettingsForm(p: SettingsFormProps) {
               <button
                 type="button"
                 className="btn btn-text btn-sm"
-                onClick={() => update({ province: "", district: "", category: "", type: "", designation: "" })}
+                onClick={() => update({ province: "", district: "", category: "", type: "", designation: "", difficultOnly: false })}
               >
                 Clear
               </button>
@@ -357,6 +360,31 @@ function SettingsForm(p: SettingsFormProps) {
             </div>
           )}
         </div>
+        {meta.difficultCount > 0 && (
+          <div className="field">
+            <span className="field-label" id="f-difficult">
+              Difficult stations
+            </span>
+            <Segmented
+              label="Difficult stations"
+              stretch
+              options={[
+                { value: "all", label: "All stations" },
+                {
+                  value: "only",
+                  label: (
+                    <>
+                      <span className="difficult-dot" aria-hidden="true" />
+                      Difficult only ({num(meta.difficultCount)})
+                    </>
+                  ),
+                },
+              ]}
+              value={s.difficultOnly ? "only" : "all"}
+              onChange={(v) => update({ difficultOnly: v === "only" })}
+            />
+          </div>
+        )}
         {meta.hasDesignations && (
         <div className="field">
           <label htmlFor="f-designation">Designation contains</label>
@@ -399,8 +427,8 @@ function ResultRow({
   const name = titleCase(r.station.name);
   const dir = directionsUrl(origin, r.location.location!);
   return (
-    <li className={`result${selected ? " on" : ""}`}>
-      <span className="rank num" aria-hidden="true">
+    <li className={`result${selected ? " on" : ""}${r.station.difficult ? " difficult" : ""}`}>
+      <span className={`rank num${r.station.difficult ? " difficult" : ""}`} aria-hidden="true">
         {r.rank}
       </span>
       <div className="result-main">
@@ -442,6 +470,7 @@ function StationPopup({ r, origin }: { r: SearchResult; origin: LatLng }) {
         <span className="popup-meta">
           {r.station.category} · {titleCase(r.station.district)}
         </span>
+        {r.station.difficult && <DifficultChip />}
       </div>
       <div className="popup-metrics num">
         <span className="strong">
@@ -495,7 +524,7 @@ function StationSheet({
         <span className="sheet-handle" aria-hidden="true" />
       </button>
       <div className="sheet-head">
-        <span className="rank num on" aria-hidden="true">
+        <span className={`rank num on${r.station.difficult ? " difficult" : ""}`} aria-hidden="true">
           {r.rank}
         </span>
         <button type="button" className="sheet-title" aria-expanded={expanded} onClick={onToggle}>
@@ -533,8 +562,13 @@ function StationSheet({
           </dl>
         </>
       ) : (
-        // An approximate location changes how far the station really is: keep that visible.
-        <QualityChip entry={r.location} />
+        (r.station.difficult || r.location.source === "geocode-town" || r.location.suspect) && (
+          // Difficult, and an approximate location (it changes the real distance), stay visible.
+          <div className="result-chips">
+            {r.station.difficult && <DifficultChip />}
+            <QualityChip entry={r.location} />
+          </div>
+        )
       )}
       <div className="sheet-actions">
         <button type="button" className="icon-btn" aria-label="Previous station" onClick={() => onMove(-1)} disabled={total < 2}>
@@ -606,6 +640,7 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
       category: has(meta.categories, settings.category) ? settings.category : "",
       type: has(meta.types, settings.type) ? settings.type : "",
       designation: meta.hasDesignations ? settings.designation : "",
+      difficultOnly: meta.difficultCount > 0 && settings.difficultOnly,
     };
     setSettings(next);
     if (origin && resp) runSearch(origin, next);
@@ -715,6 +750,7 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
     pos: r.location.location!,
     label: String(r.rank),
     tone: "good",
+    difficult: r.station.difficult,
   }));
 
   const originOnMap = origin ?? (resp ? { lat: resp.origin.lat, lng: resp.origin.lng } : null);

@@ -49,44 +49,49 @@ func TestLoadListsManifest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := map[string]int{"vacancies-2025-11-04": 1416, "difficult-stations-2026": 265, "draft-2026": 1300}
-	if len(lists) != len(want) {
-		t.Fatalf("got %d lists, want %d", len(lists), len(want))
+	if len(lists) != 1 || lists[0].ID != "vacancies-2025-11-04" {
+		t.Fatalf("lists = %d, want only the 2025.11.04 vacancy list", len(lists))
 	}
-	byID := map[string]map[string]*Station{}
-	for _, l := range lists {
-		n := 0
-		byID[l.ID] = map[string]*Station{}
-		for _, st := range l.Stations {
-			n += len(st.Vacancies)
-			byID[l.ID][st.ID] = st
-		}
-		if n != want[l.ID] {
-			t.Errorf("list %s: %d rows, want %d", l.ID, n, want[l.ID])
+	l := lists[0]
+	rows, difficult, difficultRows := 0, 0, 0
+	byID := map[string]*Station{}
+	for _, st := range l.Stations {
+		byID[st.ID] = st
+		rows += len(st.Vacancies)
+		if st.Difficult {
+			difficult++
+			difficultRows += len(st.Vacancies)
 		}
 	}
-	if lists[0].ID != "vacancies-2025-11-04" {
-		t.Errorf("default list = %s", lists[0].ID)
+	if rows != 1416 || len(l.Stations) != 537 {
+		t.Errorf("%d vacancies at %d stations, want 1416 at 537", rows, len(l.Stations))
 	}
-	// The same station has the same ID in every list, so it shares one location.
-	for _, id := range []string{"kandy-gampola-bh", "kandy-deltota-sisila-mental-rehabilitation-centre"} {
-		for l := range want {
-			if l == "difficult-stations-2026" && id == "kandy-gampola-bh" {
-				continue
+	// The stations of PDF345 that are on the 2026 difficult stations list.
+	if difficult != 115 || difficultRows != 126 {
+		t.Errorf("%d difficult stations with %d vacancies, want 115 with 126", difficult, difficultRows)
+	}
+	if st := byID["kandy-deltota-sisila-mental-rehabilitation-centre"]; st == nil || !st.Difficult {
+		t.Errorf("Deltota Sisila Mental Rehabilitation Centre should be difficult: %+v", st)
+	}
+	if st := byID["kandy-gampola-bh"]; st == nil || st.Difficult {
+		t.Errorf("Gampola BH should not be difficult: %+v", st)
+	}
+	// The difficult list itself must still load (it is the source of the marking).
+	hard, err := LoadStations("../../../data/difficult-stations-2026.json")
+	if err != nil || len(hard) != 265 {
+		t.Fatalf("difficult list: %d stations, err %v", len(hard), err)
+	}
+	inPDF345 := 0
+	for _, st := range hard {
+		if byID[st.ID] != nil {
+			inPDF345++
+			if !byID[st.ID].Difficult {
+				t.Errorf("%s is on the difficult list but not marked in PDF345", st.ID)
 			}
-			if byID[l][id] == nil {
-				t.Errorf("station %s missing from list %s", id, l)
-			}
 		}
 	}
-	// Vacancies at difficult stations are marked in the new vacancy list.
-	for _, v := range byID["vacancies-2025-11-04"]["kandy-deltota-sisila-mental-rehabilitation-centre"].Vacancies {
-		if v.Type != "Difficult station" {
-			t.Errorf("vacancy at a difficult station has type %q", v.Type)
-		}
-	}
-	if n := len(AllStations(lists)); n <= len(byID["vacancies-2025-11-04"]) {
-		t.Errorf("AllStations = %d, expected the union of all lists", n)
+	if inPDF345 != difficult {
+		t.Errorf("%d difficult-list stations are in PDF345 but %d are marked", inPDF345, difficult)
 	}
 }
 

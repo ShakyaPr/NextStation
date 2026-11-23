@@ -35,8 +35,9 @@ type Request struct {
 	SortBy         string   `json:"sortBy,omitempty"` // duration | distance | straight
 	Provinces      []string `json:"provinces,omitempty"`
 	Districts      []string `json:"districts,omitempty"`
-	Types          []string `json:"types,omitempty"`      // vacancy type: New, Difficult station, ...
-	Categories     []string `json:"categories,omitempty"` // station category
+	Types          []string `json:"types,omitempty"`         // vacancy type: New, Difficult station, ...
+	Categories     []string `json:"categories,omitempty"`    // station category
+	DifficultOnly  bool     `json:"difficultOnly,omitempty"` // only stations on the difficult stations list
 	Designation    string   `json:"designation,omitempty"`
 }
 
@@ -193,6 +194,9 @@ func (s *Service) Search(ctx context.Context, req Request) (*Response, error) {
 			continue
 		}
 		if cats != nil && !cats[strings.ToUpper(st.Category)] {
+			continue
+		}
+		if req.DifficultOnly && !st.Difficult {
 			continue
 		}
 		var vacs []data.Vacancy

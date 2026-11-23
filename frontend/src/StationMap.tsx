@@ -9,6 +9,8 @@ export interface MapMarker {
   pos: LatLng;
   label: string;
   tone: "good" | "warn" | "bad" | "muted";
+  /** Station on the difficult stations list: a red numbered pin. */
+  difficult?: boolean;
 }
 
 interface Props {
@@ -38,11 +40,12 @@ const SRI_LANKA_CENTER: [number, number] = [7.8731, 80.7718];
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-function rankIcon(label: string, selected: boolean) {
+function rankIcon(label: string, selected: boolean, difficult?: boolean) {
   const size = selected ? 34 : 28;
+  const cls = `pin${selected ? " on" : ""}${difficult ? " difficult" : ""}`;
   return L.divIcon({
     className: "",
-    html: `<div class="pin${selected ? " on" : ""}" style="width:${size}px;height:${size}px">${escapeHtml(label)}</div>`,
+    html: `<div class="${cls}" style="width:${size}px;height:${size}px">${escapeHtml(label)}</div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
@@ -242,7 +245,7 @@ export default function StationMap({
           <Marker
             key={m.id}
             position={[m.pos.lat, m.pos.lng]}
-            icon={pinStyle === "rank" ? rankIcon(m.label, m.id === selectedId) : statusIcon(m.tone, m.id === selectedId)}
+            icon={pinStyle === "rank" ? rankIcon(m.label, m.id === selectedId, m.difficult) : statusIcon(m.tone, m.id === selectedId)}
             zIndexOffset={m.id === selectedId ? 900 : 0}
             title={pinStyle === "status" ? m.label : undefined}
             eventHandlers={{ click: () => onMarkerClick?.(m.id) }}
