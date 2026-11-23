@@ -19,7 +19,8 @@ backend/       Go API server                       (http://localhost:8080)
 data/          lists.json (which lists exist) + one JSON per list, geocache.json, overrides.json
 source-pdfs/   the PDFs the lists were extracted from
 tools/         extract_pdf.py (text PDF), extract_scanned_pdf.py (scanned PDF) → data/*.json
-deploy/        config.yaml for the image, Caddyfile, users.example.csv
+deploy/        config.yaml for the image, Caddyfile
+docs/          keycloak.md: setting up sign-in and registering users
 docker-compose.yml, Dockerfile, .env.example   VPS deployment
 ```
 
@@ -108,13 +109,14 @@ serves the UI at http://localhost:8080 (`server.staticDir` in your local `config
 ## Deploy on a VPS with Docker
 
 One container serves the UI and the API, and [Caddy](https://caddyserver.com) in
-front of it gets an HTTPS certificate automatically. Sign-in is built in: only the
-people in your users file can open the app or use your Google key.
+front of it gets an HTTPS certificate automatically. Sign-in goes through your
+**Keycloak**: only users you register there can open the app or use your Google key.
+(On Dokploy, Traefik takes Caddy's place; see [Deploy on Dokploy](#deploy-on-dokploy).)
 
 ```
-Browser ──HTTPS──► Caddy (:443, Let's Encrypt) ──► app (:8080, UI + API + sign-in) ──► Google APIs
-                                                     │
-                                                     └─ volume app-data: locations, fixes, session key
+Browser ──HTTPS──► Caddy (:443, Let's Encrypt) ──► app (:8080, UI + API) ──► Google APIs
+   │                                                 │  │
+   └──── sign-in page ◄──────── Keycloak ◄───────────┘  └─ volume app-data: locations, fixes, session key
 ```
 
 ### 1. Prepare the server
@@ -124,45 +126,31 @@ Browser ──HTTPS──► Caddy (:443, Let's Encrypt) ──► app (:8080, U
   `stations.example.com`. If you have no domain, see "No domain" below.
 - Ports **80** and **443** open in the firewall (Caddy needs 80 for the certificate).
 
-### 2. Get the code and configure
+### 2. Set up Keycloak
+Follow [docs/keycloak.md](docs/keycloak.md) Part 1: create a realm, a `station-finder`
+client and an `admin` role. Then register your users (Part 3). Note the client secret.
+
+### 3. Get the code and configure
 ```bash
 git clone <your repo URL> station-finder && cd station-finder
 cp .env.example .env
-nano .env        # GOOGLE_MAPS_API_KEY=...   DOMAIN=stations.example.com
+nano .env
 ```
-
-### 3. Choose who can sign in
-Create `users.csv` next to `docker-compose.yml`. It is git-ignored and never
-copied into the image. It uses the same columns as the Choreo user CSV:
-```csv
-username,password,groups,first_name,last_name,email
-"stationadmin","<hash>","[admins, users]","Station","Admin","admin@example.com"
-"doctor1","<hash>","[users]","Nimal","Perera","nimal@example.com"
-```
-- Members of `admins` can fix station locations and re-run geocoding. Everyone
-  else can search.
-- Make a password hash for each user (build the image once first):
-  ```bash
-  docker compose build
-  read -rs PW && printf '%s\n' "$PW" | docker run --rm -i station-finder:latest hash-password
-  ```
-  Type the password and press Enter; paste the printed `$2a$...` line into the
-  password column.
-- Plain-text passwords also work (e.g. an existing `station-finder-users.csv`), but the
-  app logs a warning. Hashes are safer if the file leaks.
-- The container runs as UID 10014, so make the file readable: `chmod 644 users.csv`.
-- After editing the file, restart the app: `docker compose restart app`.
-
-Create `users.csv` **before** the first `docker compose up`. Otherwise Docker creates
-an empty directory with that name and the app refuses to start. If that happens, run
-`rm -r users.csv`, create the file, and start again.
+Fill in:
+- `GOOGLE_MAPS_API_KEY`
+- `DOMAIN=stations.example.com`
+- `OIDC_ISSUER=https://keycloak.example.com/realms/station-finder`
+- `OIDC_CLIENT_SECRET=<client secret>`
+- `PUBLIC_URL=https://stations.example.com`
 
 ### 4. Start
 ```bash
 docker compose up -d --build
 docker compose logs -f app       # watch the first start
 ```
-Open `https://<your domain>` and sign in.
+Open `https://<your domain>` and sign in with a Keycloak user. The log should show
+`sign-in with https://keycloak…`; see the troubleshooting table in
+[docs/keycloak.md](docs/keycloak.md) if sign-in fails.
 - On the first start the app locates any stations missing from the committed
   `data/geocache.json`, about 1–2 minutes. Results are kept in the `app-data` volume.
 - If the Google key was wrong at that point, fix `.env`, run `docker compose up -d`,
@@ -198,15 +186,19 @@ only for testing: passwords and session cookies travel unencrypted.
 |---|---|
 | `GOOGLE_MAPS_API_KEY` | required; Places API (New), Geocoding API, Routes API |
 | `DOMAIN` | domain for HTTPS, or `:80` |
+| `OIDC_ISSUER` | Keycloak realm URL. **Empty = no sign-in: anyone can use the app** |
+| `OIDC_CLIENT_ID` | default `station-finder` |
+| `OIDC_CLIENT_SECRET` | the client's secret (Keycloak → Clients → station-finder → Credentials) |
+| `PUBLIC_URL` | the app's address; Keycloak must allow `PUBLIC_URL/auth/callback` |
+| `OIDC_ADMIN_ROLE` | default `admin`; users with it can fix station locations |
+| `OIDC_REQUIRED_ROLE` | optional; only users with this role may sign in |
 | `SESSION_SECRET` | optional, 32+ characters; otherwise generated and kept in the volume |
 
-`docker-compose.yml` also sets these for the container:
-- `STATE_DIR=/data`: the volume
-- `AUTH_USERS_FILE=/run/config/users.csv`: the mounted users file. Without it,
-  sign-in is off and the API is open to anyone.
+`docker-compose.yml` also sets `STATE_DIR=/data` (the volume).
 
-Sign-ins last 7 days (`auth.sessionHours` in `deploy/config.yaml`). After 10 wrong
-passwords from one address, sign-in is blocked there for 15 minutes.
+Signing in lasts 12 hours (`auth.sessionHours` in `deploy/config.yaml`). After that the
+app checks with Keycloak again, silently if the user is still signed in there.
+Wrong-password lock-outs are handled by Keycloak's brute force detection.
 
 ### Running the image without compose
 ```bash
@@ -217,6 +209,24 @@ curl localhost:8080/healthz
 - Runs as UID `10014`. Without `STATE_DIR`, it writes only to `/tmp/stationfinder`, so
   a read-only root filesystem works, but fixes are lost when the container is replaced.
 - Health check: `GET /healthz`, or `/app/stationfinder healthcheck` inside the container.
+
+### Deploy on Dokploy
+Deploy as an **Application**, not as Compose. Dokploy's Traefik already serves ports
+80/443 with HTTPS, so Caddy isn't needed.
+1. **Create Service → Application.**
+   - Provider: your Git repo, branch `main`.
+   - Build Type **Dockerfile**: Dockerfile Path `Dockerfile`, Docker Context Path `.`.
+2. **Environment:** the variables from the Settings table above (without `DOMAIN`),
+   plus `STATE_DIR=/data`.
+3. **Advanced → Volumes/Mounts → Volume Mount:** Volume Name `station-finder-data`,
+   Mount Path `/data`. Use a volume, not a bind mount: the app runs as UID 10014 and
+   couldn't write to a root-owned host folder.
+4. **Domains:** your host, **Container Port `8080`**, HTTPS on, certificate `letsencrypt`.
+5. **Deploy.** To copy location fixes out of the volume:
+   ```bash
+   C=$(docker ps -q --filter name=<app name>)
+   docker cp $C:/data/overrides.json data/overrides.json
+   ```
 
 ## Alternative: deploy on Choreo with managed authentication
 
@@ -358,9 +368,10 @@ budget alert in Google Cloud.
 | `GET` | `/api/places/autocomplete?q=kegal&session=<token>` | Google place suggestions + matching stations |
 | `GET` | `/api/places/details?placeId=<id>&session=<token>` | coordinates of a suggested place |
 
-Without `list`, the first list in `data/lists.json` is used. With the built-in sign-in
-on, every `/api/*` call needs the session cookie from `POST /auth/login`.
-`GET /auth/userinfo` returns the signed-in user and `POST /auth/logout` signs out.
+Without `list`, the first list in `data/lists.json` is used. With Keycloak sign-in on,
+every `/api/*` call needs the session cookie set after `GET /auth/login`, which
+redirects to Keycloak and back to `/auth/callback`. `GET /auth/userinfo` returns the
+signed-in user and `GET /auth/logout` signs out of the app and Keycloak.
 
 ```bash
 curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{

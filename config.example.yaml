@@ -33,9 +33,14 @@ geocoding:
   onStartup: true   # geocode any stations missing from geocache.json when the server starts
   workers: 4
 
-# Optional built-in sign-in (normally used in Docker; see README). Leave usersFile
-# empty to run without sign-in.
+# Optional sign-in with Keycloak (normally used in Docker; see docs/keycloak.md).
+# Leave issuer empty to run without sign-in. Env vars OIDC_ISSUER, OIDC_CLIENT_ID,
+# OIDC_CLIENT_SECRET, PUBLIC_URL, OIDC_ADMIN_ROLE and OIDC_REQUIRED_ROLE override these.
 auth:
-  usersFile: ""          # CSV: username,password,groups,first_name,last_name,email
-  adminGroup: admins     # members may fix station locations and run geocoding
-  sessionHours: 168
+  issuer: ""                 # e.g. https://keycloak.example.com/realms/station-finder
+  clientId: station-finder
+  clientSecret: ""
+  publicUrl: ""              # e.g. http://localhost:8080 (Keycloak must allow <publicUrl>/auth/callback)
+  adminRole: admin           # users with this role may fix station locations
+  requiredRole: ""           # optional: only users with this role may sign in
+  sessionHours: 12
