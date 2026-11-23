@@ -446,11 +446,11 @@ a:focus-visible {
   font-weight: 500;
   box-shadow: var(--shadow-xs);
 }
-.segmented.stretch {
+.segmented.full {
   display: flex;
   border-radius: 22px;
 }
-.segmented.stretch button {
+.segmented.full button {
   flex: 1;
   min-height: 38px;
   border-radius: 19px;
@@ -1440,6 +1440,8 @@ input[type="range"] {
   text-align: left;
   cursor: pointer;
 }
+/* Clickable card: the element's ::after covers its nearest positioned ancestor, so the
+   whole row responds to a tap. Only for elements inside a position: relative row. */
 .stretch::after {
   content: "";
   position: absolute;
