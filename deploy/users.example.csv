@@ -1,3 +1,0 @@
-username,password,groups,first_name,last_name,email
-"stationadmin","$2a$12$replace.with.a.hash.from.hash-password.command.xxxxxxxxxxxxxx","[admins, users]","Station","Admin","admin@example.com"
-"doctor1","$2a$12$replace.with.a.hash.from.hash-password.command.xxxxxxxxxxxxxx","[users]","First","Doctor","doctor1@example.com"

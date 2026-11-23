@@ -4,8 +4,8 @@
 // (proxied by Vite) and there is no sign-in.
 //
 // When the Go backend serves the built UI (the Docker image), it answers /config.js
-// itself, turning on its built-in sign-in when a users file is configured:
-//   window.configs = { apiUrl: "", managedAuth: true, authMode: "local" };
+// itself, turning on Keycloak sign-in when OIDC_ISSUER is configured:
+//   window.configs = { apiUrl: "", managedAuth: true, authMode: "oidc" };
 //
 // On Choreo this file is REPLACED by a file mount on the web app component, e.g.
 //   window.configs = {

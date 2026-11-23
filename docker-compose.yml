@@ -1,7 +1,6 @@
 # Station Finder on a VPS: the app plus Caddy for HTTPS (automatic Let's Encrypt).
 #
-#   cp .env.example .env              # fill in GOOGLE_MAPS_API_KEY and DOMAIN
-#   cp deploy/users.example.csv users.csv && chmod 644 users.csv   # who may sign in
+#   cp .env.example .env              # Google key, DOMAIN and the Keycloak client settings
 #   docker compose up -d --build
 #
 # See README → "Deploy on a VPS with Docker".
@@ -12,12 +11,17 @@ services:
     restart: unless-stopped
     environment:
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:?set GOOGLE_MAPS_API_KEY in .env}
+      # Sign-in with Keycloak (docs/keycloak.md). Leave OIDC_ISSUER empty to run without sign-in.
+      OIDC_ISSUER: ${OIDC_ISSUER:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-station-finder}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_ADMIN_ROLE: ${OIDC_ADMIN_ROLE:-admin}
+      OIDC_REQUIRED_ROLE: ${OIDC_REQUIRED_ROLE:-}
+      PUBLIC_URL: ${PUBLIC_URL:-}
       SESSION_SECRET: ${SESSION_SECRET:-}
       STATE_DIR: /data
-      AUTH_USERS_FILE: /run/config/users.csv
     volumes:
       - app-data:/data                                  # locations, fixes, session key
-      - ./users.csv:/run/config/users.csv:ro            # sign-in users (not in the image)
     # Not published: only Caddy reaches it. For a quick test without Caddy, add
     #   ports: ["8080:8080"]
     expose: ["8080"]

@@ -66,17 +66,28 @@ type GeocodingConfig struct {
 	Workers   int  `yaml:"workers"`
 }
 
-// AuthConfig turns on the built-in sign-in (used when the app is self-hosted, e.g. on
-// a VPS with Docker; on Choreo, managed authentication does this instead).
+// AuthConfig turns on sign-in with Keycloak (or another OpenID Connect provider) when
+// the app is self-hosted, e.g. Docker on a VPS. (On Choreo, managed authentication
+// does this instead and these settings stay empty.)
 type AuthConfig struct {
-	// UsersFile is a CSV of the people who may sign in:
-	//   username,password,groups,first_name,last_name,email
-	// password is a bcrypt hash (stationfinder hash-password) or, discouraged, plain text.
-	// Empty = sign-in off and the API is open. Env: AUTH_USERS_FILE.
-	UsersFile string `yaml:"usersFile"`
-	// Members of this group may change station locations and run geocoding.
-	AdminGroup string `yaml:"adminGroup"`
-	// How long a sign-in lasts.
+	// Issuer is the Keycloak realm URL, e.g. https://keycloak.example.com/realms/station-finder.
+	// Empty = sign-in off and the API is open. Env: OIDC_ISSUER.
+	Issuer string `yaml:"issuer"`
+	// The Keycloak client (confidential, standard flow). Env: OIDC_CLIENT_ID, OIDC_CLIENT_SECRET.
+	ClientID     string `yaml:"clientId"`
+	ClientSecret string `yaml:"clientSecret"`
+	// PublicURL is the address users open, e.g. https://stations.example.com. Keycloak
+	// sends users back to PublicURL/auth/callback. Empty = taken from each request.
+	// Env: PUBLIC_URL.
+	PublicURL string `yaml:"publicUrl"`
+	// Users with this role (a client role of ClientID, a realm role or a group name)
+	// may change station locations and run geocoding. Env: OIDC_ADMIN_ROLE.
+	AdminRole string `yaml:"adminRole"`
+	// Optional: only users with this role may sign in (useful when the realm also has
+	// users of other apps). Empty = every user of the realm. Env: OIDC_REQUIRED_ROLE.
+	RequiredRole string `yaml:"requiredRole"`
+	// How long a sign-in lasts in this app. Removing a user in Keycloak takes effect
+	// when it ends. Signing in again is automatic while the Keycloak session is alive.
 	SessionHours int `yaml:"sessionHours"`
 	// SessionSecret signs the session cookie. Env: SESSION_SECRET. When empty, a random
 	// key is created in SessionKeyFile so sessions survive restarts.
@@ -107,7 +118,7 @@ func Load(path string) (*Config, error) {
 			SuspectDistanceKm:  75,
 		},
 		Geocoding: GeocodingConfig{OnStartup: true, Workers: 4},
-		Auth:      AuthConfig{AdminGroup: "admins", SessionHours: 24 * 7},
+		Auth:      AuthConfig{ClientID: "station-finder", AdminRole: "admin", SessionHours: 12},
 	}
 	if err := yaml.Unmarshal(raw, cfg); err != nil {
 		return nil, fmt.Errorf("parse config: %w", err)
@@ -116,12 +127,20 @@ func Load(path string) (*Config, error) {
 		cfg.Google.APIKey = env
 	}
 	cfg.Google.APIKey = strings.TrimSpace(cfg.Google.APIKey)
-	if env := os.Getenv("AUTH_USERS_FILE"); env != "" {
-		cfg.Auth.UsersFile = env
+	for env, field := range map[string]*string{
+		"OIDC_ISSUER":        &cfg.Auth.Issuer,
+		"OIDC_CLIENT_ID":     &cfg.Auth.ClientID,
+		"OIDC_CLIENT_SECRET": &cfg.Auth.ClientSecret,
+		"OIDC_ADMIN_ROLE":    &cfg.Auth.AdminRole,
+		"OIDC_REQUIRED_ROLE": &cfg.Auth.RequiredRole,
+		"PUBLIC_URL":         &cfg.Auth.PublicURL,
+		"SESSION_SECRET":     &cfg.Auth.SessionSecret,
+	} {
+		if v := strings.TrimSpace(os.Getenv(env)); v != "" {
+			*field = v
+		}
 	}
-	if env := os.Getenv("SESSION_SECRET"); env != "" {
-		cfg.Auth.SessionSecret = env
-	}
+	cfg.Auth.Issuer = strings.TrimRight(strings.TrimSpace(cfg.Auth.Issuer), "/")
 	if env := os.Getenv("PORT"); env != "" {
 		port, err := strconv.Atoi(env)
 		if err != nil {
@@ -143,7 +162,6 @@ func Load(path string) (*Config, error) {
 	cfg.Data.GeocacheSeedFile = resolve(cfg.Data.GeocacheSeedFile)
 	cfg.Data.OverridesSeedFile = resolve(cfg.Data.OverridesSeedFile)
 	cfg.Server.StaticDir = resolve(cfg.Server.StaticDir)
-	cfg.Auth.UsersFile = resolve(cfg.Auth.UsersFile)
 	cfg.Auth.SessionKeyFile = resolve(cfg.Auth.SessionKeyFile)
 	// STATE_DIR moves every file the app writes into one directory (a Docker volume).
 	if dir := os.Getenv("STATE_DIR"); dir != "" {
@@ -154,11 +172,8 @@ func Load(path string) (*Config, error) {
 	if cfg.Auth.SessionKeyFile == "" {
 		cfg.Auth.SessionKeyFile = filepath.Join(filepath.Dir(cfg.Data.GeocacheFile), "session.key")
 	}
-	if cfg.Auth.AdminGroup == "" {
-		cfg.Auth.AdminGroup = "admins"
-	}
 	if cfg.Auth.SessionHours <= 0 {
-		cfg.Auth.SessionHours = 24 * 7
+		cfg.Auth.SessionHours = 12
 	}
 	if cfg.Google.TravelMode == "" {
 		cfg.Google.TravelMode = "DRIVE"

@@ -1,7 +1,9 @@
 # Configuration baked into the Docker image (see Dockerfile).
 # Secrets are NOT stored here; they come from environment variables:
 #   GOOGLE_MAPS_API_KEY   Google key (required)
-#   AUTH_USERS_FILE       users CSV; turns on the built-in sign-in (recommended on a VPS)
+#   OIDC_ISSUER, OIDC_CLIENT_ID, OIDC_CLIENT_SECRET, PUBLIC_URL
+#                         sign-in with Keycloak (recommended on a VPS; docs/keycloak.md)
+#   OIDC_ADMIN_ROLE, OIDC_REQUIRED_ROLE   optional role names
 #   SESSION_SECRET        optional; otherwise a key is generated in the state directory
 #   STATE_DIR             where writable files go (docker-compose.yml sets /data, a volume)
 #   PORT, CONFIG_FILE     also honoured
@@ -37,6 +39,7 @@ geocoding:
   onStartup: true   # only stations missing from the seed / state are looked up
 
 auth:
-  # usersFile comes from AUTH_USERS_FILE. Members of adminGroup may fix locations.
-  adminGroup: admins
-  sessionHours: 168
+  # issuer, clientId, clientSecret and publicUrl come from the OIDC_* / PUBLIC_URL env vars.
+  clientId: station-finder
+  adminRole: admin      # users with this role may fix station locations
+  sessionHours: 12      # then the app checks with Keycloak again (silently if still signed in there)

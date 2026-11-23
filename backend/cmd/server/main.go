@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"errors"
 	"flag"
@@ -10,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 	"time"
 
@@ -26,9 +24,6 @@ import (
 func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
-		case "hash-password":
-			hashPassword()
-			return
 		case "healthcheck":
 			healthcheck()
 			return
@@ -53,6 +48,11 @@ func main() {
 	au, err := auth.New(cfg.Auth)
 	if err != nil {
 		log.Fatal(err)
+	}
+	if au != nil {
+		go au.Check(context.Background())
+	} else {
+		log.Printf("sign-in is off (no OIDC_ISSUER): anyone who can reach the app can use it")
 	}
 	client := google.New(cfg.Google.APIKey)
 	store, err := locations.NewStoreWithSeeds(locations.Paths{
@@ -96,27 +96,6 @@ func main() {
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	_ = srv.Shutdown(shutdownCtx)
-}
-
-// hashPassword reads a password from stdin and prints a bcrypt hash for the users file:
-//
-//	docker compose run --rm -T app hash-password
-func hashPassword() {
-	fmt.Fprint(os.Stderr, "Password: ")
-	line, err := bufio.NewReader(os.Stdin).ReadString('\n')
-	if err != nil && line == "" {
-		log.Fatal("no password given")
-	}
-	pw := strings.TrimRight(line, "\r\n")
-	if len(pw) < 8 {
-		log.Fatal("use at least 8 characters")
-	}
-	h, err := auth.HashPassword(pw)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Fprintln(os.Stderr)
-	fmt.Println(h)
 }
 
 // healthcheck exits 0 if the server answers /healthz (the image has no curl or shell).

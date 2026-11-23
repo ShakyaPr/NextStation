@@ -44,8 +44,8 @@ func New(bgCtx context.Context, cfg *config.Config, lists []*data.List, store *l
 	return &Server{cfg: cfg, lists: lists, all: all, byID: byID, store: store, search: svc, google: gc, auth: au, bgCtx: bgCtx}
 }
 
-// adminRoutes change shared data. With built-in sign-in only the admin group may call
-// them; on Choreo they are tagged "admin" in openapi.yaml for the same purpose.
+// adminRoutes change shared data. With Keycloak sign-in only users with the admin role
+// may call them; on Choreo they are tagged "admin" in openapi.yaml for the same purpose.
 var adminRoutes = map[string]bool{
 	"PUT /api/stations/{id}/location":    true,
 	"DELETE /api/stations/{id}/location": true,
@@ -77,25 +77,19 @@ func (s *Server) Handler() http.Handler {
 		mux.HandleFunc(pattern, s.guard(pattern, h))
 	}
 	if s.auth != nil {
-		mux.HandleFunc("POST /auth/login", s.auth.Login)
+		// Sign-in with Keycloak; same paths as Choreo's managed authentication.
+		mux.HandleFunc("GET /auth/login", s.auth.Login)
+		mux.HandleFunc("GET /auth/callback", s.auth.Callback)
 		mux.HandleFunc("GET /auth/userinfo", s.auth.UserInfo)
-		mux.HandleFunc("POST /auth/logout", s.auth.Logout)
-		// The frontend navigates to these in Choreo mode; here the app shows its own form.
-		mux.HandleFunc("GET /auth/login", func(w http.ResponseWriter, r *http.Request) {
-			http.Redirect(w, r, "/", http.StatusFound)
-		})
-		mux.HandleFunc("GET /auth/logout", func(w http.ResponseWriter, r *http.Request) {
-			s.auth.Logout(discardStatus{w}, r)
-			http.Redirect(w, r, "/", http.StatusFound)
-		})
+		mux.HandleFunc("GET /auth/logout", s.auth.Logout)
 	}
 
 	if dir := s.cfg.Server.StaticDir; dir != "" {
 		if _, err := os.Stat(filepath.Join(dir, "index.html")); err == nil {
 			// Runtime config for the UI served from here: same origin, and sign-in on
-			// when a users file is configured. (On Choreo a file mount provides it.)
+			// when Keycloak is configured. (On Choreo a file mount provides it.)
 			mux.HandleFunc("GET /config.js", func(w http.ResponseWriter, _ *http.Request) {
-				cfg, _ := json.Marshal(map[string]any{"apiUrl": "", "managedAuth": s.auth != nil, "authMode": "local"})
+				cfg, _ := json.Marshal(map[string]any{"apiUrl": "", "managedAuth": s.auth != nil, "authMode": "oidc"})
 				w.Header().Set("Content-Type", "text/javascript; charset=utf-8")
 				w.Header().Set("Cache-Control", "no-store")
 				fmt.Fprintf(w, "window.configs = %s;\n", cfg)
@@ -133,11 +127,6 @@ func (s *Server) guard(pattern string, h http.HandlerFunc) http.HandlerFunc {
 		h(w, r)
 	}
 }
-
-// discardStatus lets a handler set cookies while the caller decides the status.
-type discardStatus struct{ http.ResponseWriter }
-
-func (discardStatus) WriteHeader(int) {}
 
 func withCORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

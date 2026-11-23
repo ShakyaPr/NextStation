@@ -9,21 +9,20 @@
 // so the browser never handles an access token.
 
 //
-// Self-hosted (Docker), the backend provides the same /auth/* endpoints itself and
-// serves config.js with authMode "local": the app then shows a username/password
-// form instead of redirecting to an identity provider.
+// Self-hosted (Docker), the Go backend provides the same /auth/* endpoints itself and
+// signs users in with Keycloak; it serves config.js with authMode "oidc".
 
 declare global {
   interface Window {
-    configs?: { apiUrl?: string; managedAuth?: boolean; authMode?: "choreo" | "local" };
+    configs?: { apiUrl?: string; managedAuth?: boolean; authMode?: "choreo" | "oidc" };
   }
 }
 
 export const runtimeConfig = {
   apiUrl: (window.configs?.apiUrl ?? "").replace(/\/+$/, ""),
   managedAuth: window.configs?.managedAuth === true,
-  /** "local" = the backend's built-in sign-in (username + password form). */
-  localAuth: window.configs?.authMode === "local",
+  /** Sign-in is run by our own backend (Keycloak), which always answers /auth/userinfo. */
+  backendAuth: window.configs?.authMode === "oidc",
 };
 
 export interface User {
@@ -93,8 +92,8 @@ export async function loadUser(): Promise<User | null> {
     // fall through
   }
   // 3. Fallback: what we stored at sign-in during this browser session (Choreo only;
-  //    the built-in sign-in always answers /auth/userinfo).
-  if (runtimeConfig.localAuth) return null;
+  //    our own backend always answers /auth/userinfo).
+  if (runtimeConfig.backendAuth) return null;
   const stored = safeSession(() => sessionStorage.getItem(USER_KEY));
   return stored ? (JSON.parse(stored) as User) : null;
 }
@@ -104,32 +103,13 @@ export function login() {
   window.location.href = "/auth/login";
 }
 
-/** Built-in sign-in: check the password and start a session (sets an HttpOnly cookie). */
-export async function loginWithPassword(username: string, password: string): Promise<User> {
-  const res = await fetch("/auth/login", {
-    method: "POST",
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error ?? `Sign-in failed (HTTP ${res.status})`);
-  safeSession(() => sessionStorage.setItem(USER_KEY, JSON.stringify(data)));
-  return data as User;
-}
-
-export async function logout() {
+export function logout() {
   safeSession(() => sessionStorage.removeItem(USER_KEY));
-  if (runtimeConfig.localAuth) {
-    await fetch("/auth/logout", { method: "POST", credentials: "same-origin" }).catch(() => undefined);
-    window.location.href = "/";
-    return;
-  }
   const hint = getCookie("session_hint") ?? "";
   window.location.href = `/auth/logout?session_hint=${encodeURIComponent(hint)}`;
 }
 
-/** Error reported by Choreo on the error path (?code=...&message=...). */
+/** Sign-in error reported on the app URL (?code=...&message=...) by Choreo or our backend. */
 export function authErrorFromUrl(): string | null {
   const p = new URLSearchParams(window.location.search);
   const code = p.get("code");
