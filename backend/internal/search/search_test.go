@@ -61,7 +61,7 @@ func fakeGoogle(t *testing.T) *httptest.Server {
 			fmt.Fprint(w, `{"status":"ZERO_RESULTS","results":[]}`)
 			return
 		}
-		fmt.Fprintf(w, `{"status":"OK","results":[{"formatted_address":"addr","types":["locality"],"geometry":{"location":{"lat":%f,"lng":%f}}}]}`, p.Lat, p.Lng)
+		fmt.Fprintf(w, `{"status":"OK","results":[{"formatted_address":%q,"types":["locality"],"geometry":{"location":{"lat":%f,"lng":%f}}}]}`, r.URL.Query().Get("address"), p.Lat, p.Lng)
 	})
 	mux.HandleFunc("/matrix", func(w http.ResponseWriter, r *http.Request) {
 		var body struct {
@@ -109,7 +109,10 @@ func TestSearchEndToEnd(t *testing.T) {
 		{Province: "CENTRAL PROVINCE", District: "KANDY", Institution: "KANDY NATIONAL HOSPITAL", Designation: "SHO SURGERY", Type: "New"},
 		{Province: "SABARAGAMUWA PROVINCE", District: "RATHNAPURA", Institution: "RATNAPURA TH", Designation: "MO", Type: "New"},
 		{Province: "NORTHERN PROVINCE", District: "JAFFNA", Institution: "JAFFNA TH", Designation: "MO", Type: "New"},
-		{Province: "NORTHERN PROVINCE", District: "JAFFNA", Institution: "NOWHERE PMCU", Designation: "MO", Type: "New"},
+		// Unknown to Google: falls back to the Mannar district centre.
+		{Province: "NORTHERN PROVINCE", District: "MANNAR", Institution: "NOWHERE PMCU", Designation: "MO", Type: "New"},
+		// Unknown to Google, in an area without a known centre: stays without a location.
+		{Province: "NOWHERE PROVINCE", District: "ATLANTIS", Institution: "LOST PMCU", Designation: "MO", Type: "New"},
 	}
 	raw, _ := json.Marshal(vac)
 	vacPath := filepath.Join(dir, "v.json")
@@ -140,8 +143,11 @@ func TestSearchEndToEnd(t *testing.T) {
 		}
 		time.Sleep(10 * time.Millisecond)
 	}
-	if p := store.Progress(); p.Failed != 1 || p.Done != 6 {
-		t.Fatalf("progress = %+v, want 6 done / 1 failed", p)
+	if p := store.Progress(); p.Failed != 1 || p.Done != 7 {
+		t.Fatalf("progress = %+v, want 7 done / 1 failed", p)
+	}
+	if e := store.Get("mannar-nowhere-pmcu"); e == nil || e.Source != "district" || e.Location == nil {
+		t.Fatalf("NOWHERE PMCU should be at the district centre: %+v", e)
 	}
 	if _, err := os.Stat(filepath.Join(dir, "cache.json")); err != nil {
 		t.Fatal("geocache not written")
@@ -159,7 +165,7 @@ func TestSearchEndToEnd(t *testing.T) {
 	for _, r := range resp.Results {
 		names = append(names, r.Station.Name)
 	}
-	want := "MAWANELLA BH,WARAKAPOLA DH,KANDY NATIONAL HOSPITAL,RATNAPURA TH,JAFFNA TH"
+	want := "MAWANELLA BH,WARAKAPOLA DH,KANDY NATIONAL HOSPITAL,RATNAPURA TH,NOWHERE PMCU,JAFFNA TH"
 	if strings.Join(names, ",") != want {
 		t.Fatalf("results = %v, want %s", names, want)
 	}

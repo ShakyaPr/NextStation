@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { api, formatDuration, titleCase } from "./api";
+import { api, formatDuration, isApproximate, locationQuality, titleCase } from "./api";
 import type { LatLng, Meta, SearchRequest, SearchResponse, SearchResult } from "./api";
 import StationMap, { type MapMarker } from "./StationMap";
 import PlaceSearch, { type SelectedPlace } from "./PlaceSearch";
@@ -470,7 +470,12 @@ function StationPopup({ r, origin }: { r: SearchResult; origin: LatLng }) {
         <span className="popup-meta">
           {r.station.category} · {titleCase(r.station.district)}
         </span>
-        {r.station.difficult && <DifficultChip />}
+        {(r.station.difficult || locationQuality(r.location).tone !== "good") && (
+          <div className="popup-chips">
+            {r.station.difficult && <DifficultChip />}
+            <QualityChip entry={r.location} />
+          </div>
+        )}
       </div>
       <div className="popup-metrics num">
         <span className="strong">
@@ -562,7 +567,7 @@ function StationSheet({
           </dl>
         </>
       ) : (
-        (r.station.difficult || r.location.source === "geocode-town" || r.location.suspect) && (
+        (r.station.difficult || locationQuality(r.location).tone !== "good") && (
           // Difficult, and an approximate location (it changes the real distance), stay visible.
           <div className="result-chips">
             {r.station.difficult && <DifficultChip />}
@@ -751,6 +756,7 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
     label: String(r.rank),
     tone: "good",
     difficult: r.station.difficult,
+    approx: isApproximate(r.location),
   }));
 
   const originOnMap = origin ?? (resp ? { lat: resp.origin.lat, lng: resp.origin.lng } : null);

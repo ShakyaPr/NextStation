@@ -61,6 +61,21 @@ type Place struct {
 	Name     string     `json:"name,omitempty"`
 	Address  string     `json:"address,omitempty"`
 	PlaceID  string     `json:"placeId,omitempty"`
+	// Types are Google's place types, e.g. "hospital" or "locality".
+	Types []string `json:"-"`
+}
+
+// IsArea reports whether a result is a town, village or other area rather than a
+// facility: what Google returns when it doesn't know the station itself.
+func (p *Place) IsArea() bool {
+	for _, t := range p.Types {
+		switch t {
+		case "establishment", "point_of_interest", "premise", "subpremise", "street_address",
+			"hospital", "health", "doctor", "local_government_office", "government_office":
+			return false
+		}
+	}
+	return true
 }
 
 type apiError struct {
@@ -141,10 +156,11 @@ func (c *Client) PlacesTextSearch(ctx context.Context, query string) ([]Place, e
 				Latitude  float64 `json:"latitude"`
 				Longitude float64 `json:"longitude"`
 			} `json:"location"`
+			Types []string `json:"types"`
 		} `json:"places"`
 	}
 	err := c.postJSON(ctx, c.ep.PlacesSearchText,
-		"places.id,places.displayName,places.formattedAddress,places.location", body, &resp)
+		"places.id,places.displayName,places.formattedAddress,places.location,places.types", body, &resp)
 	if err != nil {
 		return nil, err
 	}
@@ -158,6 +174,7 @@ func (c *Client) PlacesTextSearch(ctx context.Context, query string) ([]Place, e
 			Name:     p.DisplayName.Text,
 			Address:  p.FormattedAddress,
 			PlaceID:  p.ID,
+			Types:    p.Types,
 		})
 	}
 	return out, nil
@@ -306,6 +323,7 @@ func (c *Client) Geocode(ctx context.Context, address string) (*Place, error) {
 		Location: geo.LatLng{Lat: r.Geometry.Location.Lat, Lng: r.Geometry.Location.Lng},
 		Address:  r.FormattedAddress,
 		PlaceID:  r.PlaceID,
+		Types:    r.Types,
 	}, nil
 }
 

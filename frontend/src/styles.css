@@ -1782,6 +1782,11 @@ input[type="range"] {
 .pin.on.difficult {
   box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.3), var(--shadow-sm);
 }
+/* Only the town or district is known: a dashed ring says "roughly here". */
+.pin.approx {
+  outline: 2px dashed var(--gray-700);
+  outline-offset: 1px;
+}
 .dot-pin {
   width: 100%;
   height: 100%;
@@ -1869,8 +1874,10 @@ input[type="range"] {
   flex-direction: column;
   gap: 2px;
 }
-.popup-head .chip {
-  align-self: flex-start;
+.popup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
   margin-top: 4px;
 }
 .popup-title {

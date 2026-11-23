@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
@@ -198,7 +199,7 @@ func (s *Store) Run(ctx context.Context, stations []*data.Station, workers int, 
 	var todo []*data.Station
 	for _, st := range stations {
 		e := s.Get(st.ID)
-		if e == nil || (retryFailed && e.Status != "ok") {
+		if e == nil || (retryFailed && e.Status != "ok") || needsRecheck(st, e) {
 			todo = append(todo, st)
 		}
 	}
@@ -269,14 +270,30 @@ func (s *Store) saveCache() {
 	}
 }
 
-// locate tries, in order: Places text search, Geocoding of the full name,
-// then Geocoding of the town name. A candidate within the district radius wins;
-// otherwise the first result found is kept and flagged suspect.
+// nearTownKm: a facility named after a town is within this distance of the town.
+const nearTownKm = 15
+
+// locate finds a station, from most to least precise:
+//  1. Places Text Search for the station itself. A result only counts if its name or
+//     address mentions the station's place (NameMatches) and, when the town is known,
+//     it lies near that town: Google happily returns another health office, or a
+//     similarly named place elsewhere, for a facility it doesn't know.
+//  2. Geocoding of the full name, if Google returns an actual facility.
+//  3. The town the station is named after (a town-level location).
+//  4. The centre of the district, so the station is still searchable (marked as such).
+//
+// A candidate within the district radius wins; otherwise the first one found is kept
+// and flagged suspect. API errors (bad key, quota) skip step 4, so the station is
+// retried on the next run instead of being parked at the district centre.
 func (s *Store) locate(ctx context.Context, st *data.Station) *Entry {
 	query := st.SearchQuery()
 	var fallback *Entry
 	var lastErr error
-
+	note := func(err error) {
+		if err != nil && !errors.Is(err, google.ErrNotFound) {
+			lastErr = err
+		}
+	}
 	consider := func(e *Entry) bool {
 		s.annotate(st, e)
 		if !e.Suspect {
@@ -287,52 +304,99 @@ func (s *Store) locate(ctx context.Context, st *data.Station) *Entry {
 		}
 		return false
 	}
+	entry := func(p google.Place, source, q string) *Entry {
+		loc := p.Location
+		return &Entry{Status: "ok", Location: &loc, Source: source, Query: q,
+			MatchedName: p.Name, Address: p.Address, UpdatedAt: time.Now()}
+	}
 
+	town := s.findTown(ctx, st, note)
+	nearTown := func(p google.Place) bool {
+		return town == nil || geo.HaversineKm(p.Location, *town.Location) <= nearTownKm
+	}
+
+	// 1. The station itself.
 	if s.usePlaces {
 		places, err := s.client.PlacesTextSearch(ctx, query)
-		if err != nil && !errors.Is(err, google.ErrNotFound) {
-			lastErr = err
-		}
+		note(err)
 		for _, p := range places {
-			e := &Entry{Status: "ok", Location: &p.Location, Source: "places", Query: query,
-				MatchedName: p.Name, Address: p.Address, UpdatedAt: time.Now()}
-			if consider(e) {
+			if !NameMatches(st.Name, p.Name+" "+p.Address) || !nearTown(p) {
+				continue
+			}
+			if e := entry(p, "places", query); consider(e) {
 				return e
 			}
 		}
 	}
 
+	// 2. Geocoding of the full name. When Google doesn't know the station it answers
+	// with a town or area, which step 3 handles more carefully.
 	if p, err := s.client.Geocode(ctx, query); err == nil {
-		e := &Entry{Status: "ok", Location: &p.Location, Source: "geocode", Query: query,
-			Address: p.Address, UpdatedAt: time.Now()}
-		if consider(e) {
-			return e
+		if !p.IsArea() && nearTown(*p) {
+			if e := entry(*p, "geocode", query); consider(e) {
+				return e
+			}
 		}
-	} else if !errors.Is(err, google.ErrNotFound) {
-		lastErr = err
+	} else {
+		note(err)
 	}
 
-	for _, tq := range st.TownQueries() {
-		p, err := s.client.Geocode(ctx, tq)
-		if err != nil {
-			if !errors.Is(err, google.ErrNotFound) {
-				lastErr = err
-			}
-			continue
-		}
-		e := &Entry{Status: "ok", Location: &p.Location, Source: "geocode-town", Query: tq,
-			Address: p.Address, UpdatedAt: time.Now()}
-		if consider(e) {
-			return e
-		}
+	// 3. The town.
+	if town != nil && consider(town) {
+		return town
 	}
 
 	if fallback != nil {
 		return fallback
+	}
+	// 4. The district centre.
+	if c, ok := geo.DistrictCentres[st.District]; ok && lastErr == nil {
+		e := &Entry{Status: "ok", Location: &c, Source: "district", Query: st.District + " district",
+			Address: "Centre of " + st.District + " district", UpdatedAt: time.Now()}
+		s.annotate(st, e)
+		return e
 	}
 	msg := errNotFound
 	if lastErr != nil {
 		msg = lastErr.Error()
 	}
 	return &Entry{Status: "failed", Query: query, Error: msg, UpdatedAt: time.Now()}
+}
+
+// findTown locates the town a station is named after (Geocoding, then Places). A result
+// only counts if it names that town: for an unknown village Google answers with the
+// district town instead.
+func (s *Store) findTown(ctx context.Context, st *data.Station, note func(error)) *Entry {
+	for _, tq := range st.TownQueries() {
+		name, _, _ := strings.Cut(tq, ",")
+		town := func(p google.Place) *Entry {
+			loc := p.Location
+			return &Entry{Status: "ok", Location: &loc, Source: "geocode-town", Query: tq,
+				MatchedName: p.Name, Address: p.Address, UpdatedAt: time.Now()}
+		}
+		if p, err := s.client.Geocode(ctx, tq); err == nil {
+			if NameMatches(name, p.Name+" "+p.Address) {
+				return town(*p)
+			}
+		} else {
+			note(err)
+		}
+		if !s.usePlaces {
+			continue
+		}
+		places, err := s.client.PlacesTextSearch(ctx, tq)
+		note(err)
+		for _, p := range places {
+			if NameMatches(name, p.Name+" "+p.Address) {
+				return town(p)
+			}
+		}
+	}
+	return nil
+}
+
+// needsRecheck finds cached matches made before NameMatches existed that point at a
+// different place (e.g. "AHWC Galathura Estate" pinned to a health office in Ratnapura).
+func needsRecheck(st *data.Station, e *Entry) bool {
+	return e.Source == "places" && !NameMatches(st.Name, e.MatchedName+" "+e.Address)
 }

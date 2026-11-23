@@ -42,13 +42,22 @@ docker-compose.yml, Dockerfile, .env.example   VPS deployment
    - To offer more than one list again, add entries to `data/lists.json`; a list
      picker then appears in the app.
 2. **Station locations.** On first start, the backend looks up each station once and
-   caches the result in `data/geocache.json`. It tries these in order:
+   caches the result in `data/geocache.json`. It first locates the town the station
+   is named after (e.g. `AHWC GALATHURA ESTATE` → Galathura), then tries, in order:
    - Places API (New) Text Search, with abbreviations expanded
-     (e.g. `DELTOTA DH` → "Deltota Divisional Hospital, Kandy District, Sri Lanka")
-   - Geocoding API with the same query
-   - Geocoding API with the town name only. These are marked **Town centre**.
+     (e.g. `DELTOTA DH` → "Deltota Divisional Hospital, Kandy District, Sri Lanka").
+     A result counts only if its name or address mentions the station's place and it
+     lies within 15 km of the town. For a facility it doesn't know, Google otherwise
+     returns some other health office or a similarly named place elsewhere.
+   - Geocoding API with the same query, if it returns an actual facility.
+   - The town itself. These are marked **Town centre**.
+   - The district centre, so the station can still be searched. These are marked
+     **District centre**.
 
-   Any result more than 75 km from its district centre is flagged **Check location**.
+   On the map, town- and district-level stations get a dashed ring. Results more than
+   75 km from their district centre are flagged **Check location**. At startup,
+   stations cached as "not found", and earlier matches that name a different place,
+   are looked up again once.
    You can fix it in the UI's *Station locations* tab: select the station, click
    *Set location manually*, then click the map. Manual fixes are saved to
    `data/overrides.json` and always win over the cache.
