@@ -18,7 +18,7 @@ export interface Vacancy {
 export interface LocationEntry {
   status: "ok" | "failed";
   location?: LatLng;
-  source?: "places" | "geocode" | "geocode-town" | "manual";
+  source?: "places" | "geocode" | "geocode-town" | "district" | "manual";
   query?: string;
   matchedName?: string;
   address?: string;
@@ -202,9 +202,16 @@ export function titleCase(s: string): string {
     );
 }
 
+/** The location is only roughly known (the town or district, not the station). */
+export function isApproximate(e?: LocationEntry | null): boolean {
+  return e?.source === "geocode-town" || e?.source === "district";
+}
+
 export function locationQuality(e?: LocationEntry | null): { label: string; tone: "good" | "warn" | "bad" } {
   if (!e || !e.location) return { label: e?.status === "failed" ? "Not found" : "Pending", tone: "bad" };
   if (e.source === "manual") return { label: "Manual", tone: "good" };
+  // Google didn't know the station or its town: placed at the district centre.
+  if (e.source === "district") return { label: "District centre", tone: "bad" };
   if (e.suspect) return { label: "Check location", tone: "bad" };
   if (e.source === "geocode-town") return { label: "Town centre", tone: "warn" };
   return { label: "Located", tone: "good" };

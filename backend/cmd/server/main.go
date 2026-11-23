@@ -75,7 +75,9 @@ func main() {
 	if !client.Enabled() {
 		log.Printf("WARNING: google.apiKey is empty – geocoding and search are disabled")
 	} else if cfg.Geocoding.OnStartup {
-		if err := store.Run(ctx, stations, cfg.Geocoding.Workers, false); err != nil {
+		// Also retry stations cached as "not found": the town and district fallbacks
+		// usually place them now. Each is looked up once; afterwards it has a location.
+		if err := store.Run(ctx, stations, cfg.Geocoding.Workers, true); err != nil {
 			log.Printf("geocoding: %v", err)
 		}
 	}
