@@ -62,6 +62,22 @@ const defaults = (limit: number): Settings => ({
 
 const DESIGNATIONS = ["MO", "SHO", "MOIC", "ADDITIONAL MOH", "MO OPD", "ANAESTHESIA", "PAEDIATRICS", "MEDICINE", "SURGERY"];
 
+const NO_KEY_MESSAGE =
+  "Search is switched off because the server has no Google Maps API key. Ask the administrator to set GOOGLE_MAPS_API_KEY.";
+
+/** A message that says what to do, for each way getting the location can fail. */
+function locationErrorMessage(err: GeolocationPositionError): string {
+  switch (err.code) {
+    case err.PERMISSION_DENIED:
+      return "Location access is blocked for this site. Allow it in your browser's site settings (on iPhone also: Settings → Privacy & Security → Location Services), or search for a place instead.";
+    case err.POSITION_UNAVAILABLE:
+      return "Your location isn't available right now. Check that location (GPS) is turned on, or search for a place instead.";
+    case err.TIMEOUT:
+      return "Finding your location took too long. Try again, or search for a place instead.";
+  }
+  return `Location unavailable: ${err.message}`;
+}
+
 const fmtKm = (v: number) => `${v.toFixed(1)} km`;
 const fmtCoord = (p: LatLng) => `${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`;
 const num = (n: number) => n.toLocaleString("en-US");
@@ -121,6 +137,8 @@ interface SettingsFormProps {
   update: (patch: Partial<Settings>) => void;
   showRanking?: boolean;
   autoFocusSearch?: boolean;
+  /** Shown under the starting point (phone sheet), where the action that failed was taken. */
+  error?: string | null;
 }
 
 function SettingsForm(p: SettingsFormProps) {
@@ -132,6 +150,10 @@ function SettingsForm(p: SettingsFormProps) {
     [meta, s.province],
   );
   const active = activeFilterCount(s);
+  const errorRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (p.error) errorRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [p.error]);
   const limitOptions = [...new Set([5, 10, 20, 50, s.limit])].sort((a, b) => a - b);
 
   return (
@@ -144,7 +166,8 @@ function SettingsForm(p: SettingsFormProps) {
       <section className="settings-section">
         <h2 className="section-title">Starting point</h2>
         {p.origin ? (
-          <div className="origin-card">
+          // The whole card switches back to the search box (it looks like one).
+          <div className="origin-card" onClick={p.onClearOrigin} title="Change starting point">
             <span className="origin-card-icon">
               <LocateIcon size={18} />
             </span>
@@ -175,6 +198,11 @@ function SettingsForm(p: SettingsFormProps) {
             Pick on map
           </button>
         </div>
+        {p.error && (
+          <div ref={errorRef}>
+            <Alert severity="error">{p.error}</Alert>
+          </div>
+        )}
       </section>
 
       <section className="settings-section">
@@ -433,60 +461,86 @@ function StationPopup({ r, origin }: { r: SearchResult; origin: LatLng }) {
   );
 }
 
-/** Phone map view: the selected station as a bottom sheet with previous / next. */
+/**
+ * Phone map view: the selected station as a bottom sheet with previous / next.
+ * Compact by default so the map keeps most of the screen; tap the name or the
+ * handle for the full details.
+ */
 function StationSheet({
   r,
   index,
   total,
   origin,
   onMove,
+  expanded,
+  onToggle,
 }: {
   r: SearchResult;
   index: number;
   total: number;
   origin: LatLng;
   onMove: (delta: number) => void;
+  expanded: boolean;
+  onToggle: () => void;
 }) {
   return (
-    <div className="station-sheet" role="region" aria-label="Selected station">
-      <span className="sheet-handle" aria-hidden="true" />
+    <div className={`station-sheet${expanded ? " expanded" : ""}`} role="region" aria-label="Selected station">
+      <button
+        type="button"
+        className="sheet-grip"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Show fewer details" : "Show more details"}
+        onClick={onToggle}
+      >
+        <span className="sheet-handle" aria-hidden="true" />
+      </button>
       <div className="sheet-head">
         <span className="rank num on" aria-hidden="true">
           {r.rank}
         </span>
-        <div className="sheet-title">
-          <h2>{titleCase(r.station.name)}</h2>
-          <span className="result-meta">
-            {r.station.category} · {titleCase(r.station.district)}
+        <button type="button" className="sheet-title" aria-expanded={expanded} onClick={onToggle}>
+          <span className="sheet-name">{titleCase(r.station.name)}</span>
+          <span className="sheet-summary num">
+            <strong>{formatDuration(r.durationMin)}</strong> · {fmtKm(r.distanceKm)} · {titleCase(r.station.district)}
           </span>
-        </div>
+        </button>
         <span className="num sheet-pos">
-          {index + 1} of {total}
+          {index + 1}/{total}
         </span>
       </div>
-      <div className="result-chips">
+      {expanded ? (
+        <>
+          <span className="result-meta">
+            {r.station.category} · {titleCase(r.station.district)}, {titleCase(r.station.province)}
+          </span>
+          <div className="result-chips">
+            <QualityChip entry={r.location} />
+            <VacancyChips vacancies={r.vacancies} />
+          </div>
+          <dl className="sheet-metrics">
+            <div>
+              <dt>Travel time</dt>
+              <dd className="num">{formatDuration(r.durationMin)}</dd>
+            </div>
+            <div>
+              <dt>By road</dt>
+              <dd className="num">{fmtKm(r.distanceKm)}</dd>
+            </div>
+            <div>
+              <dt>Straight line</dt>
+              <dd className="num">{fmtKm(r.straightLineKm)}</dd>
+            </div>
+          </dl>
+        </>
+      ) : (
+        // An approximate location changes how far the station really is: keep that visible.
         <QualityChip entry={r.location} />
-        <VacancyChips vacancies={r.vacancies} />
-      </div>
-      <dl className="sheet-metrics">
-        <div>
-          <dt>Travel time</dt>
-          <dd className="num">{formatDuration(r.durationMin)}</dd>
-        </div>
-        <div>
-          <dt>By road</dt>
-          <dd className="num">{fmtKm(r.distanceKm)}</dd>
-        </div>
-        <div>
-          <dt>Straight line</dt>
-          <dd className="num">{fmtKm(r.straightLineKm)}</dd>
-        </div>
-      </dl>
+      )}
       <div className="sheet-actions">
         <button type="button" className="icon-btn" aria-label="Previous station" onClick={() => onMove(-1)} disabled={total < 2}>
           <ChevronLeft size={18} />
         </button>
-        <a className="btn btn-contained btn-lg btn-full" href={directionsUrl(origin, r.location.location!)} target="_blank" rel="noreferrer">
+        <a className="btn btn-contained btn-md btn-full" href={directionsUrl(origin, r.location.location!)} target="_blank" rel="noreferrer">
           <NavigateIcon />
           Directions
         </a>
@@ -522,6 +576,7 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
   const [showInfo, setShowInfo] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false); // tablet drawer / phone sheet
   const [view, setView] = useState<"list" | "map">("list"); // phone only
+  const [sheetExpanded, setSheetExpanded] = useState(false); // phone map: station details
   const listRef = useRef<HTMLElement>(null);
 
   const currentKey = origin ? JSON.stringify(buildRequest(origin, settings, meta.list)) : "";
@@ -568,7 +623,10 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
       if (layout === "tablet") setPanelOpen(true);
       return;
     }
-    if (!meta.apiKeyConfigured) return;
+    if (!meta.apiKeyConfigured) {
+      setError(NO_KEY_MESSAGE);
+      return;
+    }
     const req = buildRequest(o, s, meta.list);
     setLoading(true);
     try {
@@ -593,8 +651,13 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
   }
 
   function useMyLocation() {
-    if (!navigator.geolocation) {
-      setError("Location is not available in this browser.");
+    setError(null);
+    if (!window.isSecureContext || !navigator.geolocation) {
+      setError(
+        window.isSecureContext
+          ? "This browser can't share your location. Search for a place instead."
+          : "Your location can only be used when the site is opened over https://.",
+      );
       return;
     }
     setLocating(true);
@@ -605,9 +668,11 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
       },
       (err) => {
         setLocating(false);
-        setError(`Location unavailable: ${err.message}`);
+        setError(locationErrorMessage(err));
       },
-      { enableHighAccuracy: true, timeout: 15000 },
+      // A quick network-based fix is plenty for ranking stations; waiting for GPS is
+      // slow indoors. A position up to 5 minutes old is fine.
+      { enableHighAccuracy: false, maximumAge: 5 * 60_000, timeout: 20_000 },
     );
   }
 
@@ -811,7 +876,8 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
   const resultsPane = (
     <section className={`results-pane${loading ? " busy" : ""}`} aria-label="Results" ref={listRef}>
       {apiKeyAlert && <div className="pane-alert">{apiKeyAlert}</div>}
-      {error && !panelOpen && (
+      {/* The "no API key" case is already explained by apiKeyAlert above. */}
+      {error && !panelOpen && error !== NO_KEY_MESSAGE && (
         <div className="pane-alert">
           <Alert severity="error">{error}</Alert>
         </div>
@@ -902,6 +968,8 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
           total={results.length}
           origin={resp.origin}
           onMove={(d) => setSelected(results[(phoneSelIndex + d + results.length) % results.length].station.id)}
+          expanded={sheetExpanded}
+          onToggle={() => setSheetExpanded((e) => !e)}
         />
       )}
     </section>
@@ -996,7 +1064,8 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
   // Phone
   return (
     <div className="sv sv-phone">
-      <div className="phone-top">
+      {/* One row: the search summary and an icon-only List / Map switch, to leave room for the map. */}
+      <div className="phone-top row">
         <button type="button" className="summary" onClick={() => setPanelOpen(true)}>
           <span className="summary-icon">
             <LocateIcon />
@@ -1012,14 +1081,24 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
             <SlidersIcon />
           </span>
         </button>
-        <nav className="view-toggle" aria-label="Results view">
-          <button type="button" aria-current={view === "list" ? "page" : undefined} onClick={() => setView("list")}>
-            <ListIcon size={15} />
-            List
+        <nav className="view-toggle compact" aria-label="Results view">
+          <button
+            type="button"
+            aria-label="List"
+            title="List"
+            aria-current={view === "list" ? "page" : undefined}
+            onClick={() => setView("list")}
+          >
+            <ListIcon size={18} />
           </button>
-          <button type="button" aria-current={view === "map" ? "page" : undefined} onClick={() => setView("map")}>
-            <MapIcon size={15} />
-            Map
+          <button
+            type="button"
+            aria-label="Map"
+            title="Map"
+            aria-current={view === "map" ? "page" : undefined}
+            onClick={() => setView("map")}
+          >
+            <MapIcon size={18} />
           </button>
         </nav>
       </div>
@@ -1037,8 +1116,7 @@ export default function SearchView({ meta, onListChange }: { meta: Meta; onListC
             </button>
           </div>
           <div className="sheet-body">
-            <SettingsForm {...formProps} showRanking autoFocusSearch={!origin} />
-            {error && <Alert severity="error">{error}</Alert>}
+            <SettingsForm {...formProps} showRanking autoFocusSearch={!origin} error={error} />
             {dataLine}
           </div>
           <div className="sheet-footer">
