@@ -152,9 +152,15 @@ function Controls({
   return (
     <div ref={ref} className="map-controls">
       {markers.length > 0 ? (
-        <button type="button" className="map-fit" onClick={() => fit(map, boundsOf(markers, origin))}>
-          <FitIcon size={14} />
-          {fitLabel}
+        <button
+          type="button"
+          className={`map-fit${compact ? " icon-only" : ""}`}
+          aria-label={fitLabel}
+          title={fitLabel}
+          onClick={() => fit(map, boundsOf(markers, origin))}
+        >
+          <FitIcon size={compact ? 18 : 14} />
+          {!compact && fitLabel}
         </button>
       ) : (
         <span />
