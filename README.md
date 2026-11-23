@@ -1,21 +1,40 @@
 # Station Finder
 
-Finds the most suitable stations from the *Draft vacancy list for preliminary grade
-appointments (Oct/Nov 2026)* for a given starting point. It ranks them by real road
-travel time or distance, optionally within a time or distance limit.
+Finds the most suitable stations for a given starting point and ranks them by real road
+travel time or distance, optionally within a time or distance limit. You pick the list
+to search in the app:
+
+| List | Source PDF (`source-pdfs/`) | Rows | Stations |
+|---|---|---|---|
+| **Vacancy list – 2025.11.04 batch** (default) | `PDF345-vac-new2.pdf` | 1,416 vacancies | 537 |
+| **Difficult stations – 2026** | `Difficult Vacancy signed.pdf` | 265 stations | 265 |
+| **Draft vacancy list – Oct/Nov 2026** | `Draft vacancy list for preliminary grade appointments.pdf` | 1,300 vacancies | 438 |
+
+In the 2025.11.04 list, the 126 vacancies at stations on the 2026 difficult stations
+list have the vacancy type **Difficult station**, so you can filter for them.
 
 ```
-frontend/  React + Vite + Leaflet UI         (http://localhost:5173)
-backend/   Go API server                      (http://localhost:8080)
-data/      vacancies.json (from the PDF), geocache.json, overrides.json
-tools/     extract_pdf.py  (PDF → data/vacancies.json)
+frontend/      React + Vite + Leaflet UI          (http://localhost:5173)
+backend/       Go API server                       (http://localhost:8080)
+data/          lists.json (which lists exist) + one JSON per list, geocache.json, overrides.json
+source-pdfs/   the PDFs the lists were extracted from
+tools/         extract_pdf.py (text PDF), extract_scanned_pdf.py (scanned PDF) → data/*.json
+deploy/        config.yaml for the image, Caddyfile, users.example.csv
+docker-compose.yml, Dockerfile, .env.example   VPS deployment
 ```
 
 ## How it works
 
-1. **Data.** `tools/extract_pdf.py` pulled 1,300 vacancy rows out of the PDF and
-   stripped the "DRAFT" watermark. The backend groups them into 438 unique stations
-   (district + institution).
+1. **Data.** Each list is a JSON file in `data/`, declared in `data/lists.json`.
+   - The draft list was a text PDF; `tools/extract_pdf.py` pulled out its 1,300 rows
+     and stripped the "DRAFT" watermark.
+   - The two newer lists are scans. `tools/extract_scanned_pdf.py` reads them with
+     macOS's OCR plus the PDF's own text layer, and cross-checks the two. Names are
+     snapped to the draft list's spellings, so the same station gets the same ID (and
+     the same location) in every list. The few cells the two readings disagreed on
+     were checked against the scans and fixed in `tools/corrections.json`.
+   - The backend groups rows into stations (district + institution): 702 distinct
+     stations across the three lists.
 2. **Station locations.** On first start, the backend looks up each station once and
    caches the result in `data/geocache.json`. It tries these in order:
    - Places API (New) Text Search, with abbreviations expanded
@@ -66,9 +85,12 @@ cd backend
 go run ./cmd/server -config ../config.yaml
 ```
 
-The first start geocodes all 438 stations in the background, which takes about a
-minute. Progress shows in the UI header. Later starts use `data/geocache.json`, so
-those lookups are not repeated.
+The first start locates every station that isn't in `data/geocache.json` yet, in the
+background. That is 264 stations from the two new lists; the other 438 are already
+in the cache. It takes a minute or two and progress shows in the UI. Later starts reuse
+the cache. Then open **Station locations**, pick each list, and review *Needs review*.
+Commit the updated `data/geocache.json` (and `data/overrides.json`), so the Docker image
+starts with every station already located.
 
 ### 4. Run the frontend
 
@@ -83,33 +105,124 @@ Open http://localhost:5173. The Vite dev server proxies `/api` to `:8080`.
 To run a single process instead, run `npm run build` in `frontend/`. The backend then
 serves the UI at http://localhost:8080 (`server.staticDir` in your local `config.yaml`).
 
-## Docker (API service)
+## Deploy on a VPS with Docker
 
-```bash
-docker build -t station-finder-api .
-docker run -p 8080:8080 -e GOOGLE_MAPS_API_KEY=your-key station-finder-api
-curl localhost:8080/healthz
+One container serves the UI and the API, and [Caddy](https://caddyserver.com) in
+front of it gets an HTTPS certificate automatically. Sign-in is built in: only the
+people in your users file can open the app or use your Google key.
+
+```
+Browser ──HTTPS──► Caddy (:443, Let's Encrypt) ──► app (:8080, UI + API + sign-in) ──► Google APIs
+                                                     │
+                                                     └─ volume app-data: locations, fixes, session key
 ```
 
-The image contains only the Go API (distroless, ~10 MB). It doesn't include the UI,
-which is deployed separately on Choreo. It uses `deploy/config.yaml`. Your local
-`config.yaml` is excluded by `.dockerignore`, so the API key is never baked into the
-image; pass it with `GOOGLE_MAPS_API_KEY`.
+### 1. Prepare the server
+- Any small Linux VPS (1 vCPU / 512 MB is plenty) with
+  [Docker Engine and the compose plugin](https://docs.docker.com/engine/install/).
+- A domain or subdomain whose DNS **A record** points at the server's IP, e.g.
+  `stations.example.com`. If you have no domain, see "No domain" below.
+- Ports **80** and **443** open in the firewall (Caddy needs 80 for the certificate).
 
-Container behaviour:
-- Runs as UID `10014` and only writes to `/tmp`, so a read-only root filesystem works.
-- Starts from the committed `data/geocache.json` (and `data/overrides.json` if present),
-  so it makes no geocoding calls on startup.
-- Manual location fixes are saved to `/tmp/stationfinder/` and are **lost on restart**
-  (Choreo also scales idle apps to zero). To keep them, copy them into
-  `data/overrides.json` and commit.
-- Environment variables:
-  - `GOOGLE_MAPS_API_KEY` (required)
-  - `PORT` (optional)
-  - `CONFIG_FILE` (optional)
-- Health check: `GET /healthz`
+### 2. Get the code and configure
+```bash
+git clone <your repo URL> station-finder && cd station-finder
+cp .env.example .env
+nano .env        # GOOGLE_MAPS_API_KEY=...   DOMAIN=stations.example.com
+```
 
-## Deploy on Choreo with sign-in (managed authentication)
+### 3. Choose who can sign in
+Create `users.csv` next to `docker-compose.yml`. It is git-ignored and never
+copied into the image. It uses the same columns as the Choreo user CSV:
+```csv
+username,password,groups,first_name,last_name,email
+"stationadmin","<hash>","[admins, users]","Station","Admin","admin@example.com"
+"doctor1","<hash>","[users]","Nimal","Perera","nimal@example.com"
+```
+- Members of `admins` can fix station locations and re-run geocoding. Everyone
+  else can search.
+- Make a password hash for each user (build the image once first):
+  ```bash
+  docker compose build
+  read -rs PW && printf '%s\n' "$PW" | docker run --rm -i station-finder:latest hash-password
+  ```
+  Type the password and press Enter; paste the printed `$2a$...` line into the
+  password column.
+- Plain-text passwords also work (e.g. an existing `station-finder-users.csv`), but the
+  app logs a warning. Hashes are safer if the file leaks.
+- The container runs as UID 10014, so make the file readable: `chmod 644 users.csv`.
+- After editing the file, restart the app: `docker compose restart app`.
+
+Create `users.csv` **before** the first `docker compose up`. Otherwise Docker creates
+an empty directory with that name and the app refuses to start. If that happens, run
+`rm -r users.csv`, create the file, and start again.
+
+### 4. Start
+```bash
+docker compose up -d --build
+docker compose logs -f app       # watch the first start
+```
+Open `https://<your domain>` and sign in.
+- On the first start the app locates any stations missing from the committed
+  `data/geocache.json`, about 1–2 minutes. Results are kept in the `app-data` volume.
+- If the Google key was wrong at that point, fix `.env`, run `docker compose up -d`,
+  and press **Locate missing** under *Station locations* (as an admin).
+
+### Updating
+```bash
+git pull && docker compose up -d --build
+```
+The `app-data` volume survives updates. Locations and fixes committed in the new
+image's `data/` are merged in, and your own fixes on the server win.
+
+### Keeping manual location fixes
+Fixes made in the UI are stored in the volume. To back them up, or to put them in git
+so every new deployment starts with them:
+```bash
+docker compose cp app:/data/overrides.json data/overrides.json
+docker compose cp app:/data/geocache.json  data/geocache.json
+git add data && git commit -m "Update station locations"
+```
+To back up the whole volume:
+```bash
+docker run --rm -v station-finder_app-data:/data -v "$PWD":/backup alpine tar czf /backup/app-data.tgz -C /data .
+```
+The volume name is `<project folder name>_app-data`; `docker volume ls` shows it.
+
+### No domain
+Set `DOMAIN=:80` in `.env`. Caddy then serves plain HTTP on the server's IP. Use this
+only for testing: passwords and session cookies travel unencrypted.
+
+### Settings
+| Variable (`.env`) | |
+|---|---|
+| `GOOGLE_MAPS_API_KEY` | required; Places API (New), Geocoding API, Routes API |
+| `DOMAIN` | domain for HTTPS, or `:80` |
+| `SESSION_SECRET` | optional, 32+ characters; otherwise generated and kept in the volume |
+
+`docker-compose.yml` also sets these for the container:
+- `STATE_DIR=/data`: the volume
+- `AUTH_USERS_FILE=/run/config/users.csv`: the mounted users file. Without it,
+  sign-in is off and the API is open to anyone.
+
+Sign-ins last 7 days (`auth.sessionHours` in `deploy/config.yaml`). After 10 wrong
+passwords from one address, sign-in is blocked there for 15 minutes.
+
+### Running the image without compose
+```bash
+docker build -t station-finder .
+docker run -p 8080:8080 -e GOOGLE_MAPS_API_KEY=your-key station-finder   # no sign-in
+curl localhost:8080/healthz
+```
+- Runs as UID `10014`. Without `STATE_DIR`, it writes only to `/tmp/stationfinder`, so
+  a read-only root filesystem works, but fixes are lost when the container is replaced.
+- Health check: `GET /healthz`, or `/app/stationfinder healthcheck` inside the container.
+
+## Alternative: deploy on Choreo with managed authentication
+
+The app was first hosted on Choreo; this still works. The same Docker image serves as
+the API service. Its built-in UI and sign-in are unused there: Choreo serves the UI
+and handles sign-in itself.
 
 ```
 Browser ─► Web App (React preset, managed auth) ─► /choreo-apis/... ─► gateway (OAuth2 on) ─► API service (Docker)
@@ -209,10 +322,14 @@ budget alert in Google Cloud.
 
 ## Using it
 
+- **Choose a list.** *Station list* at the top of the search settings (and in
+  *Station locations*) switches between the lists above. Your choice is remembered in
+  this browser. Filters that don't apply to a list are hidden; the difficult stations
+  list, for example, has no posts.
 - **Find stations.** Set a starting point in one of three ways:
   - **Search**: start typing a town, address or landmark (e.g. `kegal`). Suggestions
-    come from Google Places, restricted to Sri Lanka. Matching stations from the
-    vacancy list are listed too, so you can start from one of them. Use ↑/↓ and
+    come from Google Places, restricted to Sri Lanka. Matching stations from any
+    list are listed too, so you can start from one of them. Use ↑/↓ and
     Enter, or click a suggestion. Selecting one runs the search straight away.
   - Click *Pick on map*.
   - Use *My location*.
@@ -222,7 +339,7 @@ budget alert in Google Cloud.
   - **Number of stations** (default 10)
   - **Rank by**: travel time or distance
   - **Filters**: province, district, vacancy type (New / Difficult station / …),
-    station type (DH, BH, PMCU, …), and designation (e.g. `SHO`, `ANAESTHESIA`)
+    station type (DH, BH, PMCU, AHWC, …), and designation (e.g. `SHO`, `ANAESTHESIA`)
 
   Each result shows road distance, travel time, matching vacancies, and a
   Google Maps *Directions* link.
@@ -233,16 +350,21 @@ budget alert in Google Cloud.
 | Method | Path | Notes |
 |---|---|---|
 | `POST` | `/api/search` | see body below |
-| `GET` | `/api/meta` | counts, filter options, geocoding progress |
-| `GET` | `/api/stations` | all stations with their location entries |
+| `GET` | `/api/meta[?list=<id>]` | available lists; counts, filter options and geocoding progress for one list |
+| `GET` | `/api/stations[?list=<id>]` | the list's stations with their location entries |
 | `PUT` | `/api/stations/{id}/location` | `{"lat":7.25,"lng":80.34}` manual fix |
 | `DELETE` | `/api/stations/{id}/location` | remove manual fix |
 | `POST` | `/api/geocode[?retryFailed=true]` | locate missing / retry failed stations |
 | `GET` | `/api/places/autocomplete?q=kegal&session=<token>` | Google place suggestions + matching stations |
 | `GET` | `/api/places/details?placeId=<id>&session=<token>` | coordinates of a suggested place |
 
+Without `list`, the first list in `data/lists.json` is used. With the built-in sign-in
+on, every `/api/*` call needs the session cookie from `POST /auth/login`.
+`GET /auth/userinfo` returns the signed-in user and `POST /auth/logout` signs out.
+
 ```bash
 curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
+  "list": "difficult-stations-2026",
   "origin": {"query": "Kegalle"},
   "maxDurationMin": 90,
   "maxDistanceKm": 80,
@@ -258,8 +380,9 @@ curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
 
 ## Cost notes
 
-- Geocoding the stations is a one-time cost: about 438 Places Text Search requests,
-  plus Geocoding requests for any fallbacks. Results are cached on disk.
+- Geocoding the stations is a one-time cost: one Places Text Search request per
+  station (438 for the draft list, 264 more for the two new lists), plus Geocoding
+  requests for any fallbacks. Results are cached on disk.
 - Place search uses Places Autocomplete with session tokens: the keystrokes and the
   final details lookup are billed as one session. Picking a station suggestion makes
   no Google call.
@@ -275,8 +398,24 @@ curl -s localhost:8080/api/search -H 'Content-Type: application/json' -d '{
 cd backend && go test ./...    # includes an end-to-end test against a fake Google API
 ```
 
-To re-extract the data from a new PDF:
+### Re-extracting or adding a list
+Text PDF (like the draft list):
 ```bash
 python3 -m venv .venv && .venv/bin/pip install pdfplumber
-.venv/bin/python tools/extract_pdf.py "Draft vacancy list for preliminary grade appointments.pdf" data/vacancies.json
+.venv/bin/python tools/extract_pdf.py "source-pdfs/Draft vacancy list for preliminary grade appointments.pdf" data/vacancies.json
 ```
+Scanned PDF (macOS only, uses the built-in Vision OCR):
+```bash
+.venv/bin/pip install pdfplumber pyobjc-framework-Vision pyobjc-framework-Quartz
+.venv/bin/python tools/extract_scanned_pdf.py difficult "source-pdfs/Difficult Vacancy signed.pdf" \
+    data/difficult-stations-2026.json --reference data/vacancies.json
+.venv/bin/python tools/extract_scanned_pdf.py vacancies source-pdfs/PDF345-vac-new2.pdf \
+    data/vacancies-2025-11-04.json --reference data/vacancies.json \
+    --mark-difficult data/difficult-stations-2026.json
+```
+- The tool prints rows per page (compare with the PDF) and flags with `!!` any cell
+  the two OCR readings disagree on.
+- Check those rows against the scan and add fixes to `tools/corrections.json`.
+- For a new list, add an entry to `data/lists.json`:
+  - `kind` is `vacancies` (rows are posts) or `stations` (rows are stations only).
+  - The first entry is the default list.

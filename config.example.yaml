@@ -15,7 +15,11 @@ google:
   travelMode: DRIVE       # DRIVE or TWO_WHEELER
 
 data:
-  vacanciesFile: data/vacancies.json   # extracted from the PDF (tools/extract_pdf.py)
+  # The vacancy / station lists offered in the app (the first one is the default).
+  # Each entry points at a JSON file extracted from a PDF in source-pdfs/.
+  listsFile: data/lists.json
+  # Used only when listsFile is empty or missing: a single list.
+  vacanciesFile: data/vacancies.json
   geocacheFile: data/geocache.json     # station coordinates found via Google (auto-created)
   overridesFile: data/overrides.json   # manual coordinate fixes made in the UI (auto-created)
 
@@ -28,3 +32,10 @@ search:
 geocoding:
   onStartup: true   # geocode any stations missing from geocache.json when the server starts
   workers: 4
+
+# Optional built-in sign-in (normally used in Docker; see README). Leave usersFile
+# empty to run without sign-in.
+auth:
+  usersFile: ""          # CSV: username,password,groups,first_name,last_name,email
+  adminGroup: admins     # members may fix station locations and run geocoding
+  sessionHours: 168

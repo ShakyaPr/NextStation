@@ -34,6 +34,9 @@ type Entry struct {
 	UpdatedAt          time.Time   `json:"updatedAt"`
 }
 
+// errNotFound is the Entry.Error of a station Google has no result for.
+const errNotFound = "not found"
+
 type Progress struct {
 	Running bool   `json:"running"`
 	Total   int    `json:"total"`
@@ -77,22 +80,39 @@ func NewStoreWithSeeds(p Paths, client *google.Client, usePlaces bool, suspectKm
 		usePlaces: usePlaces,
 		suspectKm: suspectKm,
 	}
-	if err := readWithSeed(cachePath, p.CacheSeed, &s.cache); err != nil {
+	if err := readWithSeed(cachePath, p.CacheSeed, s.cache); err != nil {
 		return nil, err
 	}
-	if err := readWithSeed(overridesPath, p.OverridesSeed, &s.overrides); err != nil {
+	if err := readWithSeed(overridesPath, p.OverridesSeed, s.overrides); err != nil {
 		return nil, err
 	}
 	return s, nil
 }
 
-// readWithSeed reads path, or seed when path does not exist yet.
-func readWithSeed(path, seed string, v any) error {
-	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) && seed != "" {
-		log.Printf("%s not found, loading seed %s", path, seed)
-		return readJSON(seed, v)
+// readWithSeed loads the read-only seed (if any) and then the writable file on top of
+// it. Entries in the writable file win, except that a failed lookup never hides a
+// located seed entry. So a persistent volume keeps its own results and edits, and
+// still picks up stations located in a newer image.
+func readWithSeed(path, seed string, into map[string]*Entry) error {
+	if seed != "" && seed != path {
+		if err := readJSON(seed, &into); err != nil {
+			return err
+		}
 	}
-	return readJSON(path, v)
+	own := map[string]*Entry{}
+	if err := readJSON(path, &own); err != nil {
+		return err
+	}
+	if len(own) == 0 && seed != "" {
+		log.Printf("%s not found or empty, starting from seed %s (%d entries)", path, seed, len(into))
+	}
+	for id, e := range own {
+		if prev, ok := into[id]; ok && e.Status != "ok" && prev.Status == "ok" {
+			continue
+		}
+		into[id] = e
+	}
+	return nil
 }
 
 func readJSON(path string, v any) error {
@@ -203,9 +223,13 @@ func (s *Store) Run(ctx context.Context, stations []*data.Station, workers int, 
 				defer wg.Done()
 				for st := range jobs {
 					e := s.locate(ctx, st)
-					s.mu.Lock()
-					s.cache[st.ID] = e
-					s.mu.Unlock()
+					// Remember results and genuine "not found"s. A failure caused by the API
+					// (bad key, quota, network) is not cached, so the next run retries it.
+					if e.Status == "ok" || e.Error == errNotFound {
+						s.mu.Lock()
+						s.cache[st.ID] = e
+						s.mu.Unlock()
+					}
 					s.progressMux.Lock()
 					s.progress.Done++
 					if e.Status != "ok" {
@@ -306,7 +330,7 @@ func (s *Store) locate(ctx context.Context, st *data.Station) *Entry {
 	if fallback != nil {
 		return fallback
 	}
-	msg := "not found"
+	msg := errNotFound
 	if lastErr != nil {
 		msg = lastErr.Error()
 	}

@@ -1,0 +1,48 @@
+{
+  "_comment": "Manual fixes for OCR misreads, checked against the scans. Keyed by output file, then by row: 'sn:<serial no>' for the difficult list, '<page>:<row on page>' for vacancy lists.",
+  "difficult-stations-2026.json": {
+    "sn:25": {
+      "institution": "KEERTHIBANDARAPURA PMCU"
+    },
+    "sn:60": {
+      "institution": "MANDUR DH"
+    },
+    "sn:75": {
+      "institution": "VAVUNATIVU MOH"
+    },
+    "sn:81": {
+      "institution": "IRAKKAMAM ERAGAMA DH"
+    },
+    "sn:84": {
+      "institution": "KALMUNAI RDHS",
+      "designation": "MO RELIEF"
+    },
+    "sn:85": {
+      "institution": "KOMARI PMCU"
+    },
+    "sn:100": {
+      "district": "TRINCOMALEE",
+      "province": "EASTERN PROVINCE",
+      "institution": "GANTALAWA PMCU"
+    },
+    "sn:125": {
+      "institution": "GALOYA JUNCTION PMCU"
+    },
+    "sn:175": {
+      "district": "MANNAR",
+      "province": "NORTHERN PROVINCE",
+      "institution": "IRANAI ILLUPPAIKULAM PMCU"
+    },
+    "sn:199": {
+      "institution": "NADDANKANDAL DH"
+    },
+    "sn:225": {
+      "institution": "OMALPE DH"
+    }
+  },
+  "vacancies-2025-11-04.json": {
+    "41:21": {
+      "institution": "AHWC THELAWILLA"
+    }
+  }
+}

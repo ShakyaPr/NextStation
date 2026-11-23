@@ -4,3 +4,6 @@ frontend/dist/
 *.tmp
 .DS_Store
 *.tsbuildinfo
+.env
+users.csv
+deploy/users.csv

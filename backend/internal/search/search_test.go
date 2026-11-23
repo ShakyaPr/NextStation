@@ -3,6 +3,7 @@ package search
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -146,7 +147,8 @@ func TestSearchEndToEnd(t *testing.T) {
 		t.Fatal("geocache not written")
 	}
 
-	svc := NewService(cfg, stations, store, client)
+	other := data.NewList(data.ListInfo{ID: "kandy-only"}, []*data.Station{stations[2]})
+	svc := NewService(cfg, []*data.List{data.NewList(data.ListInfo{ID: "main"}, stations), other}, store, client)
 
 	// 1. Closest to Kegalle, no limits.
 	resp, err := svc.Search(context.Background(), Request{Origin: Origin{Query: "Kegalle"}})
@@ -222,6 +224,18 @@ func TestSearchEndToEnd(t *testing.T) {
 	}
 	if e := store.Get(st.ID); e.Source != "manual" {
 		t.Errorf("override not applied: %+v", e)
+	}
+
+	// 4b. Another list searches only its own stations; an unknown list is a bad request.
+	resp, err = svc.Search(context.Background(), Request{List: "kandy-only", Origin: Origin{Query: "Kegalle"}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(resp.Results) != 1 || resp.Results[0].Station.Name != "KANDY NATIONAL HOSPITAL" {
+		t.Fatalf("kandy-only results = %+v", resp.Results)
+	}
+	if _, err := svc.Search(context.Background(), Request{List: "nope", Origin: Origin{Query: "Kegalle"}}); !errors.Is(err, ErrBadRequest) {
+		t.Errorf("unknown list: err = %v, want bad request", err)
 	}
 
 	// 5. Bad origin.

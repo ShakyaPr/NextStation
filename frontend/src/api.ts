@@ -9,9 +9,10 @@ export interface Vacancy {
   province: string;
   district: string;
   institution: string;
-  designation: string;
-  type: string;
+  designation: string; // empty in station-only lists
+  type: string; // may be empty
   page: number;
+  sn?: number;
 }
 
 export interface LocationEntry {
@@ -49,7 +50,21 @@ export interface GeocodeProgress {
   lastError?: string;
 }
 
+export interface ListSummary {
+  id: string;
+  name: string;
+  description?: string;
+  source?: string;
+  stationCount: number;
+  vacancyCount: number;
+  hasDesignations: boolean;
+}
+
 export interface Meta {
+  /** The list these counts and filter options belong to. */
+  list: string;
+  lists: ListSummary[];
+  hasDesignations: boolean;
   apiKeyConfigured: boolean;
   travelMode: string;
   defaultLimit: number;
@@ -93,6 +108,7 @@ export interface PlaceDetails {
 }
 
 export interface SearchRequest {
+  list?: string;
   origin: { query?: string; lat?: number; lng?: number; label?: string };
   maxDistanceKm?: number;
   maxDurationMin?: number;
@@ -140,8 +156,8 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 }
 
 export const api = {
-  meta: () => request<Meta>("GET", "api/meta"),
-  stations: () => request<Station[]>("GET", "api/stations"),
+  meta: (list?: string) => request<Meta>("GET", list ? `api/meta?list=${encodeURIComponent(list)}` : "api/meta"),
+  stations: (list: string) => request<Station[]>("GET", `api/stations?list=${encodeURIComponent(list)}`),
   search: (req: SearchRequest) => request<SearchResponse>("POST", "api/search", req),
   geocode: (retryFailed: boolean) =>
     request<GeocodeProgress>("POST", `api/geocode${retryFailed ? "?retryFailed=true" : ""}`),
@@ -176,7 +192,7 @@ export function titleCase(s: string): string {
   return s
     .toLowerCase()
     .replace(/\b([a-z])/g, (c) => c.toUpperCase())
-    .replace(/\b(Dh|Bh|Dgh|Pmcu|Moh|Rdhs|Th|Std|Icu|Etu|Opd|Mo|Sho|Moic|Fmo|Pbu|Pcu|Ent|Gu|Gi)\b/g, (w) =>
+    .replace(/\b(Dh|Bh|Dgh|Pmcu|Moh|Rdhs|Th|Std|Icu|Etu|Opd|Mo|Sho|Moic|Fmo|Pbu|Pcu|Ent|Gu|Gi|Ahwc|Mh|Nihs)\b/g, (w) =>
       w.toUpperCase(),
     );
 }

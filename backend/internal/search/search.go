@@ -26,6 +26,8 @@ type Origin struct {
 }
 
 type Request struct {
+	// List is the id of the vacancy / station list to search (default: the first list).
+	List           string   `json:"list,omitempty"`
 	Origin         Origin   `json:"origin"`
 	MaxDistanceKm  float64  `json:"maxDistanceKm,omitempty"`  // road distance limit, 0 = none
 	MaxDurationMin float64  `json:"maxDurationMin,omitempty"` // travel time limit, 0 = none
@@ -69,17 +71,33 @@ type Response struct {
 }
 
 type Service struct {
-	cfg      *config.Config
-	stations []*data.Station
-	store    *locations.Store
-	client   *google.Client
+	cfg    *config.Config
+	lists  []*data.List
+	byID   map[string]*data.List
+	store  *locations.Store
+	client *google.Client
 
 	mu         sync.Mutex
 	routeCache map[string]google.Route
 }
 
-func NewService(cfg *config.Config, stations []*data.Station, store *locations.Store, client *google.Client) *Service {
-	return &Service{cfg: cfg, stations: stations, store: store, client: client, routeCache: map[string]google.Route{}}
+func NewService(cfg *config.Config, lists []*data.List, store *locations.Store, client *google.Client) *Service {
+	byID := make(map[string]*data.List, len(lists))
+	for _, l := range lists {
+		byID[l.ID] = l
+	}
+	return &Service{cfg: cfg, lists: lists, byID: byID, store: store, client: client, routeCache: map[string]google.Route{}}
+}
+
+// List returns the list with the given id; "" means the default (first) list.
+func (s *Service) List(id string) (*data.List, error) {
+	if id == "" && len(s.lists) > 0 {
+		return s.lists[0], nil
+	}
+	if l, ok := s.byID[id]; ok {
+		return l, nil
+	}
+	return nil, badRequest("unknown list %q", id)
 }
 
 var ErrBadRequest = errors.New("bad request")
@@ -151,6 +169,10 @@ func (s *Service) Search(ctx context.Context, req Request) (*Response, error) {
 	if req.SortBy != "duration" && req.SortBy != "distance" && req.SortBy != "straight" {
 		return nil, badRequest("sortBy must be duration, distance or straight")
 	}
+	list, err := s.List(req.List)
+	if err != nil {
+		return nil, err
+	}
 
 	origin, err := s.ResolveOrigin(ctx, req.Origin)
 	if err != nil {
@@ -163,7 +185,7 @@ func (s *Service) Search(ctx context.Context, req Request) (*Response, error) {
 
 	resp := &Response{Origin: *origin}
 	var cands []*candidate
-	for _, st := range s.stations {
+	for _, st := range list.Stations {
 		if provinces != nil && !provinces[st.Province] {
 			continue
 		}
