@@ -21,11 +21,18 @@ WORKDIR /src/backend
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
 COPY backend/ ./
-RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/stationfinder ./cmd/server \
-    && mkdir -p /out/state
+# timetzdata embeds the time zone database, so TZ=Asia/Colombo works without /usr/share/zoneinfo.
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -tags timetzdata -o /out/stationfinder ./cmd/server \
+    && mkdir -p /out/state /out/root/tmp && chmod 1777 /out/root/tmp
 
 # ---- 3. Runtime ----
-FROM gcr.io/distroless/static-debian12
+# An empty base image: the binary is static and only needs the TLS root certificates
+# (to call Google and Keycloak over HTTPS) plus writable /tmp and /data folders.
+# Nothing is pulled from gcr.io, which refuses some VPS providers' IP ranges (403).
+FROM scratch
+COPY --from=api /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+# Copying the parent keeps tmp's own mode (1777: writable by the app user).
+COPY --from=api /out/root/ /
 WORKDIR /app
 COPY --from=api /out/stationfinder /app/stationfinder
 COPY --from=ui /src/frontend/dist /app/static
