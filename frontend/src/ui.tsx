@@ -171,7 +171,9 @@ export function Segmented<T extends string>({
   stretch?: boolean;
 }) {
   return (
-    <div role="group" aria-label={label} className={`segmented${stretch ? " stretch" : ""}`}>
+    // "full", not "stretch": .stretch is the clickable-card class, whose invisible ::after
+    // layer would cover the whole panel and swallow taps.
+    <div role="group" aria-label={label} className={`segmented${stretch ? " full" : ""}`}>
       {options.map((o) => (
         <button key={o.value} type="button" aria-pressed={o.value === value} onClick={() => onChange(o.value)}>
           {o.label}
